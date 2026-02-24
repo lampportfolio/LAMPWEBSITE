@@ -906,7 +906,7 @@ body {
             Apply Now
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a class="btn-outline" onclick="window.open('mailto:Jevon@MyBridge.Loans?subject=Request%20Access%20to%20Deal%20Room%20-%20LAMP%20PF&body=I%20would%20like%20to%20request%20access%20to%20the%20LAMP%20PF%20Deal%20Room.%0A%0AName:%0AEmail:%0APhone:%0A','_blank')">Request Access to Deal Room</a>
+          <a class="btn-outline" onclick="sendToFormspree({_subject:'Deal Room Access Request',form_type:'deal_room_access',message:'User requested deal room access from homepage'}).then(function(){alert('Request sent! Our team will reach out shortly.')}).catch(function(){alert('Please email Jevon@MyBridge.Loans directly.')})">Request Access to Deal Room</a>
         </div>
         <div style="margin-top:24px;display:flex;align-items:center;gap:0;max-width:480px">
           <input type="email" id="heroEmail" placeholder="Enter your email for trust deed opportunities" style="flex:1;padding:12px 16px;font-family:var(--font-body);font-size:0.82rem;border:1px solid rgba(212,116,44,0.3);border-right:none;background:rgba(255,255,255,0.05);color:var(--white);outline:none">
@@ -1741,7 +1741,7 @@ body {
           <li>Full deal room document access</li>
           <li>Target yield: 9–10% annualized</li>
         </ul>
-        <a class="btn-primary" style="width:100%;justify-content:center;" onclick="alert('Application form opens')">Request Access</a>
+        <a class="btn-primary" style="width:100%;justify-content:center;" onclick="sendToFormspree({_subject:'Tier Access Request - Foundation $100K',form_type:'tier_request',tier:'Foundation $100K'}).then(function(){alert('Request received! Our team will contact you within 24 hours.')}).catch(function(){alert('Please email info@lampportfolio.com directly.')})">Request Access</a>
       </div>
       <div class="tier-card featured">
         <h3>Premier</h3>
@@ -1753,7 +1753,7 @@ body {
           <li>Co-invest alongside principals</li>
           <li>Target yield: 10–12% annualized</li>
         </ul>
-        <a class="btn-primary" style="width:100%;justify-content:center;" onclick="alert('Application form opens')">Request Access</a>
+        <a class="btn-primary" style="width:100%;justify-content:center;" onclick="sendToFormspree({_subject:'Tier Access Request - Premier $250K',form_type:'tier_request',tier:'Premier $250K'}).then(function(){alert('Request received! Our team will contact you within 24 hours.')}).catch(function(){alert('Please email info@lampportfolio.com directly.')})">Request Access</a>
       </div>
       <div class="tier-card">
         <h3>Institutional</h3>
@@ -1786,7 +1786,7 @@ body {
         </div>
         <div class="fg full"><label>Notes (Optional)</label><textarea placeholder="Tell us about your investment goals..."></textarea></div>
       </div>
-      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="var f=this.closest('.invest-request-form')||this.parentElement;var ins=f.querySelectorAll('input,select');var name='',email='',phone='',tier='',range='';ins.forEach(function(el){var l=el.previousElementSibling;if(!l)return;var t=l.textContent;if(t.indexOf('Name')>-1)name=el.value;if(t.indexOf('Email')>-1)email=el.value;if(t.indexOf('Phone')>-1)phone=el.value;if(t.indexOf('Tier')>-1)tier=el.value;if(t.indexOf('Range')>-1)range=el.value});window.open('mailto:louis@lampportfolio.com?subject=Investment%20Information%20Request%20-%20'+encodeURIComponent(name)+'&body=Name:%20'+encodeURIComponent(name)+'%0AEmail:%20'+encodeURIComponent(email)+'%0APhone:%20'+encodeURIComponent(phone)+'%0ATier:%20'+encodeURIComponent(tier)+'%0ARange:%20'+encodeURIComponent(range),'_blank')">Submit Request</button>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitInvestorRequest(this)">Submit Request</button>
     </div>
   </section>
 </div>
@@ -1827,7 +1827,7 @@ body {
       <div style="font-size:0.65rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--orange); margin-bottom:12px;">Minimums</div>
       <div style="font-family:var(--font-display); font-size:2.4rem; font-weight:400; color:var(--white); margin-bottom:8px;">$5,000,000 <span style="color:var(--orange);">+</span></div>
       <p style="color:var(--slate-light); font-size:0.92rem; margin-bottom:28px;">Minimum commitment for institutional program participation. Customized guidelines, dedicated reporting, and direct principal access included.</p>
-      <a class="btn-primary" onclick="alert('Institutional inquiry submitted. Our team will reach out within 48 hours.')">Schedule Consultation</a>
+      <a class="btn-primary" onclick="sendToFormspree({_subject:'Institutional Consultation Request',form_type:'institutional_consultation',message:'Institution requesting consultation'}).then(function(){alert('Thank you! A senior team member will contact you within 48 hours.')}).catch(function(){alert('Please email info@lampportfolio.com directly.')})">Schedule Consultation</a>
     </div>
 
     <div class="form-card" style="margin-top: 48px;">
@@ -1845,7 +1845,7 @@ body {
         </div>
         <div class="fg full"><label>Investment Objectives</label><textarea placeholder="Describe your yield targets, risk parameters, and any specific guidelines..."></textarea></div>
       </div>
-      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="alert('Thank you. A senior team member will contact you within 48 hours.')">Submit Inquiry</button>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitInstitutionalInquiry(this)">Submit Inquiry</button>
     </div>
   </section>
 </div>
@@ -3260,6 +3260,60 @@ function submitLoanApp() {
     }).catch(function() {
       alert('There was an error submitting. Please try again or email Jevon@MyBridge.Loans directly.');
     });
+}
+
+function submitInvestorRequest(btn) {
+  var card = btn.closest('.form-card') || btn.parentElement;
+  var inputs = card.querySelectorAll('input, select, textarea');
+  var data = { _subject: 'Investment Information Request', form_type: 'investor_request' };
+  inputs.forEach(function(el) {
+    var fg = el.closest('.fg');
+    if (!fg) return;
+    var lbl = fg.querySelector('label');
+    if (!lbl) return;
+    var key = lbl.textContent.trim().replace(/[^a-zA-Z0-9]/g, '_').substring(0, 40);
+    data[key] = el.value;
+  });
+  if (!data.Email && !data.Full_Name) { alert('Please fill in your name and email.'); return; }
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  sendToFormspree(data).then(function() {
+    btn.textContent = 'Submitted!';
+    btn.style.background = 'var(--green)';
+    btn.style.borderColor = 'var(--green)';
+    setTimeout(function() { btn.textContent = 'Submit Request'; btn.style.background = ''; btn.style.borderColor = ''; btn.disabled = false; }, 3000);
+  }).catch(function() {
+    btn.textContent = 'Submit Request';
+    btn.disabled = false;
+    alert('Submission error. Please email info@lampportfolio.com directly.');
+  });
+}
+
+function submitInstitutionalInquiry(btn) {
+  var card = btn.closest('.form-card') || btn.parentElement;
+  var inputs = card.querySelectorAll('input, select, textarea');
+  var data = { _subject: 'Institutional Inquiry', form_type: 'institutional_inquiry' };
+  inputs.forEach(function(el) {
+    var fg = el.closest('.fg');
+    if (!fg) return;
+    var lbl = fg.querySelector('label');
+    if (!lbl) return;
+    var key = lbl.textContent.trim().replace(/[^a-zA-Z0-9]/g, '_').substring(0, 40);
+    data[key] = el.value;
+  });
+  if (!data.Email && !data.Contact_Name) { alert('Please fill in your name and email.'); return; }
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  sendToFormspree(data).then(function() {
+    btn.textContent = 'Inquiry Sent!';
+    btn.style.background = 'var(--green)';
+    btn.style.borderColor = 'var(--green)';
+    setTimeout(function() { btn.textContent = 'Submit Inquiry'; btn.style.background = ''; btn.style.borderColor = ''; btn.disabled = false; }, 3000);
+  }).catch(function() {
+    btn.textContent = 'Submit Inquiry';
+    btn.disabled = false;
+    alert('Submission error. Please email info@lampportfolio.com directly.');
+  });
 }
 
 // Animate numbers on scroll

@@ -906,7 +906,7 @@ body {
             Apply Now
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a class="btn-outline" onclick="sendToFormspree({_subject:'Deal Room Access Request',form_type:'deal_room_access',message:'User requested deal room access from homepage'}).then(function(){alert('Request sent! Our team will reach out shortly.')}).catch(function(){alert('Please email Jevon@MyBridge.Loans directly.')})">Request Access to Deal Room</a>
+          <a class="btn-outline" onclick="window.open('mailto:Jevon@MyBridge.Loans?subject=Request%20Access%20to%20Deal%20Room%20-%20LAMP%20PF&body=I%20would%20like%20to%20request%20access%20to%20the%20LAMP%20PF%20Deal%20Room.%0A%0AName:%0AEmail:%0APhone:%0A','_blank')">Request Access to Deal Room</a>
         </div>
         <div style="margin-top:24px;display:flex;align-items:center;gap:0;max-width:480px">
           <input type="email" id="heroEmail" placeholder="Enter your email for trust deed opportunities" style="flex:1;padding:12px 16px;font-family:var(--font-body);font-size:0.82rem;border:1px solid rgba(212,116,44,0.3);border-right:none;background:rgba(255,255,255,0.05);color:var(--white);outline:none">
@@ -1786,7 +1786,7 @@ body {
         </div>
         <div class="fg full"><label>Notes (Optional)</label><textarea placeholder="Tell us about your investment goals..."></textarea></div>
       </div>
-      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitInvestorRequest(this)">Submit Request</button>
+      <button class="btn-primary" style="width:100%;justify-content:center;" onclick="var f=this.closest('.form-card')||this.parentElement;var ins=f.querySelectorAll('input,select,textarea');var name='',email='',phone='',range='',accredited='',notes='';ins.forEach(function(el){var fg=el.closest('.fg');if(!fg)return;var lbl=fg.querySelector('label');if(!lbl)return;var t=lbl.textContent;if(t.indexOf('Name')>-1)name=el.value;if(t.indexOf('Email')>-1)email=el.value;if(t.indexOf('Phone')>-1)phone=el.value;if(t.indexOf('Range')>-1)range=el.value;if(t.indexOf('Accredited')>-1)accredited=el.value;if(t.indexOf('Notes')>-1)notes=el.value});window.open('mailto:louis@lampportfolio.com?subject=Investment%20Information%20Request%20-%20'+encodeURIComponent(name)+'&body=Name:%20'+encodeURIComponent(name)+'%0AEmail:%20'+encodeURIComponent(email)+'%0APhone:%20'+encodeURIComponent(phone)+'%0ARange:%20'+encodeURIComponent(range)+'%0AAccredited:%20'+encodeURIComponent(accredited)+'%0ANotes:%20'+encodeURIComponent(notes),'_blank')">Submit Request</button>
     </div>
   </section>
 </div>

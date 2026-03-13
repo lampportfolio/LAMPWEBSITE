@@ -1157,7 +1157,7 @@ h4 { font-size: 1.1rem; }
   /* --- Navbar --- */
   .navbar { padding: 12px 0; }
   .navbar__links { display: none; }
-  .navbar__cta .btn--secondary { display: none; }
+  .navbar__cta .btn:not(.btn--primary) { display: none; }
   .navbar__cta .btn--primary { padding: 8px 18px; font-size: 0.8rem; }
   .mobile-toggle { display: block; }
   .navbar__inner { position: relative; }
@@ -1255,6 +1255,8 @@ h4 { font-size: 1.1rem; }
   .pillar p { font-size: 0.82rem; }
   .carfax__stat-card { padding: 20px; }
   .carfax__stat-card .stat-value { font-size: 1.6rem; }
+  .crm-stats { grid-template-columns: 1fr; gap: 12px; }
+  .carfax__pillars--2col { grid-template-columns: 1fr; }
 
   /* --- Who we serve --- */
   .serve__grid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
@@ -1408,11 +1410,31 @@ h4 { font-size: 1.1rem; }
 @media (max-width: 1024px) {
   .lamp-link__grid { grid-template-columns: 1fr; gap: 40px; }
 }
+/* CRM stats row */
+.crm-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+/* Stats row variants */
+.app__stats-row--4 { grid-template-columns: repeat(4, 1fr); }
+.app__stats-row--3 { grid-template-columns: repeat(3, 1fr); }
+
+/* 2-column pillar grid for full-width sections */
+.carfax__pillars--2col { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 1024px) {
+  .app__stats-row--4 { grid-template-columns: repeat(2, 1fr); }
+  .carfax__pillars--2col { grid-template-columns: 1fr; }
+}
 @media (max-width: 768px) {
   .dark-banner { padding: 56px 0 40px; }
   .link-tier { flex-direction: column; align-items: flex-start; gap: 12px; }
   .link-tier__price { text-align: left; }
   .lamp-link__grid { gap: 32px; }
+  .app__stats-row--4 { grid-template-columns: repeat(2, 1fr); }
+  .app__stats-row--3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .app__stats-row--4 { grid-template-columns: 1fr 1fr; }
+  .app__stats-row--3 { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -1441,11 +1463,8 @@ h4 { font-size: 1.1rem; }
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="navbar__cta">
-      <a href="https://lampit.ai" class="btn btn--secondary" style="padding:10px 24px; font-size:0.85rem;">Log In</a>
-      <a href="https://lampit.ai" class="btn btn--primary" style="padding:10px 24px; font-size:0.85rem;">
-        LAMP it
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      <a href="https://lampit.ai" class="btn" style="padding:10px 24px; font-size:0.85rem; color:var(--blue); background:transparent; border:1.5px solid var(--gray-200);">Log In</a>
+      <a href="https://lampit.ai" class="btn btn--primary" style="padding:10px 24px; font-size:0.85rem;">LAMP it &rarr;</a>
     </div>
     <button class="mobile-toggle" id="mobileToggle">
       <span></span><span></span><span></span>
@@ -1506,7 +1525,7 @@ h4 { font-size: 1.1rem; }
             </div>
 
             <!-- Dashboard Stats -->
-            <div class="app__stats-row" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="app__stats-row app__stats-row--4">
               <div class="app__stat-box">
                 <div class="app__stat-label">PROPERTIES</div>
                 <div class="app__stat-num">4</div>
@@ -1528,7 +1547,7 @@ h4 { font-size: 1.1rem; }
                 <div class="app__stat-sub">6.91% blended</div>
               </div>
             </div>
-            <div class="app__stats-row" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="app__stats-row app__stats-row--3">
               <div class="app__stat-box">
                 <div class="app__stat-label">IMPROVEMENT BUDGET</div>
                 <div class="app__stat-num">N/A</div>
@@ -1982,21 +2001,17 @@ h4 { font-size: 1.1rem; }
 <!-- ==================== CARFAX / AI INTELLIGENCE ==================== -->
 <section class="section section--blue" id="intelligence">
   <div class="container">
-    <div class="carfax__grid">
-      <div class="carfax__content scroll-reveal">
-        <span class="badge" style="background:rgba(255,255,255,0.1); color:var(--orange-light); border:1px solid rgba(255,255,255,0.15);">AI-Powered Intelligence</span>
-        <h2 style="margin-top:16px;">Your Real Estate<br>Command Center</h2>
-        <p>Like having an institutional boardroom for your properties. LAMP gives you deep visibility, AI-powered insights, and a marketplace to act on every possibility — sell, improve, finance, or exchange. Real-time data. Transparent reporting. Institutional-grade analysis — with eyes on every asset.</p>
-
-        <div class="carfax__pillars">
-          <div class="pillar"><div><h4>7 Portfolio Metrics</h4><p>Total Value, Equity, Debt, LTV, Improvement Budget, Renovated Value, and Additional Equity — all calculated automatically per property and rolled up to your portfolio.</p></div></div>
-          <div class="pillar"><div><h4>Alerts / Insights</h4><p>Per-property alerts and AI-generated insights surface automatically — flagging opportunities and risks you need to act on.</p></div></div>
-          <div class="pillar"><div><h4>Strategy Resources</h4><p>Each property has tabbed Strategy Resources — Overview, Sell/Exchange, Finance, Improve, Premium — with curated intelligence for each path.</p></div></div>
-          <div class="pillar"><div><h4>Advanced Planning</h4><p>Portfolio-level Advanced Planning tools for modeling renovation upside, exchange scenarios, and long-term holds — all in one command center.</p></div></div>
-          <div class="pillar"><div><h4>Build Your Real Estate Advisory Boardroom</h4><p>Share per property or per portfolio with one easy invite. Assemble your own institutional-style board of advisors — wealth managers, brokers, CPAs, attorneys — all with eyes on your assets.</p></div></div>
-        </div>
-      </div>
-
+    <div class="scroll-reveal" style="text-align:center; max-width:720px; margin:0 auto 48px;">
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:var(--orange-light); border:1px solid rgba(255,255,255,0.15);">AI-Powered Intelligence</span>
+      <h2 style="margin-top:16px; color:white;">Your Real Estate<br>Command Center</h2>
+      <p style="color:rgba(255,255,255,0.75); line-height:1.75;">Like having an institutional boardroom for your properties. LAMP gives you deep visibility, AI-powered insights, and a marketplace to act on every possibility — sell, improve, finance, or exchange. Real-time data. Transparent reporting. Institutional-grade analysis — with eyes on every asset.</p>
+    </div>
+    <div class="carfax__pillars carfax__pillars--2col">
+      <div class="pillar"><div><h4>7 Portfolio Metrics</h4><p>Total Value, Equity, Debt, LTV, Improvement Budget, Renovated Value, and Additional Equity — all calculated automatically per property and rolled up to your portfolio.</p></div></div>
+      <div class="pillar"><div><h4>Alerts / Insights</h4><p>Per-property alerts and AI-generated insights surface automatically — flagging opportunities and risks you need to act on.</p></div></div>
+      <div class="pillar"><div><h4>Strategy Resources</h4><p>Each property has tabbed Strategy Resources — Overview, Sell/Exchange, Finance, Improve, Premium — with curated intelligence for each path.</p></div></div>
+      <div class="pillar"><div><h4>Advanced Planning</h4><p>Portfolio-level Advanced Planning tools for modeling renovation upside, exchange scenarios, and long-term holds — all in one command center.</p></div></div>
+      <div class="pillar" style="grid-column: 1 / -1;"><div><h4>Build Your Real Estate Advisory Boardroom</h4><p>Share per property or per portfolio with one easy invite. Assemble your own institutional-style board of advisors — wealth managers, brokers, CPAs, attorneys — all with eyes on your assets.</p></div></div>
     </div>
   </div>
 </section>
@@ -2038,24 +2053,24 @@ h4 { font-size: 1.1rem; }
 <!-- ==================== ADVISOR CRM ==================== -->
 <section class="section section--blue" id="advisor-crm">
   <div class="container">
-    <div class="carfax__grid">
-      <div class="carfax__content scroll-reveal">
-        <span class="badge" style="background:rgba(255,255,255,0.1); color:var(--orange-light); border:1px solid rgba(255,255,255,0.15);">LAMP Link · Advisor View</span>
-        <h2 style="margin-top:16px;">Eyes on Every Client's<br>Real Estate</h2>
-        <p>Most advisors are flying blind on their clients' largest assets. LAMP Link gives you a live, shared view of every real estate portfolio your clients choose to share — organized by client, filterable by strategy, and actionable from one place.</p>
-        <div class="carfax__pillars">
-          <div class="pillar"><div><h4>Shared With Me Dashboard</h4><p>See every portfolio a client has shared — total properties, combined value, and equity — all in one consolidated view.</p></div></div>
-          <div class="pillar"><div><h4>Filter by Strategy Across Your Entire Book</h4><p>Instantly surface which clients have properties flagged for Sell, Exchange, Finance, Improve, Hold, or Purchase.</p></div></div>
-          <div class="pillar"><div><h4>By Client or By Property</h4><p>Toggle between a client-level CRM view and a flat property list. Sort by priority, filter by category.</p></div></div>
-          <div class="pillar"><div><h4>Has Actions · Overdue Alerts</h4><p>Know which clients need attention. LAMP flags properties with pending actions or overdue items.</p></div></div>
-        </div>
-        <a href="https://lampit.ai" class="btn btn--primary" style="margin-top:28px;">Join LAMP Link →</a>
-      </div>
-      <div class="carfax__visual scroll-reveal">
-        <div class="carfax__stat-card"><div class="stat-label">Shared Properties</div><div class="stat-value">12</div><div class="stat-desc">Across 1 portfolio</div></div>
-        <div class="carfax__stat-card"><div class="stat-label">Combined Value</div><div class="stat-value">$34.6M</div><div class="stat-desc">Shared portfolio value</div></div>
-        <div class="carfax__stat-card"><div class="stat-label">Total Equity</div><div class="stat-value">$26.2M</div><div class="stat-desc">Estimated shared equity</div></div>
-      </div>
+    <div class="scroll-reveal" style="text-align:center; max-width:720px; margin:0 auto 40px;">
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:var(--orange-light); border:1px solid rgba(255,255,255,0.15);">LAMP Link · Advisor View</span>
+      <h2 style="margin-top:16px; color:white;">Eyes on Every Client's<br>Real Estate</h2>
+      <p style="color:rgba(255,255,255,0.75); line-height:1.75;">Most advisors are flying blind on their clients' largest assets. LAMP Link gives you a live, shared view of every real estate portfolio your clients choose to share — organized by client, filterable by strategy, and actionable from one place.</p>
+    </div>
+    <div class="crm-stats scroll-reveal">
+      <div class="carfax__stat-card"><div class="stat-label">Shared Properties</div><div class="stat-value">12</div><div class="stat-desc">Across 1 portfolio</div></div>
+      <div class="carfax__stat-card"><div class="stat-label">Combined Value</div><div class="stat-value">$34.6M</div><div class="stat-desc">Shared portfolio value</div></div>
+      <div class="carfax__stat-card"><div class="stat-label">Total Equity</div><div class="stat-value">$26.2M</div><div class="stat-desc">Estimated shared equity</div></div>
+    </div>
+    <div class="carfax__pillars carfax__pillars--2col" style="margin-top:40px;">
+      <div class="pillar"><div><h4>Shared With Me Dashboard</h4><p>See every portfolio a client has shared — total properties, combined value, and equity — all in one consolidated view.</p></div></div>
+      <div class="pillar"><div><h4>Filter by Strategy Across Your Entire Book</h4><p>Instantly surface which clients have properties flagged for Sell, Exchange, Finance, Improve, Hold, or Purchase.</p></div></div>
+      <div class="pillar"><div><h4>By Client or By Property</h4><p>Toggle between a client-level CRM view and a flat property list. Sort by priority, filter by category.</p></div></div>
+      <div class="pillar"><div><h4>Has Actions · Overdue Alerts</h4><p>Know which clients need attention. LAMP flags properties with pending actions or overdue items.</p></div></div>
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a href="https://lampit.ai" class="btn btn--primary">Join LAMP Link →</a>
     </div>
   </div>
 </section>

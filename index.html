@@ -1,737 +1,1506 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAMP Portfolio — Light Up Your Real Estate</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy: #1B2A4A; --navy-light: #243659; --orange: #D4722C; --orange-light: #E8894A;
-      --gold: #C9A84C; --white: #FFFFFF; --off-white: #F8F6F1; --light-gray: #EEF0F4;
-      --mid-gray: #8A93A8; --text: #1B2A4A;
-      --font-display: 'Playfair Display', Georgia, serif; --font-body: 'DM Sans', sans-serif;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); color: var(--text); background: var(--white); line-height: 1.6; -webkit-text-size-adjust: 100%; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAMP Portfolio — Light Up Your Real Estate</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(27,42,74,0.97); backdrop-filter: blur(12px); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 1px solid rgba(212,114,44,0.2); }
-    .nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-    .nav-logo span { color: var(--orange); }
-    .nav-links { display: flex; align-items: center; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 0.84rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--orange); }
-    .nav-links a.pricing-link { color: var(--orange); font-weight: 600; }
-    .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
-    .btn-nav-login { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: color 0.2s; }
-    .btn-nav-login:hover { color: var(--white); }
-    .btn-nav-primary { background: var(--orange); color: var(--white); padding: 0.45rem 1.1rem; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: background 0.2s; white-space: nowrap; }
-    .btn-nav-primary:hover { background: var(--orange-light); }
+:root {
+  --orange: #D4742C;
+  --orange-light: #E8944E;
+  --orange-glow: rgba(212, 116, 44, 0.15);
+  --blue: #1E3A6E;
+  --blue-dark: #142850;
+  --blue-light: #2E5AA0;
+  --navy: #0D1B33;
+  --white: #FAFBFD;
+  --gray-50: #F5F6F8;
+  --gray-100: #ECEEF2;
+  --gray-200: #D8DBE2;
+  --gray-400: #9099A8;
+  --gray-600: #5A6477;
+  --gray-800: #2A3142;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(13,27,51,0.06);
+  --shadow-md: 0 4px 20px rgba(13,27,51,0.08);
+  --shadow-lg: 0 12px 40px rgba(13,27,51,0.12);
+  --shadow-glow: 0 0 40px rgba(212,116,44,0.2);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    /* DARK TAGLINE BANNER */
-    .dark-banner { background: var(--navy); padding: 4.5rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; margin-top: 64px; }
-    .dark-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,114,44,0.2) 0%, transparent 65%); pointer-events: none; }
-    .banner-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.25rem; position: relative; z-index: 1; }
-    .banner-headline { font-family: var(--font-display); font-size: clamp(1.75rem, 3.8vw, 2.9rem); font-weight: 600; color: var(--white); line-height: 1.2; max-width: 880px; margin: 0 auto 1.1rem; position: relative; z-index: 1; }
-    .banner-headline em { font-style: italic; color: var(--orange); }
-    .banner-sub { font-size: 1.05rem; color: rgba(255,255,255,0.62); max-width: 580px; margin: 0 auto 2.25rem; position: relative; z-index: 1; }
-    .banner-sub strong { color: var(--orange); font-weight: 600; }
-    .banner-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-    .btn-primary { background: var(--orange); color: var(--white); padding: 0.75rem 1.75rem; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: background 0.2s, transform 0.15s; display: inline-block; }
-    .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
-    .btn-outline-light { border: 1.5px solid rgba(255,255,255,0.35); color: rgba(255,255,255,0.85); padding: 0.75rem 1.75rem; border-radius: 5px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: border-color 0.2s, background 0.2s; display: inline-block; }
-    .btn-outline-light:hover { border-color: var(--orange); background: rgba(212,114,44,0.1); color: var(--white); }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* HERO */
-    .hero { background: var(--navy); padding: 4rem 2rem 7rem; text-align: center; position: relative; overflow: hidden; }
-    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, transparent, var(--off-white)); pointer-events: none; }
-    .hero-badge { display: inline-block; background: rgba(212,114,44,0.15); border: 1px solid rgba(212,114,44,0.4); color: var(--orange); padding: 0.3rem 1rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
-    .hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; color: var(--white); line-height: 1.12; max-width: 800px; margin: 0 auto 1rem; }
-    .hero h1 span { color: var(--orange); }
-    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.68); max-width: 580px; margin: 0 auto 0.6rem; }
-    .hero-tagline { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: rgba(255,255,255,0.4); margin-bottom: 2.5rem; }
-    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem; }
-    /* DASHBOARD MOCKUP */
-    .dashboard-mock { max-width: 920px; margin: 0 auto; background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.5); position: relative; z-index: 1; font-family: var(--font-body); }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-    /* top nav bar */
-    .dm-nav { background: #0d1520; padding: 0 1.5rem; height: 48px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .dm-nav-logo { display: flex; align-items: center; gap: 8px; }
-    .dm-nav-links { display: flex; gap: 1.5rem; }
-    .dm-nav-link { font-size: 0.78rem; color: rgba(255,255,255,0.55); font-weight: 500; cursor: default; }
-    .dm-nav-link.active { color: var(--white); }
+body {
+  font-family: var(--font-body);
+  color: var(--gray-800);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* content area */
-    .dm-body { padding: 1.5rem; }
-    .dm-heading { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.2rem; }
-    .dm-sub { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 1.25rem; }
+/* ==================== UTILITIES ==================== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container-narrow { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 
-    /* stats rows */
-    .dm-stats-row { display: grid; gap: 0.7rem; margin-bottom: 0.7rem; }
-    .dm-stats-row.top { grid-template-columns: repeat(4,1fr); }
-    .dm-stats-row.bot { grid-template-columns: repeat(3,1fr); }
-    .dm-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 0.85rem 1rem; }
-    .dm-stat-icon { float: right; opacity: 0.3; font-size: 0.9rem; margin-top: -2px; }
-    .dm-stat-label { font-size: 0.62rem; color: rgba(255,255,255,0.4); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 0.35rem; }
-    .dm-stat-value { font-size: 1.2rem; font-weight: 700; color: var(--white); font-family: var(--font-display); line-height: 1; }
-    .dm-stat-sub { font-size: 0.65rem; color: rgba(255,255,255,0.35); margin-top: 0.3rem; }
-    .dm-stat-sub.green { color: #3dbe7e; }
+.section { padding: 100px 0; }
+.section--dark { background: var(--navy); color: var(--white); }
+.section--light { background: var(--gray-50); }
+.section--blue { background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-light) 100%); color: var(--white); }
 
-    /* quick actions */
-    .dm-section-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin: 1.1rem 0 0.6rem; }
-    .dm-actions { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem; margin-bottom: 0.75rem; }
-    .dm-action { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 7px; padding: 0.7rem 1rem; display: flex; align-items: center; justify-content: space-between; cursor: default; }
-    .dm-action-left { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: rgba(255,255,255,0.75); font-weight: 500; }
-    .dm-action-icon { font-size: 0.85rem; }
-    .dm-action-arrow { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.text-center { text-align: center; }
+.text-orange { color: var(--orange); }
+.text-blue { color: var(--blue); }
 
-    /* advisory boardroom bar */
-    .dm-boardroom { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 7px; padding: 0.65rem 1rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-    .dm-boardroom-left { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: rgba(255,255,255,0.7); font-weight: 500; }
-    .dm-boardroom-add { font-size: 0.72rem; color: var(--orange); font-weight: 600; display: flex; align-items: center; gap: 0.3rem; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.badge--orange { background: var(--orange-glow); color: var(--orange); border: 1px solid rgba(212,116,44,0.2); }
+.badge--blue { background: rgba(30,58,110,0.08); color: var(--blue); border: 1px solid rgba(30,58,110,0.12); }
 
-    /* properties section */
-    .dm-props-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
-    .dm-props-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-    .dm-props-count { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
-    .dm-search { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 0.5rem 0.85rem; font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
-    .dm-filters { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
-    .dm-filter { font-size: 0.68rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 20px; cursor: default; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); background: transparent; }
-    .dm-filter.active { background: var(--white); color: #111827; border-color: var(--white); }
-    .dm-filter-row2 { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
-    .dm-filter2 { font-size: 0.65rem; font-weight: 500; padding: 0.2rem 0.55rem; border-radius: 20px; cursor: default; border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); background: transparent; }
-    .dm-filter2.active { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; }
+h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
+h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+h4 { font-size: 1.1rem; }
 
-    /* property rows */
-    .dm-prop-rows { display: flex; flex-direction: column; gap: 0.45rem; }
-    .dm-prop { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; padding: 0.7rem 1rem; display: flex; justify-content: space-between; align-items: center; cursor: default; transition: background 0.15s; }
-    .dm-prop:hover { background: rgba(255,255,255,0.07); }
-    .dm-prop-left { display: flex; align-items: center; gap: 0.65rem; min-width: 0; }
-    .dm-prop-pin { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
-    .dm-prop-addr { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.85); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .dm-prop-city { font-size: 0.7rem; color: rgba(255,255,255,0.35); margin-top: 0.1rem; }
-    .dm-prop-right { display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
-    .dm-prop-val { font-size: 0.9rem; font-weight: 700; color: var(--white); }
-    .dm-prop-arrow { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--gray-600);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
 
-    /* strategy buttons on property detail */
-    .dm-strategy-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .dm-strat { font-size: 0.68rem; font-weight: 600; padding: 0.3rem 0.7rem; border-radius: 5px; cursor: default; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); background: transparent; }
-    .dm-strat.active { background: rgba(255,255,255,0.12); color: var(--white); border-color: rgba(255,255,255,0.3); }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.btn--primary {
+  background: var(--orange);
+  color: white;
+  box-shadow: 0 4px 20px rgba(212,116,44,0.3);
+}
+.btn--primary:hover {
+  background: var(--orange-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212,116,44,0.4);
+}
+.btn--secondary {
+  background: transparent;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+}
+.btn--secondary:hover { background: var(--blue); color: white; }
+.btn--white {
+  background: white;
+  color: var(--blue);
+  box-shadow: var(--shadow-md);
+}
+.btn--white:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.btn--ghost {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+}
+.btn--ghost:hover { background: rgba(255,255,255,0.2); }
 
-    /* insights / advanced planning rows */
-    .dm-bottom-rows { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.75rem; }
-    .dm-bottom-row { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 7px; padding: 0.65rem 1rem; display: flex; align-items: center; justify-content: space-between; }
-    .dm-bottom-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 0.5rem; font-weight: 500; }
-    .dm-bottom-arrow { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+.btn svg { width: 18px; height: 18px; }
 
-    /* SECTIONS */
-    section { padding: 5rem 2rem; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.75rem; }
-    .sec-title { font-family: var(--font-display); font-size: clamp(1.7rem,3.5vw,2.5rem); font-weight: 700; color: var(--navy); margin-bottom: 1rem; line-height: 1.2; }
-    .sec-sub { font-size: 1.02rem; color: var(--mid-gray); max-width: 580px; margin-bottom: 3rem; line-height: 1.65; }
-    .divider { width: 44px; height: 3px; background: var(--orange); margin: 0.85rem 0 2rem; border-radius: 2px; }
+/* ==================== NAVBAR ==================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 0;
+  transition: var(--transition);
+  background: rgba(250,251,253,0.85);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid transparent;
+}
+.navbar.scrolled { border-bottom-color: var(--gray-100); box-shadow: var(--shadow-sm); }
 
-    /* HOW IT WORKS */
-    #how-it-works { background: var(--off-white); }
-    .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
-    .step-card { background: var(--white); border-radius: 10px; padding: 2rem; border: 1px solid var(--light-gray); }
-    .step-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: rgba(212,114,44,0.55); line-height: 1; margin-bottom: 0.75rem; }
-    .step-title { font-weight: 700; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.55rem; }
-    .step-body { font-size: 0.9rem; color: #5a6a85; line-height: 1.65; }
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-    /* STRATEGY */
-    #solutions { background: var(--white); }
-    .sol-tabs { display: flex; gap: 0; flex-wrap: wrap; border-bottom: 2px solid var(--light-gray); }
-    .sol-tab { padding: 0.65rem 1.3rem; font-size: 0.87rem; font-weight: 600; color: var(--mid-gray); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s, border-color 0.2s; font-family: var(--font-body); }
-    .sol-tab:hover { color: var(--navy); }
-    .sol-tab.active { color: var(--orange); border-bottom-color: var(--orange); }
-    .sol-panels > div { display: none; padding-top: 2.5rem; }
-    .sol-panels > div.active { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .sp-code { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.35rem; }
-    .sp-title { font-family: var(--font-display); font-size: 1.65rem; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem; }
-    .sp-body { font-size: 0.95rem; color: #5a6a85; line-height: 1.7; margin-bottom: 1.5rem; }
-    .sp-features { display: flex; flex-direction: column; gap: 0.85rem; }
-    .sp-feat { display: flex; gap: 0.75rem; align-items: flex-start; }
-    .sp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); margin-top: 0.5rem; flex-shrink: 0; }
-    .sp-feat-text { font-size: 0.88rem; color: #5a6a85; line-height: 1.55; }
-    .sp-feat-text strong { color: var(--navy); font-weight: 600; }
-    .sp-cta { margin-top: 2rem; background: var(--navy); color: var(--white); padding: 0.7rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-block; transition: background 0.2s; }
-    .sp-cta:hover { background: var(--orange); }
-    .sol-vis { background: var(--off-white); border-radius: 10px; padding: 2rem; border: 1px solid var(--light-gray); min-height: 300px; }
-    .sv-header { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 1.25rem; }
-    .sv-metric { margin-bottom: 1.25rem; }
-    .sv-num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--navy); }
-    .sv-label { font-size: 0.82rem; color: var(--mid-gray); }
-    .sv-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-    .sv-tag { background: rgba(27,42,74,0.07); border: 1px solid rgba(27,42,74,0.1); color: var(--navy); font-size: 0.73rem; font-weight: 600; padding: 0.28rem 0.7rem; border-radius: 4px; }
-    .sv-tag.hl { background: rgba(212,114,44,0.12); border-color: rgba(212,114,44,0.35); color: var(--orange); }
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--blue);
+}
+.navbar__logo svg { height: 38px; width: auto; }
 
-    /* LAMP LINK */
-    #lamp-link { background: var(--navy); }
-    .ll-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .ll-eyebrow { color: var(--orange); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
-    .ll-title { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.3rem); font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 1.25rem; }
-    .ll-title em { font-style: italic; color: var(--orange); }
-    .ll-body { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.72; margin-bottom: 0.75rem; }
-    .ll-feats { margin: 1.75rem 0; display: flex; flex-direction: column; gap: 0.85rem; }
-    .ll-feat { display: flex; gap: 0.85rem; align-items: flex-start; }
-    .llf-ic { width: 32px; height: 32px; border-radius: 6px; background: rgba(212,114,44,0.18); border: 1px solid rgba(212,114,44,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .llf-ic svg { width: 14px; height: 14px; stroke: var(--orange); fill: none; stroke-width: 2; }
-    .llf-txt strong { display: block; color: var(--white); font-size: 0.88rem; font-weight: 600; margin-bottom: 0.1rem; }
-    .llf-txt span { color: rgba(255,255,255,0.52); font-size: 0.82rem; }
-    .ll-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-    .btn-ora { background: var(--orange); color: var(--white); padding: 0.7rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: background 0.2s; display: inline-block; }
-    .btn-ora:hover { background: var(--orange-light); }
-    .btn-gw { border: 1px solid rgba(255,255,255,0.28); color: rgba(255,255,255,0.78); padding: 0.7rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: border-color 0.2s, color 0.2s; display: inline-block; }
-    .btn-gw:hover { border-color: var(--orange); color: var(--white); }
-    .link-tiers { display: flex; flex-direction: column; gap: 1rem; }
-    .lt { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.2s, background 0.2s; }
-    .lt:hover { border-color: rgba(212,114,44,0.45); background: rgba(212,114,44,0.07); }
-    .lt.feat { border-color: rgba(212,114,44,0.55); background: rgba(212,114,44,0.1); }
-    .lt-name { font-weight: 700; color: var(--white); font-size: 0.95rem; margin-bottom: 0.25rem; }
-    .lt-desc { font-size: 0.78rem; color: rgba(255,255,255,0.48); }
-    .lt-pr { text-align: right; }
-    .lt-amt { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--white); }
-    .lt-amt.free { color: var(--orange); }
-    .lt-per { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-    .lt-trial { font-size: 0.7rem; color: var(--orange); font-weight: 600; margin-top: 0.2rem; }
-    .ll-more { margin-top: 1.5rem; text-align: center; }
-    .ll-more a { color: rgba(255,255,255,0.5); font-size: 0.85rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); transition: color 0.2s, border-color 0.2s; }
-    .ll-more a:hover { color: var(--orange); border-color: var(--orange); }
+.footer__logo-link { display: inline-block; }
+.footer__logo-img { height: 36px; width: auto; }
 
-    /* INTELLIGENCE */
-    #intelligence { background: var(--off-white); }
-    .intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
-    .intel-feats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-    .if { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 1.25rem; }
-    .if-title { font-weight: 700; color: var(--navy); font-size: 0.9rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
-    .if-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
-    .if-body { font-size: 0.83rem; color: #5a6a85; line-height: 1.55; }
-    .intel-vis { background: var(--navy); border-radius: 12px; padding: 2rem; }
-    .iv-title { color: rgba(255,255,255,0.45); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem; }
-    .iv-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .iv-row:last-of-type { border-bottom: none; }
-    .iv-label { font-size: 0.83rem; color: rgba(255,255,255,0.6); }
-    .iv-val { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--white); }
-    .iv-badge { font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 3px; font-weight: 600; }
-    .iv-up { background: rgba(40,150,100,0.2); color: #3dbe7e; }
-    .iv-stable { background: rgba(100,130,170,0.2); color: rgba(255,255,255,0.5); }
-    .iv-bars { margin-top: 1.25rem; }
-    .iv-bar-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-bottom: 0.4rem; display: flex; justify-content: space-between; }
-    .iv-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 0.6rem; }
-    .iv-bar-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--orange-light)); border-radius: 3px; }
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+.navbar__links a {
+  padding: 8px 16px;
+  color: var(--gray-600);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+.navbar__links a:hover { color: var(--blue); background: rgba(30,58,110,0.04); }
 
-    /* WHO WE SERVE */
-    #who-we-serve { background: var(--white); }
-    .serve-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
-    .sc { background: var(--off-white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s, background 0.2s; }
-    .sc:hover { border-color: rgba(212,114,44,0.4); background: rgba(212,114,44,0.04); }
-    .sc-title { font-weight: 700; color: var(--navy); font-size: 0.92rem; margin-bottom: 0.4rem; }
-    .sc-body { font-size: 0.83rem; color: #5a6a85; line-height: 1.55; }
+.navbar__cta { display: flex; gap: 12px; align-items: center; }
 
-    /* SECURITY */
-    #security { background: var(--off-white); }
-    .sec-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
-    .sec-card { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 1.75rem; }
-    .sec-title { font-weight: 700; color: var(--navy); font-size: 0.95rem; margin-bottom: 0.55rem; display: flex; align-items: center; gap: 0.6rem; }
-    .sec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
-    .sec-body { font-size: 0.87rem; color: #5a6a85; line-height: 1.6; }
+.mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
+.mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--gray-800); margin: 5px 0; transition: var(--transition); border-radius: 2px; }
+.mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.mobile-toggle.active span:nth-child(2) { opacity: 0; }
+.mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-    /* FAQ */
-    #faq { background: var(--white); }
-    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
-    .faq-item { border-bottom: 1px solid var(--light-gray); padding: 1.25rem 0; }
-    .faq-q { font-weight: 600; color: var(--navy); font-size: 0.92rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-    .faq-q:hover { color: var(--orange); }
-    .faq-tog { font-size: 1.1rem; font-weight: 300; color: var(--orange); flex-shrink: 0; transition: transform 0.2s; }
-    .faq-a { font-size: 0.88rem; color: #5a6a85; line-height: 1.65; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s; }
-    .faq-item.open .faq-a { max-height: 500px; padding-top: 0.75rem; }
-    .faq-item.open .faq-tog { transform: rotate(45deg); }
-    .faq-pricing-note { background: rgba(212,114,44,0.08); border: 1px solid rgba(212,114,44,0.25); border-radius: 6px; padding: 0.85rem 1.1rem; margin-top: 2.5rem; font-size: 0.88rem; color: var(--navy); display: flex; align-items: center; gap: 0.75rem; }
-    .faq-pricing-note a { color: var(--orange); font-weight: 600; text-decoration: none; }
-    .faq-pricing-note a:hover { text-decoration: underline; }
+@media (max-width: 768px) {
+  .navbar__links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 16px 24px;
+    box-shadow: var(--shadow-lg);
+    border-top: 1px solid var(--gray-100);
+    gap: 4px;
+    z-index: 1000;
+  }
+  .navbar__links.open a {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
+  .navbar__inner { position: relative; }
+}
 
-    /* CTA SECTION */
-    .cta-section { background: var(--navy); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
-    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(212,114,44,0.18) 0%, transparent 60%); pointer-events: none; }
-    .cta-section .eyebrow { position: relative; z-index: 1; }
-    .cta-title { font-family: var(--font-display); font-size: clamp(1.8rem,4vw,2.75rem); font-weight: 700; color: var(--white); line-height: 1.2; max-width: 680px; margin: 0 auto 1rem; position: relative; z-index: 1; }
-    .cta-sub { font-size: 1rem; color: rgba(255,255,255,0.62); max-width: 500px; margin: 0 auto 2.25rem; position: relative; z-index: 1; }
-    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-    .cta-note { font-size: 0.8rem; color: rgba(255,255,255,0.35); margin-top: 1.25rem; position: relative; z-index: 1; }
+/* ==================== HERO ==================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 80px;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--white) 0%, var(--gray-50) 50%, rgba(212,116,44,0.03) 100%);
+}
 
-    /* FOOTER */
-    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.07); padding: 3rem 2rem 2rem; }
-    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
-    .fb-logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
-    .fb-logo span { color: var(--orange); }
-    .fb-body { font-size: 0.83rem; color: rgba(255,255,255,0.45); line-height: 1.65; max-width: 300px; }
-    .fb-tag { font-family: var(--font-display); font-style: italic; font-size: 0.85rem; color: rgba(255,255,255,0.3); margin-top: 0.6rem; }
-    .fc-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
-    .fc ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
-    .fc ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-    .fc ul a:hover { color: var(--orange); }
-    .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
-    .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
 
-    /* HAMBURGER */
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.25s; }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.hero__content { position: relative; z-index: 2; }
 
-    /* mobile drawer */
-    .mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(27,42,74,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(212,114,44,0.2); z-index: 99; padding: 1rem 1.5rem 1.5rem; flex-direction: column; gap: 0; }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 0.92rem; font-weight: 500; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; }
-    .mobile-nav a:last-child { border-bottom: none; }
-    .mobile-nav a:hover { color: var(--orange); }
-    .mobile-nav-cta { display: flex; gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(212,114,44,0.2); }
-    .mobile-nav-cta a { flex: 1; text-align: center; }
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s ease both;
+}
 
-    /* RESPONSIVE */
-    @media(max-width:900px) {
-      nav { padding: 0 1.25rem; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      .nav-cta { display: none; }
-      .steps-grid,.intel-grid,.ll-grid,.sec-grid,.faq-grid,.footer-inner { grid-template-columns: 1fr; }
-      .serve-grid { grid-template-columns: 1fr 1fr; }
-      .sol-panels > div.active { grid-template-columns: 1fr; }
-      .dm-stats-row.top { grid-template-columns: repeat(2,1fr); }
-      .dm-stats-row.bot { grid-template-columns: 1fr; }
-      .dm-actions { grid-template-columns: 1fr; }
-      .dm-filter-row2 { display: none; }
-      .intel-feats { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-      .lt { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-      .lt-pr { text-align: left; }
-      .dm-prop { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-      .dm-prop-right { align-self: flex-end; }
-      .dm-prop-addr { white-space: normal; }
-    }
-    @media(max-width:600px) {
-      section { padding: 3.5rem 1.25rem; }
-      .dark-banner,.hero { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .serve-grid,.footer-inner { grid-template-columns: 1fr; }
-      .sol-tabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; scrollbar-width: none; }
-      .sol-tabs::-webkit-scrollbar { display: none; }
-      .sol-tab { font-size: 0.78rem; padding: 0.55rem 0.85rem; white-space: nowrap; flex-shrink: 0; }
-      .banner-headline { font-size: 1.6rem; }
-      .hero h1 { font-size: 1.9rem; }
-      .dm-stats-row.top { grid-template-columns: 1fr 1fr; }
-      .dm-body { padding: 1rem; }
-      .dm-nav { padding: 0 1rem; }
-      .dm-nav-links { gap: 0.75rem; }
-      .dm-nav-link { font-size: 0.7rem; }
-      .dm-stat-value { font-size: 1rem; }
-      .dm-filters { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 0.25rem; }
-      .dm-filters::-webkit-scrollbar { display: none; }
-      .dm-filter { flex-shrink: 0; }
-      .sv-num { font-size: 1.6rem; }
-      .sp-title { font-size: 1.35rem; }
-      .intel-vis { padding: 1.25rem; }
-      .iv-row { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
-    }
-  </style>
+.hero h1 {
+  color: var(--navy);
+  margin-bottom: 20px;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+.hero h1 .highlight {
+  position: relative;
+  color: var(--orange);
+  display: inline-block;
+}
+.hero h1 .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: var(--orange-glow);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.hero__text {
+  font-size: 1.15rem;
+  color: var(--gray-600);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 520px;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeUp 1s 0.4s ease both;
+}
+
+.hero__mockup {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg), 0 0 80px rgba(212,116,44,0.08);
+  border: 1px solid var(--gray-100);
+  overflow: hidden;
+  position: relative;
+  max-height: 700px;
+  overflow-y: auto;
+}
+.hero__mockup::-webkit-scrollbar { width: 0; }
+.hero__mockup.mockup--dark {
+  background: #0a0a0a;
+  border-color: #333;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 80px rgba(212,116,44,0.1);
+}
+
+.mockup__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-100);
+}
+.mockup__dot { width: 10px; height: 10px; border-radius: 50%; }
+.mockup__dot--red { background: #FF6058; }
+.mockup__dot--yellow { background: #FFBD2E; }
+.mockup__dot--green { background: #28CA42; }
+.mockup__url {
+  flex: 1;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  background: white;
+  padding: 6px 16px;
+  border-radius: 6px;
+  margin-left: 12px;
+}
+
+.mockup__body { padding: 28px; }
+
+.mockup__portfolio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.mockup__portfolio-header h4 { font-size: 0.95rem; color: var(--navy); font-family: var(--font-body); font-weight: 600; }
+.mockup__share-btn {
+  font-size: 0.7rem;
+  padding: 5px 12px;
+  background: var(--blue);
+  color: white;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.mockup__share-btn:hover { background: var(--blue-light); }
+
+.mockup__dashboard {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.mockup__dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.mockup__stat {
+  background: var(--gray-50);
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: center;
+  border: 1px solid var(--gray-100);
+}
+.mockup__stat-label {
+  font-size: 0.6rem;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.mockup__stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  font-family: var(--font-display);
+}
+
+.mockup__share-section {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--gray-100);
+  display: flex;
+  justify-content: center;
+}
+.mockup__share-section .mockup__share-btn {
+  font-size: 0.75rem;
+  padding: 8px 24px;
+  border-radius: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ==================== DARK APP MOCKUP ==================== */
+.mockup--dark { background: #0a0a0a; border-color: #222; }
+.mockup__toolbar--dark { background: #111; border-bottom-color: #222; }
+.mockup__url--dark { background: #1a1a1a; color: #666; }
+.mockup__body--dark { padding: 20px; background: #0a0a0a; }
+
+.app__welcome { margin-bottom: 16px; }
+.app__welcome-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: #f0f0f0; letter-spacing: 0.08em; }
+.app__welcome-sub { font-size: 0.7rem; color: #777; margin-top: 2px; }
+
+.app__topnav {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #222;
+}
+.app__topnav-item {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #555;
+  cursor: default;
+}
+.app__topnav-item--active { color: #f0f0f0; font-weight: 600; }
+
+.app__stat-sub { font-size: 0.5rem; color: #555; margin-top: 2px; }
+
+.app__stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.app__stat-box {
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 10px 8px;
+  text-align: center;
+}
+.app__stat-label { font-size: 0.5rem; color: #666; letter-spacing: 0.08em; font-weight: 600; text-transform: uppercase; }
+.app__stat-num { font-size: 0.95rem; font-weight: 700; color: #f0f0f0; font-family: var(--font-display); margin-top: 2px; }
+
+.app__alerts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(212, 116, 44, 0.1);
+  border: 1px solid rgba(212, 116, 44, 0.3);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.app__alerts-icon { font-size: 1rem; }
+.app__alerts-content { flex: 1; }
+.app__alerts-title { font-size: 0.75rem; font-weight: 600; color: var(--orange); }
+.app__alerts-sub { font-size: 0.6rem; color: var(--orange-light); }
+.app__alerts-arrow { color: var(--orange); font-size: 0.85rem; }
+
+.app__actions-section {
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+.app__actions-title { font-size: 0.6rem; font-weight: 700; color: #f0f0f0; letter-spacing: 0.1em; margin-bottom: 10px; }
+.app__action-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+.app__action-row:last-child { margin-bottom: 0; }
+.app__action-icon { font-size: 0.85rem; }
+.app__action-svg { width: 16px; height: 16px; flex-shrink: 0; }
+.app__action-svg-arrow { width: 14px; height: 14px; flex-shrink: 0; }
+.app__action-text { flex: 1; }
+.app__action-arrow { color: #555; font-size: 0.75rem; }
+
+.app__actions-row-horizontal {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.app__action-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 10px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  font-size: 0.6rem;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+.app__action-box span { flex: 1; }
+
+.app__advisors-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.app__advisors-icon { width: 18px; height: 18px; flex-shrink: 0; }
+.app__advisors-info { flex: 1; }
+.app__advisors-title { font-size: 0.75rem; font-weight: 600; color: #e0e0e0; }
+.app__advisors-add { font-size: 0.65rem; color: #888; font-weight: 500; }
+
+.app__nav-svg { width: 16px; height: 16px; }
+
+.app__properties-section {
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+.app__properties-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.app__properties-title { font-size: 0.65rem; font-weight: 700; color: #f0f0f0; letter-spacing: 0.08em; }
+.app__properties-count { font-size: 0.6rem; color: var(--blue-light); font-weight: 500; }
+
+.app__search-bar {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.65rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.app__filter-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.app__pill {
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: #888;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+}
+.app__pill--active { background: #f0f0f0; color: #0a0a0a; border-color: #f0f0f0; }
+
+.app__property-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  transition: var(--transition);
+}
+.app__property-card:last-child { margin-bottom: 0; }
+.app__property-pin { font-size: 0.75rem; opacity: 0.5; }
+.app__property-info { flex: 1; min-width: 0; }
+.app__property-name { font-size: 0.65rem; font-weight: 600; color: #e0e0e0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app__property-meta { font-size: 0.55rem; color: #666; margin-top: 1px; }
+.app__property-val { font-size: 0.7rem; font-weight: 700; color: #f0f0f0; white-space: nowrap; }
+
+.app__bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 6px;
+  border-top: 1px solid #222;
+  margin-top: 4px;
+}
+.app__nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.5rem;
+  color: #555;
+  font-weight: 500;
+}
+.app__nav-item--active { color: #f0f0f0; }
+
+.mockup__property {
+  background: var(--gray-50);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--gray-100);
+  transition: var(--transition);
+}
+
+.mockup__property-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.mockup__property-addr { font-size: 0.8rem; font-weight: 600; color: var(--navy); }
+.mockup__property-type { font-size: 0.65rem; color: var(--gray-400); margin-top: 2px; }
+.mockup__property-value { font-size: 0.8rem; font-weight: 700; color: var(--blue); }
+
+.mockup__lightup-bar {
+  display: flex;
+  gap: 6px;
+}
+.mockup__lightup-btn {
+  flex: 1;
+  padding: 6px 4px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid var(--gray-200);
+  background: white;
+  color: var(--gray-600);
+}
+.mockup__lightup-btn:hover, .mockup__lightup-btn.active {
+  background: var(--orange);
+  color: white;
+  border-color: var(--orange);
+  box-shadow: 0 2px 12px rgba(212,116,44,0.3);
+}
+
+.mockup__property--lit {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 1px var(--orange), var(--shadow-glow);
+  background: rgba(212,116,44,0.02);
+}
+
+.hero__bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+.hero__bg-shape--1 { width: 500px; height: 500px; background: var(--orange-glow); top: -100px; right: -100px; }
+.hero__bg-shape--2 { width: 400px; height: 400px; background: rgba(30,58,110,0.05); bottom: -100px; left: -50px; }
+
+/* ==================== TRUST BAR ==================== */
+.trust-bar {
+  padding: 40px 0;
+  border-top: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-100);
+  background: white;
+}
+.trust-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.trust-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray-400);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.trust-bar__item svg { width: 20px; height: 20px; opacity: 0.6; }
+.trust-bar__divider { width: 1px; height: 24px; background: var(--gray-200); }
+
+/* ==================== HOW IT WORKS ==================== */
+.steps__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 60px;
+}
+
+.step-card {
+  position: relative;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  border: 1px solid var(--gray-100);
+  transition: var(--transition);
+  text-align: center;
+}
+.step-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--orange); }
+
+.step-card__number {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(212,116,44,0.25);
+}
+
+.step-card h3 { color: var(--navy); margin-bottom: 12px; }
+.step-card p { color: var(--gray-600); font-size: 0.95rem; line-height: 1.65; }
+
+.step-connector {
+  position: absolute;
+  top: 68px;
+  right: -16px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-200);
+  z-index: 2;
+}
+
+/* ==================== SOLUTIONS DROPDOWN ==================== */
+.solutions-section { position: relative; }
+
+.solutions__intro { max-width: 700px; margin: 0 auto 60px; }
+
+.solutions__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.sol-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--gray-50);
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  transition: var(--transition);
+}
+.sol-tab:hover { border-color: var(--gray-200); color: var(--navy); }
+.sol-tab.active { background: var(--orange-glow); border-color: var(--orange); color: var(--orange); }
+.sol-tab svg { width: 18px; height: 18px; }
+
+.sol-panel {
+  display: none;
+  animation: fadeUp 0.5s ease;
+}
+.sol-panel.active { display: block; }
+
+.sol-panel__card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.sol-panel__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 48px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+}
+.sol-panel__header-content { flex: 1; }
+.sol-panel__icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.sol-panel__icon svg { width: 32px; height: 32px; color: var(--orange-light); }
+
+.sol-panel__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orange-light);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.sol-panel__header h3 { font-size: 1.6rem; margin-bottom: 12px; color: white; }
+.sol-panel__header p { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.7; max-width: 560px; }
+
+.sol-panel__body { padding: 48px; }
+
+.sol-panel__features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.sol-feature {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.sol-feature__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--orange-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sol-feature__icon svg { width: 18px; height: 18px; color: var(--orange); }
+.sol-feature h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 4px; font-family: var(--font-body); font-weight: 600; }
+.sol-feature p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.6; }
+
+.sol-panel__cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--gray-100);
+}
+
+/* ==================== CARFAX SECTION ==================== */
+.carfax-section { position: relative; overflow: hidden; }
+
+.carfax__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.carfax__content h2 { color: white; margin-bottom: 20px; }
+.carfax__content p { color: rgba(255,255,255,0.75); line-height: 1.75; margin-bottom: 28px; }
+
+.carfax__pillars {
+  display: grid;
+  gap: 20px;
+}
+
+.pillar {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+.pillar:hover { background: rgba(255,255,255,0.08); border-color: rgba(212,116,44,0.3); }
+.pillar__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pillar__icon svg { width: 22px; height: 22px; color: white; }
+.pillar h4 { color: white; font-family: var(--font-body); font-weight: 600; margin-bottom: 4px; }
+.pillar p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.5; }
+
+.carfax__visual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.carfax__stat-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+.carfax__stat-card:hover { border-color: var(--orange); background: rgba(255,255,255,0.08); }
+.carfax__stat-card .stat-label { font-size: 0.8rem; color: var(--orange-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.carfax__stat-card .stat-value { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: white; }
+.carfax__stat-card .stat-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+/* ==================== WHO WE SERVE ==================== */
+.serve__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 60px;
+}
+
+.serve-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid var(--gray-100);
+  transition: var(--transition);
+}
+.serve-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--orange); }
+
+.serve-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--orange-glow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.serve-card__icon svg { width: 26px; height: 26px; color: var(--orange); }
+.serve-card h4 { color: var(--navy); margin-bottom: 8px; font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; }
+.serve-card p { color: var(--gray-600); font-size: 0.82rem; line-height: 1.5; }
+
+/* ==================== SECURITY ==================== */
+.security__grid { max-width: 800px; margin: 0 auto; }
+.security__content h2 { text-align: center; }
+.security__content > span { display: block; text-align: center; }
+.security__content > p { text-align: center; margin-left: auto; margin-right: auto; }
+
+.security__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.security__card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: var(--transition);
+}
+.security__card:hover { background: rgba(255,255,255,0.07); border-color: rgba(212,116,44,0.3); }
+.security__card h4 { color: white; font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+.security__card p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.6; }
+
+/* ==================== FAQ ==================== */
+.faq__list {
+  max-width: 740px;
+  margin: 48px auto 0;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--gray-200);
+}
+.faq-item:first-child { border-top: 1px solid var(--gray-200); }
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: left;
+  transition: var(--transition);
+}
+.faq-question:hover { color: var(--orange); }
+
+.faq-toggle {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--gray-400);
+  transition: var(--transition);
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 0;
+}
+.faq-answer p { color: var(--gray-600); font-size: 0.92rem; line-height: 1.7; }
+
+.faq-item.open .faq-answer { max-height: 500px; padding: 0 0 20px; }
+.faq-item.open .faq-toggle { transform: rotate(45deg); color: var(--orange); }
+
+.faq__category {
+  max-width: 740px;
+  margin: 36px auto 0;
+}
+.faq__category:first-of-type { margin-top: 48px; }
+.faq__category-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--blue);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--orange);
+  display: inline-block;
+}
+
+/* ==================== CTA SECTION ==================== */
+.cta-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue-dark) 50%, var(--blue) 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212,116,44,0.15), transparent 70%);
+  border-radius: 50%;
+}
+
+.cta-section h2 { color: white; margin-bottom: 16px; }
+.cta-section p { color: rgba(255,255,255,0.7); max-width: 560px; margin: 0 auto 36px; font-size: 1.1rem; line-height: 1.7; }
+
+.cta__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.cta__note {
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+  padding: 60px 0 32px;
+  background: var(--navy);
+  color: rgba(255,255,255,0.6);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer__brand-desc { font-size: 0.85rem; line-height: 1.65; margin-top: 12px; max-width: 300px; }
+
+.footer__col h5 {
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+.footer__col ul { list-style: none; }
+.footer__col li { margin-bottom: 10px; }
+.footer__col a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; transition: var(--transition); }
+.footer__col a:hover { color: var(--orange-light); }
+
+.footer__bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.footer__tagline { font-family: var(--font-display); font-style: italic; color: var(--orange-light); font-size: 0.85rem; }
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,116,44,0.3); }
+  50% { box-shadow: 0 0 0 12px rgba(212,116,44,0); }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+/* ---------- Tablet (max-width: 1024px) ---------- */
+@media (max-width: 1024px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero__visual { order: -1; }
+  .hero__mockup { max-width: 440px; }
+  .carfax__grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .serve__grid { grid-template-columns: repeat(2, 1fr); }
+  .security__cards { grid-template-columns: 1fr; }
+}
+
+/* ---------- Mobile (max-width: 768px) ---------- */
+@media (max-width: 768px) {
+  /* --- Global spacing --- */
+  .section { padding: 56px 0; }
+  .container { padding: 0 16px; }
+  .container-narrow { padding: 0 16px; }
+
+  /* --- Typography --- */
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.15rem; }
+  .subtitle { font-size: 0.95rem; }
+
+  /* --- Buttons --- */
+  .btn { padding: 12px 24px; font-size: 0.88rem; }
+
+  /* --- Navbar --- */
+  .navbar { padding: 12px 0; }
+  .navbar__links { display: none; }
+  .navbar__cta .btn--secondary { display: none; }
+  .navbar__cta .btn--primary { padding: 8px 18px; font-size: 0.8rem; }
+  .mobile-toggle { display: block; }
+  .navbar__inner { position: relative; }
+  .navbar__links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 12px 16px;
+    box-shadow: var(--shadow-lg);
+    border-top: 1px solid var(--gray-100);
+    gap: 2px;
+    z-index: 1000;
+  }
+  .navbar__links.open a {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
+  .navbar__logo svg { height: 30px; }
+
+  /* --- Hero --- */
+  .hero { min-height: auto; padding-top: 72px; padding-bottom: 48px; }
+  .hero__grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero__visual { order: -1; }
+  .hero__mockup { max-width: 100%; max-height: 480px; }
+  .hero__text { font-size: 1rem; margin-bottom: 28px; }
+  .hero__actions { flex-direction: column; gap: 12px; }
+  .hero__actions .btn { width: 100%; justify-content: center; text-align: center; }
+  .hero__bg-shape--1 { width: 280px; height: 280px; top: -60px; right: -60px; }
+  .hero__bg-shape--2 { width: 220px; height: 220px; bottom: -60px; left: -40px; }
+  .hero__eyebrow { margin-bottom: 16px; }
+
+  /* --- Dark app mockup internals --- */
+  .app__stats-row { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .app__stat-box { padding: 8px 4px; }
+  .app__stat-num { font-size: 0.8rem; }
+  .app__stat-label { font-size: 0.45rem; }
+  .app__stat-sub { font-size: 0.42rem; }
+  .app__actions-row-horizontal { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .app__action-box { padding: 8px 6px; font-size: 0.5rem; gap: 4px; }
+  .app__action-svg { width: 12px; height: 12px; }
+  .app__action-svg-arrow { width: 10px; height: 10px; }
+  .app__property-name { font-size: 0.58rem; }
+  .app__property-meta { font-size: 0.48rem; }
+  .app__property-val { font-size: 0.62rem; }
+  .app__filter-pills { gap: 3px; }
+  .app__pill { padding: 3px 7px; font-size: 0.48rem; }
+  .app__welcome-text { font-size: 0.9rem; }
+  .app__topnav { gap: 10px; }
+  .app__topnav-item { font-size: 0.58rem; }
+
+  /* --- Trust bar --- */
+  .trust-bar { padding: 24px 0; }
+  .trust-bar__inner { gap: 16px; justify-content: center; }
+  .trust-bar__item { font-size: 0.75rem; }
+  .trust-bar__divider { display: none; }
+
+  /* --- Steps / How it works --- */
+  .steps__grid { grid-template-columns: 1fr; gap: 20px; margin-top: 36px; }
+  .step-card { padding: 28px 20px; }
+  .step-connector { display: none; }
+  .step-card__number { width: 44px; height: 44px; font-size: 1.1rem; margin-bottom: 14px; }
+  .step-card p { font-size: 0.88rem; }
+
+  /* --- Solutions --- */
+  .solutions__tabs { gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .sol-tab { padding: 8px 14px; font-size: 0.78rem; }
+  .sol-tab svg { width: 14px; height: 14px; }
+  .sol-panel__header { flex-direction: column; gap: 16px; padding: 24px 20px; }
+  .sol-panel__icon { width: 56px; height: 56px; }
+  .sol-panel__icon svg { width: 24px; height: 24px; }
+  .sol-panel__header h3 { font-size: 1.25rem; }
+  .sol-panel__header p { font-size: 0.9rem; }
+  .sol-panel__label { font-size: 0.7rem; }
+  .sol-panel__body { padding: 24px 20px; }
+  .sol-panel__features { grid-template-columns: 1fr; gap: 20px; }
+  .sol-feature h4 { font-size: 0.9rem; }
+  .sol-feature p { font-size: 0.82rem; }
+  .sol-panel__cta { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .sol-panel__cta .btn { width: 100%; justify-content: center; text-align: center; }
+  .sol-panel__cta span { font-size: 0.78rem; text-align: center; width: 100%; }
+
+  /* --- Carfax / Intelligence --- */
+  .carfax__grid { grid-template-columns: 1fr; gap: 32px; }
+  .carfax__content h2 { font-size: 1.5rem; }
+  .carfax__content p { font-size: 0.92rem; }
+  .pillar { padding: 16px; gap: 12px; }
+  .pillar__icon { width: 38px; height: 38px; }
+  .pillar__icon svg { width: 18px; height: 18px; }
+  .pillar h4 { font-size: 0.95rem; }
+  .pillar p { font-size: 0.82rem; }
+  .carfax__stat-card { padding: 20px; }
+  .carfax__stat-card .stat-value { font-size: 1.6rem; }
+
+  /* --- Who we serve --- */
+  .serve__grid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+  .serve-card { padding: 24px 20px; text-align: left; display: flex; flex-direction: column; }
+  .serve-card__icon { margin-bottom: 12px; width: 44px; height: 44px; }
+  .serve-card h4 { font-size: 0.9rem; }
+  .serve-card p { font-size: 0.8rem; }
+
+  /* --- Security --- */
+  .security__grid { max-width: 100%; }
+  .security__content h2 { font-size: 1.5rem; }
+  .security__content > p { font-size: 0.9rem; }
+  .security__cards { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+  .security__card { padding: 20px; }
+  .security__card h4 { font-size: 0.9rem; }
+  .security__card p { font-size: 0.82rem; }
+
+  /* --- FAQ --- */
+  .faq__list { margin-top: 28px; }
+  .faq__category { margin-top: 28px; }
+  .faq__category-title { font-size: 1rem; }
+  .faq-question { padding: 16px 0; font-size: 0.9rem; }
+  .faq-question span:first-child { padding-right: 12px; }
+  .faq-answer p { font-size: 0.85rem; }
+  .faq-toggle { font-size: 1.2rem; }
+
+  /* --- CTA section --- */
+  .cta-section { padding: 64px 0; }
+  .cta-section h2 { font-size: 1.5rem; }
+  .cta-section p { font-size: 0.95rem; padding: 0 8px; }
+  .cta__actions { flex-direction: column; gap: 12px; align-items: center; }
+  .cta__actions .btn { width: 100%; max-width: 320px; justify-content: center; text-align: center; }
+  .cta__note { font-size: 0.75rem; }
+
+  /* --- Footer --- */
+  .footer { padding: 40px 0 24px; }
+  .footer__grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 32px; }
+  .footer__brand-desc { max-width: 100%; font-size: 0.82rem; }
+  .footer__col h5 { margin-bottom: 10px; }
+  .footer__col a { font-size: 0.82rem; }
+  .footer__bottom { flex-direction: column; gap: 10px; text-align: center; font-size: 0.75rem; }
+  .footer__tagline { font-size: 0.8rem; }
+}
+
+/* ---------- Small phones (max-width: 420px) ---------- */
+@media (max-width: 420px) {
+  h1 { font-size: 1.7rem; }
+  h2 { font-size: 1.4rem; }
+  .container { padding: 0 12px; }
+
+  .hero { padding-top: 64px; padding-bottom: 36px; }
+  .hero__mockup { max-height: 400px; }
+
+  .app__stats-row { gap: 4px; }
+  .app__stat-box { padding: 6px 3px; }
+  .app__stat-num { font-size: 0.7rem; }
+  .app__stat-label { font-size: 0.4rem; }
+  .app__actions-row-horizontal { gap: 3px; }
+  .app__action-box { padding: 6px 4px; font-size: 0.45rem; }
+
+  .sol-tab { padding: 7px 10px; font-size: 0.72rem; }
+  .sol-panel__header { padding: 20px 16px; }
+  .sol-panel__body { padding: 20px 16px; }
+
+  .step-card { padding: 24px 16px; }
+
+  .trust-bar__item { font-size: 0.68rem; }
+
+  .navbar__cta .btn--primary { padding: 7px 14px; font-size: 0.75rem; }
+
+  .cta__actions .btn { max-width: 280px; }
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <svg width="22" height="22" viewBox="0 0 100 100" fill="none"><polygon points="50,8 95,88 5,88" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/><polygon points="50,92 5,12 95,12" fill="none" stroke="#D4722C" stroke-width="10" stroke-linejoin="round"/></svg>
-    LAMP <span>Portfolio</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#how-it-works">How It Works</a></li>
-    <li><a href="#solutions">Strategy</a></li>
-    <li><a href="#intelligence">Intelligence</a></li>
-    <li><a href="#lamp-link">LAMP Link</a></li>
-    <li><a href="#advisor-crm">Advisor CRM</a></li>
-    <li><a href="#who-we-serve">Who We Serve</a></li>
-    <li><a href="#security">Security</a></li>
-    <li><a href="#faq">FAQ</a></li>
-  </ul>
-  <div class="nav-cta">
-    <a href="https://lampit.ai" class="btn-nav-login">Log In</a>
-    <a href="https://lampit.ai" class="btn-nav-primary">LAMP it</a>
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="#" class="navbar__logo">
+      <svg viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Orange triangle pointing DOWN: apex at bottom center, base at top -->
+        <path d="M6 6 L42 6 L24 42Z" fill="none" stroke="#D4742C" stroke-width="3.5" stroke-linejoin="round"/>
+        <!-- Blue triangle pointing UP: apex at top center, base at bottom -->
+        <path d="M6 42 L42 42 L24 6Z" fill="none" stroke="#1E3A6E" stroke-width="3.5" stroke-linejoin="round"/>
+        <text x="54" y="34" font-family="'Playfair Display', serif" font-size="26" font-weight="700" fill="#1E3A6E">LAMP</text>
+      </svg>
+    </a>
+    <ul class="navbar__links">
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#intelligence">Intelligence</a></li>
+      <li><a href="#who-we-serve">Who We Serve</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="/pf">LAMP PF</a></li>
+    </ul>
+    <div class="navbar__cta">
+      <a href="https://lampit.ai" class="btn btn--secondary" style="padding:10px 24px; font-size:0.85rem;">Log In</a>
+      <a href="https://lampit.ai" class="btn btn--primary" style="padding:10px 24px; font-size:0.85rem;">
+        LAMP it
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <button class="mobile-toggle" id="mobileToggle">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<!-- MOBILE NAV DRAWER -->
-<div class="mobile-nav" id="mobile-nav">
-  <a href="#how-it-works">How It Works</a>
-  <a href="#solutions">Strategy</a>
-  <a href="#intelligence">Intelligence</a>
-  <a href="#lamp-link">LAMP Link</a>
-  <a href="#advisor-crm">Advisor CRM</a>
-  <a href="#who-we-serve">Who We Serve</a>
-  <a href="#security">Security</a>
-  <a href="#faq">FAQ</a>
-  <div class="mobile-nav-cta">
-    <a href="https://lampit.ai" class="btn-nav-login" style="color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;">Log In</a>
-    <a href="https://lampit.ai" class="btn-nav-primary">LAMP it</a>
-  </div>
-</div>
-
-<!-- DARK TAGLINE BANNER -->
-<div class="dark-banner">
-  <div class="banner-eyebrow">The Question Every Property Owner Should Ask</div>
-  <h2 class="banner-headline">How in the dark are you on your <em>real estate assets?</em></h2>
-  <p class="banner-sub">Most property owners are flying blind — no centralized intelligence, no institutional-grade visibility, no command center. <strong>Light them up with LAMP Portfolio. LAMP it.</strong></p>
-  <div class="banner-actions">
-    <a href="https://lampit.ai" class="btn-primary">LAMP it — It's Free</a>
-  </div>
-</div>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">Free for Property Owners</div>
-  <h1>Light Up Your <span>Real Estate Portfolio</span></h1>
-  <p class="hero-sub">Your AI-powered real estate command center — delivering institutional-grade intelligence and clear visibility into every property.</p>
-  <p class="hero-tagline">"LAMP it."</p>
-  <div class="hero-actions">
-    <a href="https://lampit.ai" class="btn-primary">Light Up My Portfolio</a>
-  </div>
-  <div class="dashboard-mock">
-    <div class="dm-nav">
-      <div class="dm-nav-logo">
-        <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><polygon points="50,8 95,88 5,88" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/><polygon points="50,92 5,12 95,12" fill="none" stroke="#D4722C" stroke-width="10" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="dm-nav-links">
-        <span class="dm-nav-link active">Dashboard</span>
-        <span class="dm-nav-link">Actions</span>
-        <span class="dm-nav-link">Shared</span>
-        <span class="dm-nav-link">Settings</span>
-      </div>
-      <div style="width:18px"></div>
-    </div>
-
-    <div class="dm-body">
-      <div class="dm-heading">Dashboard</div>
-      <div class="dm-sub">Here's an overview of your portfolio</div>
-
-      <div class="dm-stats-row top">
-        <div class="dm-stat"><span class="dm-stat-icon">🏠</span><div class="dm-stat-label">Properties</div><div class="dm-stat-value">4</div><div class="dm-stat-sub">In your portfolio</div></div>
-        <div class="dm-stat"><span class="dm-stat-icon">$</span><div class="dm-stat-label">Total Value</div><div class="dm-stat-value">$8.4M</div><div class="dm-stat-sub">Portfolio value</div></div>
-        <div class="dm-stat"><span class="dm-stat-icon">↗</span><div class="dm-stat-label">Total Equity</div><div class="dm-stat-value">$4.5M</div><div class="dm-stat-sub">Estimated equity</div></div>
-        <div class="dm-stat"><span class="dm-stat-icon">$</span><div class="dm-stat-label">Total Debt</div><div class="dm-stat-value">$3.9M</div><div class="dm-stat-sub">6.91% blended · $25,753/mo</div></div>
-      </div>
-      <div class="dm-stats-row bot">
-        <div class="dm-stat"><span class="dm-stat-icon">↗</span><div class="dm-stat-label">Total Improvement Budget</div><div class="dm-stat-value">N/A</div><div class="dm-stat-sub">Planned renovations</div></div>
-        <div class="dm-stat"><span class="dm-stat-icon">↗</span><div class="dm-stat-label">Total Renovated Value</div><div class="dm-stat-value">N/A</div><div class="dm-stat-sub">After improvements</div></div>
-        <div class="dm-stat"><span class="dm-stat-icon" style="color:#3dbe7e">↗</span><div class="dm-stat-label">Additional Equity</div><div class="dm-stat-value" style="color:#3dbe7e">$0</div><div class="dm-stat-sub">Value added by renovations</div></div>
-      </div>
-
-      <div class="dm-section-label">Quick Actions</div>
-      <div class="dm-actions">
-        <div class="dm-action"><div class="dm-action-left"><span class="dm-action-icon">＋</span> Add Property</div><span class="dm-action-arrow">→</span></div>
-        <div class="dm-action"><div class="dm-action-left"><span class="dm-action-icon">☑</span> My Actions</div><span class="dm-action-arrow">→</span></div>
-        <div class="dm-action"><div class="dm-action-left"><span class="dm-action-icon">⤢</span> Share Portfolio</div><span class="dm-action-arrow">→</span></div>
-      </div>
-
-      <div class="dm-boardroom">
-        <div class="dm-boardroom-left"><span style="opacity:0.5">👤</span> Advisory Boardroom</div>
-        <div class="dm-boardroom-add">Add →</div>
-      </div>
-
-      <div class="dm-props-header">
-        <span class="dm-props-title">Your Properties</span>
-        <span class="dm-props-count">4 total</span>
-      </div>
-      <div class="dm-search"><span style="opacity:0.4">🔍</span> Search properties...</div>
-      <div class="dm-filters">
-        <span class="dm-filter active">All</span>
-        <span class="dm-filter">Sell</span>
-        <span class="dm-filter">Exchange</span>
-        <span class="dm-filter">Improve</span>
-        <span class="dm-filter">Hold</span>
-        <span class="dm-filter">Finance</span>
-        <span class="dm-filter">Premium</span>
-        <span class="dm-filter">Purchase</span>
-      </div>
-      <div class="dm-filter-row2">
-        <span class="dm-filter2 active">All Types</span>
-        <span class="dm-filter2">Primary Residence</span>
-        <span class="dm-filter2">Investment</span>
-        <span class="dm-filter2">Second Home / Vacation</span>
-        <span class="dm-filter2">Land / Development</span>
-        <span class="dm-filter2">Commercial</span>
-        <span class="dm-filter2">Mixed Use</span>
-      </div>
-      <div class="dm-prop-rows">
-        <div class="dm-prop"><div class="dm-prop-left"><div class="dm-prop-pin">📍</div><div><div class="dm-prop-addr">742 Evergreen Terrace, Pasadena, CA</div><div class="dm-prop-city">Pasadena, CA 91101</div></div></div><div class="dm-prop-right"><span class="dm-prop-val">$1.3M</span><span class="dm-prop-arrow">→</span></div></div>
-        <div class="dm-prop"><div class="dm-prop-left"><div class="dm-prop-pin">📍</div><div><div class="dm-prop-addr">1100 Sunset Blvd, Los Angeles, CA</div><div class="dm-prop-city">Los Angeles, CA 90026</div></div></div><div class="dm-prop-right"><span class="dm-prop-val">$2.4M</span><span class="dm-prop-arrow">→</span></div></div>
-        <div class="dm-prop"><div class="dm-prop-left"><div class="dm-prop-pin">📍</div><div><div class="dm-prop-addr">305 Harbor View Rd, Irvine, CA</div><div class="dm-prop-city">Irvine, CA 92603</div></div></div><div class="dm-prop-right"><span class="dm-prop-val">$3.1M</span><span class="dm-prop-arrow">→</span></div></div>
-        <div class="dm-prop"><div class="dm-prop-left"><div class="dm-prop-pin">📍</div><div><div class="dm-prop-addr">8800 Industrial Pkwy, San Diego, CA</div><div class="dm-prop-city">San Diego, CA 92121</div></div></div><div class="dm-prop-right"><span class="dm-prop-val">$1.8M</span><span class="dm-prop-arrow">→</span></div></div>
-      </div>
-
-      <div class="dm-bottom-rows">
-        <div class="dm-bottom-row"><div class="dm-bottom-label"><span style="opacity:0.5">ℹ</span> Insights</div><span class="dm-bottom-arrow">→</span></div>
-        <div class="dm-bottom-row"><div class="dm-bottom-label"><span style="opacity:0.5">↗</span> Advanced Planning</div><span class="dm-bottom-arrow">→</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section id="how-it-works">
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="hero">
+  <div class="hero__bg-shape hero__bg-shape--1"></div>
+  <div class="hero__bg-shape hero__bg-shape--2"></div>
   <div class="container">
-    <div class="eyebrow">Three Simple Steps</div>
-    <div class="sec-title">How LAMP Works</div>
-    <div class="divider"></div>
-    <p class="sec-sub">Three steps to unlock institutional-grade intelligence for your entire real estate portfolio. LAMP it. Visit <strong>LAMPit.ai</strong> to get started.</p>
-    <div class="steps-grid">
-      <div class="step-card"><div class="step-num">1</div><div class="step-title">Login &amp; Add Properties</div><div class="step-body">Create your free account at LAMPit.ai. Add your property addresses to build your portfolio. Then build your real estate advisory boardroom — share per property or your entire portfolio with one easy invite to assemble your advisory team of CPAs, wealth managers, brokers, and more.</div></div>
-      <div class="step-card"><div class="step-num">2</div><div class="step-title">"Light Up" Your Portfolio</div><div class="step-body">Each property shows a <strong>Strategy</strong> section with action buttons — Sell, Exchange, Improve, Hold, Finance, Premium, and Purchase. Click the solution you need and hit the action button. LAMP distributes your inquiry to the appropriate LAMP Link Network Partner. You also get <strong>Alerts / Insights</strong> and <strong>Strategy Resources</strong> surfaced per property.</div></div>
-      <div class="step-card"><div class="step-num">3</div><div class="step-title">Connect &amp; Transact</div><div class="step-body">When you light up a solution, your existing advisors in that category are notified first — your realtor gets the sell inquiry, your CPA gets the tax question. <strong>LAMP Link Network Partners only step in when there's no advisor already in that role.</strong> LAMP is a marketplace for the gaps, not a replacement for the relationships you already have. All platform and referral fees are paid by Network Partners — never by you.</div></div>
-    </div>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;">
-      <a href="mailto:info@lampportfolio.com?subject=LAMP%20Demo%20Request" class="btn-primary">Schedule a Demo</a>
-      <a href="mailto:info@lampportfolio.com?subject=LAMP%20Webinar%20Registration" class="btn-outline" style="border:1.5px solid var(--orange);color:var(--orange);padding:0.75rem 1.75rem;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.95rem;transition:background 0.2s;display:inline-block;">Join a Webinar <span style="font-size:0.8rem;opacity:0.75;">· Wednesdays 1pm PST</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- STRATEGY -->
-<section id="solutions">
-  <div class="container">
-    <div class="eyebrow">Strategy</div>
-    <div class="sec-title">Light Up Every Opportunity</div>
-    <div class="divider"></div>
-    <p class="sec-sub">LAMP is a comprehensive marketplace connecting you with LAMP Link Network Partners across every real estate need. Click a solution to learn more.</p>
-    <div class="sol-tabs" id="sol-tabs">
-      <button class="sol-tab active" data-sol="sell">Sell</button>
-      <button class="sol-tab" data-sol="exchange">Exchange</button>
-      <button class="sol-tab" data-sol="finance">Finance</button>
-      <button class="sol-tab" data-sol="improve">Improve</button>
-      <button class="sol-tab" data-sol="hold">Hold</button>
-      <button class="sol-tab" data-sol="premium">Premium</button>
-      <button class="sol-tab" data-sol="purchase">Purchase</button>
-      <button class="sol-tab" data-sol="custom">Custom</button>
-    </div>
-    <div class="sol-panels">
-      <div id="sol-sell" class="active">
-        <div><div class="sp-code">LAMP AM · Asset Management</div><div class="sp-title">Sell Your Property</div><div class="sp-body">Maximize sale prices with detailed financial modeling and data-driven insights. LAMP AM connects you with LAMP Link Network Partners who provide institutional-grade analysis to ensure you capture the full value of your asset.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Data-Driven Pricing</strong> — AI-powered market analysis helps determine optimal listing price and sale timing based on real-time comparable data.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Advisor Collaboration</strong> — Share your portfolio with your advisory team so everyone has complete visibility into the sale process.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>LAMP Link Network Partners</strong> — Brokers and real estate professionals who specialize in maximizing asset value for sellers.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Zero Cost to You</strong> — All platform, referral, and transaction fees are paid by LAMP Link Network Partners.</div></div></div><a href="https://lampit.ai" class="sp-cta">Light Up to Sell →</a></div>
-        <div class="sol-vis"><div class="sv-header">Sell Analysis · 742 Evergreen Terrace</div><div class="sv-metric"><div class="sv-num">$1.42M</div><div class="sv-label">AI Estimated Sale Price</div></div><div class="sv-metric"><div class="sv-num">94 days</div><div class="sv-label">Est. time on market</div></div><div class="sv-tags"><span class="sv-tag hl">Sell</span><span class="sv-tag">Exchange</span><span class="sv-tag">Finance</span><span class="sv-tag">Improve</span><span class="sv-tag">Hold</span></div></div>
-      </div>
-      <div id="sol-exchange">
-        <div><div class="sp-code">LAMP X · Exchange</div><div class="sp-title">Exchange Your Property</div><div class="sp-body">Explore the full spectrum of exchange opportunities — 1031 exchanges, DSTs, 721 UPREITs, Opportunity Zones, and more. Light Up "Exchange" on any property and LAMP connects you with the right LAMP Link Network Partner.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Full Range of Exchange Options</strong> — 1031, DSTs, 721 UPREITs, Opportunity Zones, and other tax-efficient transactions.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Complete Property Intelligence</strong> — Your portfolio analysis gives exchange sponsors the data they need.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>You Initiate the Connection</strong> — Click "Exchange" and hit "Inquire Now." LAMP Link distributes your intent to the right sponsor.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Warm Introductions</strong> — Sponsors receive your intent with complete asset details — not a cold call.</div></div></div><a href="https://lampit.ai" class="sp-cta">Light Up to Exchange →</a></div>
-        <div class="sol-vis"><div class="sv-header">Exchange Options · 1100 Sunset Blvd</div><div class="sv-metric"><div class="sv-num">$2.4M</div><div class="sv-label">Current Assessed Value</div></div><div class="sv-metric"><div class="sv-num">$387K</div><div class="sv-label">Est. Deferred Tax (1031)</div></div><div class="sv-tags"><span class="sv-tag hl">1031 Exchange</span><span class="sv-tag">DST</span><span class="sv-tag">721 UPREIT</span><span class="sv-tag">OZ</span></div></div>
-      </div>
-      <div id="sol-finance">
-        <div><div class="sp-code">LAMP PF · Portfolio Finance</div><div class="sp-title">Finance Your Property</div><div class="sp-body">Uncover competitive financing options by showcasing your asset's true value. LAMP PF connects you with lenders who can underwrite quickly using clean, institutional-grade documentation.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Clean Loan Packaging</strong> — Comprehensive documentation enables lenders to underwrite quickly — bridge financing in days, not months.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Lender Network</strong> — Access LAMP's network of private lenders and traditional financing sources.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Asset Value Showcase</strong> — AI-powered analysis highlights your property's strengths for more favorable terms.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Accelerated Timelines</strong> — Centralized data means financing partners move faster.</div></div></div><a href="https://lampit.ai" class="sp-cta">Light Up to Finance →</a></div>
-        <div class="sol-vis"><div class="sv-header">Finance Analysis · 305 Harbor View Rd</div><div class="sv-metric"><div class="sv-num">$3.1M</div><div class="sv-label">Current Value</div></div><div class="sv-metric"><div class="sv-num">65% LTV</div><div class="sv-label">Available Leverage</div></div><div class="sv-tags"><span class="sv-tag hl">Bridge</span><span class="sv-tag">Refi</span><span class="sv-tag">Construction</span><span class="sv-tag">DSCR</span></div></div>
-      </div>
-      <div id="sol-improve">
-        <div><div class="sp-code">LAMP PI · Portfolio Improvement</div><div class="sp-title">Improve Your Property</div><div class="sp-body">Enhance property value with strategic renovation recommendations. LAMP PI connects you with construction and improvement professionals who understand how to maximize your return on investment.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Strategic Renovation Plans</strong> — Targeted recommendations on which improvements deliver the highest ROI for your specific property and market.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Value-Add Analysis</strong> — AI projections show how specific improvements increase property value and rental income.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Contractor Network</strong> — Connect with construction and renovation professionals through LAMP Link.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Budget &amp; Timeline Guidance</strong> — Clear budgets and timelines so you can plan with confidence.</div></div></div><a href="https://lampit.ai" class="sp-cta">Light Up to Improve →</a></div>
-        <div class="sol-vis"><div class="sv-header">Improvement Analysis · 8800 Industrial Pkwy</div><div class="sv-metric"><div class="sv-num">+$340K</div><div class="sv-label">Est. Value-Add (post-reno)</div></div><div class="sv-metric"><div class="sv-num">18 mo.</div><div class="sv-label">Est. project timeline</div></div><div class="sv-tags"><span class="sv-tag hl">Renovate</span><span class="sv-tag">Reposition</span><span class="sv-tag">Lease-Up</span></div></div>
-      </div>
-      <div id="sol-premium">
-        <div><div class="sp-code">LAMP PC · Private Client</div><div class="sp-title">Premium Advisory</div><div class="sp-body">Full-service real estate advisory and asset management for institutions, family offices, and UHNW families. LAMP PC delivers a disciplined six-phase optimization process across your entire portfolio.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Phase 1: Organize &amp; Structure</strong> — Digitize and centralize all property data into a cloud-based profile for each asset.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Phase 2: Strategize</strong> — Develop a customized strategy for each asset aligned with portfolio goals.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Phases 3–6: Value, Plan, Project, Execute</strong> — Comprehensive valuations, highest &amp; best use analysis, after-renovated value projections, and ongoing portfolio management.</div></div></div><a href="https://lampit.ai" class="sp-cta">Light Up for Premium →</a></div>
-        <div class="sol-vis"><div class="sv-header">LAMP PC · 6-Phase Process</div><div style="display:flex;flex-direction:column;gap:0.65rem;margin-top:0.5rem;">
-          <div style="display:flex;gap:0.75rem;align-items:center;"><div style="width:24px;height:24px;border-radius:50%;background:var(--orange);color:white;font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div><div style="font-size:0.83rem;color:#5a6a85;"><strong style="color:var(--navy);">Organize &amp; Structure</strong></div></div>
-          <div style="display:flex;gap:0.75rem;align-items:center;"><div style="width:24px;height:24px;border-radius:50%;background:var(--orange);color:white;font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div><div style="font-size:0.83rem;color:#5a6a85;"><strong style="color:var(--navy);">Strategize</strong></div></div>
-          <div style="display:flex;gap:0.75rem;align-items:center;"><div style="width:24px;height:24px;border-radius:50%;background:var(--orange);color:white;font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div><div style="font-size:0.83rem;color:#5a6a85;"><strong style="color:var(--navy);">Value</strong></div></div>
-          <div style="display:flex;gap:0.75rem;align-items:center;"><div style="width:24px;height:24px;border-radius:50%;background:rgba(212,114,44,0.35);color:var(--navy);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div><div style="font-size:0.83rem;color:#5a6a85;"><strong style="color:var(--navy);">Highest &amp; Best Use</strong></div></div>
-          <div style="display:flex;gap:0.75rem;align-items:center;"><div style="width:24px;height:24px;border-radius:50%;background:rgba(212,114,44,0.25);color:var(--navy);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</div><div style="font-size:0.83rem;color:#5a6a85;"><strong style="color:var(--navy);">After-Renovated Value</strong></div></div>
-          <div style="display:flex;gap:0.75rem;align-items:center;"><div style="width:24px;height:24px;border-radius:50%;background:rgba(212,114,44,0.15);color:var(--navy);font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">6</div><div style="font-size:0.83rem;color:#5a6a85;"><strong style="color:var(--navy);">Execute &amp; Reassess</strong></div></div>
-        </div></div>
-      </div>
-      <div id="sol-hold">
-        <div><div class="sp-code">LAMP Hold · Portfolio Strategy</div><div class="sp-title">Hold Your Property</div><div class="sp-body">Not every property needs to transact. LAMP's Hold analysis gives you institutional-grade data to support a disciplined hold decision — with ongoing monitoring so you know exactly when conditions shift.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Hold vs. Sell Modeling</strong> — Compare the projected outcome of holding against a sale or exchange over your target time horizon.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Ongoing Monitoring</strong> — LAMP tracks your property's value, equity, and market conditions continuously — alerting you when the calculus changes.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Advisor Visibility</strong> — Your advisory team sees your hold positions and can weigh in when timing or strategy shifts.</div></div></div><a href="https://lampit.ai" class="sp-cta">Light Up to Hold →</a></div>
-        <div class="sol-vis"><div class="sv-header">Hold Analysis · 305 Harbor View Rd</div><div class="sv-metric"><div class="sv-num">$3.1M</div><div class="sv-label">Current estimated value</div></div><div class="sv-metric"><div class="sv-num">Hold</div><div class="sv-label">Current strategy setting</div></div><div class="sv-tags"><span class="sv-tag hl">Hold</span><span class="sv-tag">Sell</span><span class="sv-tag">Exchange</span><span class="sv-tag">Finance</span></div></div>
-      </div>
-      <div id="sol-purchase">
-        <div><div class="sp-code">LAMP Purchase · Acquisition Intelligence</div><div class="sp-title">Purchase a Property</div><div class="sp-body">LAMP isn't just for what you own — it's for what you're considering. Add a potential acquisition address and get the same institutional-grade analysis before you buy. Connect with LAMP Link Network Partners who specialize in sourcing and underwriting acquisition opportunities.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Pre-Purchase Analysis</strong> — Run the same AI-powered intelligence on a target property before committing capital.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Acquisition Modeling</strong> — Pro forma, cap rate, LTV, and equity projections on properties you're evaluating.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>LAMP Link Sourcing Partners</strong> — Connect with brokers and advisors who can source and underwrite deals through LAMP Link.</div></div></div><a href="https://lampit.ai" class="sp-cta">Light Up to Purchase →</a></div>
-        <div class="sol-vis"><div class="sv-header">Purchase Analysis · Target Property</div><div class="sv-metric"><div class="sv-num">Add Address</div><div class="sv-label">Enter any property to analyze</div></div><div class="sv-tags"><span class="sv-tag hl">Purchase</span><span class="sv-tag">Pro Forma</span><span class="sv-tag">Cap Rate</span><span class="sv-tag">LTV</span></div></div>
-      </div>
-      <div id="sol-custom">
-        <div><div class="sp-code">LAMP PS · Portfolio Services</div><div class="sp-title">Custom Solutions</div><div class="sp-body">Licensing agreements and customized integrations designed to bring LAMP intelligence into your firm's existing workflows. LAMP PS delivers bespoke solutions tailored to your organization's unique requirements.</div><div class="sp-features"><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>White-Label Integration</strong> — Embed LAMP's intelligence platform within your firm's existing technology stack.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Licensing Agreements</strong> — Flexible licensing models from individual practitioners to enterprise-wide deployments.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Proprietary Software Access</strong> — Direct access to LAMP's AI engine, analytics dashboards, and portfolio intelligence tools.</div></div><div class="sp-feat"><div class="sp-dot"></div><div class="sp-feat-text"><strong>Dedicated Support</strong> — Work directly with LAMP's technology team to build, deploy, and optimize your solution.</div></div></div><a href="mailto:info@lampportfolio.com?subject=Custom%20Solution%20Inquiry" class="sp-cta">Contact Us for Custom →</a></div>
-        <div class="sol-vis"><div class="sv-header">LAMP PS · Enterprise Options</div><div class="sv-metric"><div class="sv-num">White-Label</div><div class="sv-label">Your brand, LAMP's engine</div></div><div class="sv-tags"><span class="sv-tag hl">Licensing</span><span class="sv-tag">API Access</span><span class="sv-tag">Custom Build</span><span class="sv-tag">Enterprise</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AI INTELLIGENCE -->
-<section id="intelligence">
-  <div class="container">
-    <div class="intel-grid">
-      <div>
-        <div class="eyebrow">AI-Powered Intelligence</div>
-        <div class="sec-title">Your Real Estate Command Center</div>
-        <div class="divider"></div>
-        <p class="sec-sub">Like having an institutional boardroom for your properties. Deep visibility, AI-powered insights, and a marketplace to act on every possibility — sell, improve, finance, or exchange.</p>
-        <div class="intel-feats">
-          <div class="if"><div class="if-title"><div class="if-dot"></div>7 Portfolio Metrics</div><div class="if-body">Total Value, Equity, Debt, LTV, Improvement Budget, Renovated Value, and Additional Equity — all calculated automatically per property and rolled up to your portfolio.</div></div>
-          <div class="if"><div class="if-title"><div class="if-dot"></div>Alerts / Insights</div><div class="if-body">Per-property alerts and AI-generated insights surface automatically — flagging opportunities and risks you need to act on.</div></div>
-          <div class="if"><div class="if-title"><div class="if-dot"></div>Strategy Resources</div><div class="if-body">Each property has tabbed Strategy Resources — Overview, Sell/Exchange, Finance, Improve, Premium — with curated intelligence for each path.</div></div>
-          <div class="if"><div class="if-title"><div class="if-dot"></div>Advanced Planning</div><div class="if-body">Portfolio-level Advanced Planning tools for modeling renovation upside, exchange scenarios, and long-term holds — all in one command center.</div></div>
+    <div class="hero__grid">
+      <div class="hero__content">
+        <div class="hero__eyebrow">
+          <span class="badge badge--orange">Free for Property Owners</span>
+        </div>
+        <h1><span class="highlight">Light Up</span> Your<br>Real Estate Portfolio</h1>
+        <p class="hero__text">
+          LAMP is your AI-powered real estate command center — delivering institutional-grade intelligence and clear visibility into every property. Analyze assets, uncover opportunities to sell, exchange, finance, improve, or optimize, and connect to our marketplace of solutions and partners. Free to Light Up your portfolio. LAMP it.
+        </p>
+        <div class="hero__actions">
+          <a href="https://lampit.ai" class="btn btn--primary">
+            Light Up My Portfolio
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#how-it-works" class="btn btn--secondary">See How It Works</a>
         </div>
       </div>
-      <div class="intel-vis">
-        <div class="iv-title">Portfolio Intelligence · lampit.ai</div>
-        <div class="iv-row"><span class="iv-label">Total Value</span><div style="display:flex;align-items:center;gap:0.5rem;"><span class="iv-val">$8.4M</span><span class="iv-badge iv-up">↗ Live</span></div></div>
-        <div class="iv-row"><span class="iv-label">Total Equity</span><div style="display:flex;align-items:center;gap:0.5rem;"><span class="iv-val">$4.5M</span><span class="iv-badge iv-up">Estimated</span></div></div>
-        <div class="iv-row"><span class="iv-label">Total Debt</span><div style="display:flex;align-items:center;gap:0.5rem;"><span class="iv-val">$3.9M</span><span class="iv-badge iv-stable">6.91% blended</span></div></div>
-        <div class="iv-row"><span class="iv-label">Total Renovated Value</span><div style="display:flex;align-items:center;gap:0.5rem;"><span class="iv-val">$8.4M</span><span class="iv-badge iv-stable">After improvements</span></div></div>
-        <div class="iv-row"><span class="iv-label">Additional Equity (reno)</span><div style="display:flex;align-items:center;gap:0.5rem;"><span class="iv-val" style="color:#3dbe7e">$0</span><span class="iv-badge" style="background:rgba(40,150,100,0.15);color:#3dbe7e;">Value-add</span></div></div>
-        <div class="iv-bars">
-          <div class="iv-bar-lbl"><span>LTV (blended)</span><span>46%</span></div><div class="iv-bar"><div class="iv-bar-fill" style="width:46%"></div></div>
-          <div class="iv-bar-lbl"><span>Equity / Total Value</span><span>54%</span></div><div class="iv-bar"><div class="iv-bar-fill" style="width:54%"></div></div>
-          <div class="iv-bar-lbl"><span>Renovation Upside</span><span>Unactivated</span></div><div class="iv-bar"><div class="iv-bar-fill" style="width:5%;opacity:0.4"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- LAMP LINK -->
-<section id="lamp-link">
-  <div class="container">
-    <div class="ll-grid">
-      <div>
-        <div class="ll-eyebrow">LAMP Link · Network Partner Program</div>
-        <h2 class="ll-title">Connect. Advise. <em>Grow.</em></h2>
-        <p class="ll-body">LAMP Link is how advisors — wealth managers, RIAs, CPAs, estate attorneys, realtors, loan officers, exchange sponsors, and more — join the LAMP ecosystem as Network Partners.</p>
-        <p class="ll-body">Your clients' real estate portfolios are your blind spot. LAMP Link eliminates it. When a client shares their portfolio, you get complete, institutional-grade visibility into every asset — transforming scattered spreadsheets into a real-time command center for your entire book of business.</p>
-        <p class="ll-body">And when a property owner without an existing advisor in your category clicks "Inquire Now" — that referral comes to you. Not a cold call list. A client who already raised their hand, with their full portfolio intelligence attached. <strong style="color:var(--white);">LAMP Link is a lead generation machine.</strong></p>
-        <div style="background:rgba(212,114,44,0.1);border:1px solid rgba(212,114,44,0.25);border-radius:8px;padding:1rem 1.25rem;margin:1.25rem 0;">
-          <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:0.5rem;">Your Relationships Stay Yours</div>
-          <p style="font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.65;margin:0;">When a client lights up a solution, their existing advisors in that category are notified first. Light up Sell with a realtor in the boardroom? The realtor gets the call. LAMP Link Network Partners only fill the gaps — categories where no advisor has been assigned. LAMP is a marketplace that strengthens your client relationships, not one that competes with them.</p>
-        </div>
-        <div class="ll-feats">
-          <div class="ll-feat"><div class="llf-txt"><strong>Real Estate CRM</strong><span>Client assets are the trackable entity — not documents, not scattered notes.</span></div></div>
-          <div class="ll-feat"><div class="llf-txt"><strong>LAMP Link Network — Lead Generation</strong><span>When a property owner without an existing advisor clicks "Inquire Now," that warm, intent-driven referral is routed to you — complete with full portfolio intelligence attached.</span></div></div>
-          <div class="ll-feat"><div class="llf-txt"><strong>Deal Flow Pipeline</strong><span>Advisory Boardroom participation, referral structure, and transaction-based alignment.</span></div></div>
-          <div class="ll-feat"><div class="llf-txt"><strong>30-Day Free Trial</strong><span>Begins automatically on first access to a shared portfolio — no credit card required to start.</span></div></div>
-        </div>
-        <div class="ll-ctas">
-          <a href="https://lampit.ai" class="btn-ora">Join LAMP Link</a>
-        </div>
-      </div>
-      <div>
-        <div class="link-tiers">
-          <div class="lt"><div><div class="lt-name">Property Owners</div><div class="lt-desc">Full platform access — portfolio command center, sharing, and all solutions</div></div><div class="lt-pr"><div class="lt-amt free">$0</div><div class="lt-per">No subscription</div></div></div>
-          <div class="lt feat"><div><div class="lt-name">LAMP Link Solo</div><div class="lt-desc">Individual advisor — full platform, LAMP Link Network</div></div><div class="lt-pr"><div class="lt-amt">$49</div><div class="lt-per">/mo after trial</div><div class="lt-trial">30-day free trial</div></div></div>
-          <div class="lt"><div><div class="lt-name">LAMP Link Teams</div><div class="lt-desc">3+ advisors, same firm — auto-detected, firm-wide discount</div></div><div class="lt-pr"><div class="lt-amt">$35</div><div class="lt-per">/seat/mo</div><div class="lt-trial">Save 29% vs Solo</div></div></div>
-          <div class="lt"><div><div class="lt-name">Enterprise</div><div class="lt-desc">Custom implementation, white-label, API access, volume pricing</div></div><div class="lt-pr"><div class="lt-amt" style="font-size:1.1rem;">Custom</div><div class="lt-per">Annual contract</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="hero__visual">
+        <div class="hero__mockup mockup--dark">
+          <div class="mockup__body mockup__body--dark" style="border-radius: var(--radius-lg);">
 
-<!-- ADVISOR CRM -->
-<section id="advisor-crm" style="background:var(--navy); padding:5rem 2rem;">
-  <div class="container">
-    <div class="intel-grid">
-      <div>
-        <div class="eyebrow" style="color:var(--orange);">LAMP Link · Advisor View</div>
-        <div class="sec-title" style="color:var(--white);">Eyes on Every Client's Real Estate</div>
-        <div class="divider"></div>
-        <p class="sec-sub" style="color:rgba(255,255,255,0.6);">Most advisors are flying blind on their clients' largest assets. LAMP Link gives you a live, shared view of every real estate portfolio your clients choose to share — organized by client, filterable by strategy, and actionable from one place.</p>
-        <div class="intel-feats" style="margin-top:1.5rem;">
-          <div class="if" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
-            <div class="if-title" style="color:var(--white);"><div class="if-dot"></div>Shared With Me Dashboard</div>
-            <div class="if-body" style="color:rgba(255,255,255,0.55);">See every portfolio a client has shared — total properties, combined value, and equity — all in one consolidated view the moment you log in.</div>
-          </div>
-          <div class="if" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
-            <div class="if-title" style="color:var(--white);"><div class="if-dot"></div>Filter by Strategy Across Your Entire Book</div>
-            <div class="if-body" style="color:rgba(255,255,255,0.55);">Instantly surface which clients have properties flagged for Sell, Exchange, Finance, Improve, Hold, or Purchase — across every shared portfolio at once.</div>
-          </div>
-          <div class="if" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
-            <div class="if-title" style="color:var(--white);"><div class="if-dot"></div>By Client or By Property</div>
-            <div class="if-body" style="color:rgba(255,255,255,0.55);">Toggle between a client-level CRM view and a flat property list. Sort by priority, filter by category — Tax Planning, Estate Planning, Insurance, Finance, and more.</div>
-          </div>
-          <div class="if" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
-            <div class="if-title" style="color:var(--white);"><div class="if-dot"></div>Has Actions · Overdue Alerts</div>
-            <div class="if-body" style="color:rgba(255,255,255,0.55);">Know which clients need attention. LAMP flags properties with pending actions or overdue items so nothing falls through the cracks.</div>
-          </div>
-        </div>
-        <a href="https://lampit.ai" class="btn-primary" style="margin-top:2rem;display:inline-block;">Join LAMP Link →</a>
-      </div>
-
-      <div>
-        <div class="dashboard-mock" style="font-size:0.9em;">
-          <div class="dm-nav">
-            <div class="dm-nav-logo">
-              <svg width="18" height="18" viewBox="0 0 100 100" fill="none"><polygon points="50,8 95,88 5,88" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/><polygon points="50,92 5,12 95,12" fill="none" stroke="#D4722C" stroke-width="10" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="dm-nav-links">
-              <span class="dm-nav-link">Dashboard</span>
-              <span class="dm-nav-link">Actions</span>
-              <span class="dm-nav-link active">Shared</span>
-              <span class="dm-nav-link">Settings</span>
-            </div>
-            <div style="width:18px"></div>
-          </div>
-          <div class="dm-body">
-            <div class="dm-heading">Shared With Me</div>
-            <div class="dm-sub">Portfolios that others have shared with you</div>
-
-            <div class="dm-stats-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:1rem;">
-              <div class="dm-stat"><span class="dm-stat-icon">🏠</span><div class="dm-stat-label">Shared Properties</div><div class="dm-stat-value">12</div><div class="dm-stat-sub">Across 1 portfolio</div></div>
-              <div class="dm-stat"><span class="dm-stat-icon">$</span><div class="dm-stat-label">Total Value</div><div class="dm-stat-value">$34.6M</div><div class="dm-stat-sub">Combined portfolio value</div></div>
-              <div class="dm-stat"><span class="dm-stat-icon">↗</span><div class="dm-stat-label">Total Equity</div><div class="dm-stat-value">$26.2M</div><div class="dm-stat-sub">Estimated shared equity</div></div>
+            <!-- Top Nav -->
+            <div class="app__topnav">
+              <span class="app__topnav-item app__topnav-item--active">Dashboard</span>
+              <span class="app__topnav-item">Actions</span>
+              <span class="app__topnav-item">Shared</span>
+              <span class="app__topnav-item">Settings</span>
             </div>
 
-            <div style="display:flex;gap:0.5rem;margin-bottom:0.85rem;">
-              <span style="font-size:0.75rem;font-weight:700;padding:0.3rem 0.9rem;border-radius:20px;background:var(--white);color:#111827;cursor:default;">By Client</span>
-              <span style="font-size:0.75rem;font-weight:500;padding:0.3rem 0.9rem;border-radius:20px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);cursor:default;">All Properties</span>
+            <!-- Welcome Header -->
+            <div class="app__welcome">
+              <div class="app__welcome-sub">Here's an overview of your portfolio</div>
             </div>
 
-            <div class="dm-section-label">Shared Portfolios</div>
-            <div class="dm-search"><span style="opacity:0.4">🔍</span> Search clients...</div>
-
-            <div class="dm-filters" style="margin-bottom:0.5rem;">
-              <span class="dm-filter active">All Strategies</span>
-              <span class="dm-filter">Sell</span>
-              <span class="dm-filter">Exchange</span>
-              <span class="dm-filter">Improve</span>
-              <span class="dm-filter">Hold</span>
-              <span class="dm-filter">Finance</span>
-              <span class="dm-filter">Premium</span>
-              <span class="dm-filter">Purchase</span>
-            </div>
-            <div class="dm-filters" style="margin-bottom:0.75rem;">
-              <span class="dm-filter active" style="background:rgba(212,114,44,0.15);border-color:rgba(212,114,44,0.3);color:var(--orange);">All</span>
-              <span class="dm-filter">Has Actions</span>
-              <span class="dm-filter">Overdue</span>
-            </div>
-            <div class="dm-filters" style="margin-bottom:0.85rem;">
-              <span class="dm-filter2 active">Tax Planning</span>
-              <span class="dm-filter2 active">Estate Planning</span>
-              <span class="dm-filter2">Insurance</span>
-              <span class="dm-filter2">Finance</span>
+            <!-- Dashboard Stats (3 boxes) -->
+            <div class="app__stats-row">
+              <div class="app__stat-box">
+                <div class="app__stat-label">TOTAL PROPERTIES</div>
+                <div class="app__stat-num">4</div>
+                <div class="app__stat-sub">In your portfolio</div>
+              </div>
+              <div class="app__stat-box">
+                <div class="app__stat-label">TOTAL VALUE</div>
+                <div class="app__stat-num">$8.6M</div>
+                <div class="app__stat-sub" style="color:#28CA42;">↗ Portfolio value</div>
+              </div>
+              <div class="app__stat-box">
+                <div class="app__stat-label">TOTAL EQUITY</div>
+                <div class="app__stat-num">$4.3M</div>
+                <div class="app__stat-sub">Estimated equity</div>
+              </div>
             </div>
 
-            <div class="dm-prop" style="padding:0.85rem 1rem;">
-              <div class="dm-prop-left">
-                <div class="dm-prop-pin" style="width:32px;height:32px;font-size:0.85rem;">👤</div>
-                <div>
-                  <div class="dm-prop-addr">Louis C. Baker</div>
-                  <div class="dm-prop-city">12 properties · $34.6M</div>
+            <!-- Quick Actions (horizontal) -->
+            <div class="app__actions-section">
+              <div class="app__actions-title">QUICK ACTIONS</div>
+              <div class="app__actions-row-horizontal">
+                <div class="app__action-box"><svg class="app__action-svg" viewBox="0 0 24 24" fill="none" stroke="#28CA42" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Add Property</span><svg class="app__action-svg-arrow" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                <div class="app__action-box"><svg class="app__action-svg" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>My Actions</span><svg class="app__action-svg-arrow" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                <div class="app__action-box"><svg class="app__action-svg" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span>Share Portfolio</span><svg class="app__action-svg-arrow" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+              </div>
+            </div>
+
+            <!-- Your Advisors Bar -->
+            <div class="app__advisors-bar">
+              <svg class="app__advisors-icon" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              <div class="app__advisors-info">
+                <div class="app__advisors-title">Your Advisors</div>
+              </div>
+              <span class="app__advisors-add">Add →</span>
+            </div>
+
+            <!-- Properties List -->
+            <div class="app__properties-section">
+              <div class="app__properties-header">
+                <div class="app__properties-title">YOUR PROPERTIES</div>
+                <div class="app__properties-count">4 total</div>
+              </div>
+              <div class="app__search-bar">🔍 Search properties...</div>
+              <div class="app__filter-pills">
+                <span class="app__pill app__pill--active">All</span>
+                <span class="app__pill">Sell</span>
+                <span class="app__pill">Exchange</span>
+                <span class="app__pill">Improve</span>
+                <span class="app__pill">Hold</span>
+                <span class="app__pill">Finance</span>
+                <span class="app__pill">Premium</span>
+                <span class="app__pill">Purchase</span>
+              </div>
+
+              <div class="app__property-card">
+                <div class="app__property-info">
+                  <div class="app__property-name">742 Evergreen Terrace, Pasadena, CA</div>
+                  <div class="app__property-meta">Single Family Home · 91101</div>
                 </div>
+                <div class="app__property-val">$1.3M</div>
               </div>
-              <div class="dm-prop-right">
-                <span style="font-size:0.72rem;color:rgba(255,255,255,0.35);">louis@example.com</span>
-                <span class="dm-prop-arrow">→</span>
+
+              <div class="app__property-card">
+                <div class="app__property-info">
+                  <div class="app__property-name">1100 Sunset Blvd, Los Angeles, CA</div>
+                  <div class="app__property-meta">Multifamily · 90026</div>
+                </div>
+                <div class="app__property-val">$2.4M</div>
+              </div>
+
+              <div class="app__property-card">
+                <div class="app__property-info">
+                  <div class="app__property-name">305 Harbor View Rd, Irvine, CA</div>
+                  <div class="app__property-meta">Retail · 92603</div>
+                </div>
+                <div class="app__property-val">$3.1M</div>
+              </div>
+
+              <div class="app__property-card">
+                <div class="app__property-info">
+                  <div class="app__property-name">8800 Industrial Pkwy, San Diego, CA</div>
+                  <div class="app__property-meta">Industrial · 92121</div>
+                </div>
+                <div class="app__property-val">$1.8M</div>
               </div>
             </div>
 
+            <!-- Bottom Nav -->
+            <div class="app__bottom-nav">
+              <div class="app__nav-item app__nav-item--active"><svg class="app__nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg><span>Home</span></div>
+              <div class="app__nav-item"><svg class="app__nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span>Actions</span></div>
+              <div class="app__nav-item"><svg class="app__nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg><span>Shared</span></div>
+              <div class="app__nav-item"><svg class="app__nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span>Settings</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -739,157 +1508,754 @@
   </div>
 </section>
 
-<!-- WHO WE SERVE -->
-<section id="who-we-serve">
-  <div class="container">
-    <div class="eyebrow">Built for Everyone</div>
-    <div class="sec-title">Who We Serve</div>
-    <div class="divider"></div>
-    <p class="sec-sub">LAMP is a marketplace that empowers every stakeholder in the real estate ecosystem — from individual property owners to institutional investors. Every LAMP Link Network Partner who joins strengthens the network.</p>
-    <div class="serve-grid">
-      <div class="sc"><div class="sc-title">Property Owners</div><div class="sc-body">Free institutional-grade analysis of your entire portfolio. Light up any property to connect with solutions.</div></div>
-      <div class="sc"><div class="sc-title">Advisors &amp; RIAs</div><div class="sc-body">A real estate CRM where your clients' assets are the trackable entity. Eliminate the real estate blind spot through LAMP Link.</div></div>
-      <div class="sc"><div class="sc-title">RE Sponsors &amp; Brokers</div><div class="sc-body">Receive leads with clear transaction intent. Build scalable exchange pipelines through LAMP Link Network partnerships.</div></div>
-      <div class="sc"><div class="sc-title">CPAs &amp; Tax Advisors</div><div class="sc-body">Help clients identify tax-efficient strategies and exchange opportunities with complete portfolio intelligence.</div></div>
-      <div class="sc"><div class="sc-title">Private Lenders</div><div class="sc-body">Access clean, comprehensive property data for faster underwriting and confident lending decisions.</div></div>
-      <div class="sc"><div class="sc-title">Family Offices &amp; UHNW</div><div class="sc-body">Institutional-grade portfolio management with dedicated advisory through our Premium LAMP PC service.</div></div>
-      <div class="sc"><div class="sc-title">Realtors</div><div class="sc-body">Strengthen client relationships with portfolio-wide visibility and connect clients to the full LAMP solutions suite.</div></div>
-      <div class="sc"><div class="sc-title">Enterprise &amp; Firms</div><div class="sc-body">Custom white-label solutions and licensing through LAMP PS. Integrate LAMP intelligence into your existing platform.</div></div>
+<!-- ==================== TRUST BAR ==================== -->
+<div class="trust-bar">
+  <div class="trust-bar__inner">
+    <div class="trust-bar__item">
+      Professional Analysis
+    </div>
+    <div class="trust-bar__divider"></div>
+    <div class="trust-bar__item">
+      AI Powered
+    </div>
+    <div class="trust-bar__divider"></div>
+    <div class="trust-bar__item">
+      Institutional Grade
+    </div>
+    <div class="trust-bar__divider"></div>
+    <div class="trust-bar__item">
+      Free for Property Owners
     </div>
   </div>
-</section>
-
-<!-- SECURITY -->
-<section id="security">
-  <div class="container">
-    <div class="eyebrow">Your Data, Your Control</div>
-    <div class="sec-title">Built on Trust, Transparency &amp; Security</div>
-    <div class="divider"></div>
-    <p class="sec-sub">Your portfolio data is private by default. No one — not advisors, not Network Partners, not LAMP — can view your information unless you explicitly choose to share it. And LAMP will never provide legal, financial, tax, or real estate advice of any kind.</p>
-
-    <div style="background:var(--navy);border-radius:10px;padding:2rem 2.25rem;margin-bottom:2rem;">
-      <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:0.75rem;">Data Ownership Statement</div>
-      <p style="font-size:1rem;color:var(--white);font-weight:600;line-height:1.5;margin-bottom:0.75rem;">Property owners own their data. Entirely. Always.</p>
-      <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.72;margin-bottom:0.75rem;">Nothing in your portfolio is visible to anyone — not your advisors, not LAMP Link Network Partners, not LAMP itself — until you make an explicit choice to share it. You control what is shared, with whom, and when. You can revoke access at any time from your Settings tab.</p>
-      <p style="font-size:0.9rem;color:rgba(255,255,255,0.65);line-height:1.72;margin:0;">LAMP is a technology platform and marketplace. We do not provide legal, financial, tax, investment, or real estate advice of any kind. We do not hold licenses as a broker, lender, attorney, or financial advisor. Our role is to organize your data, surface intelligence, and facilitate connections. All professional services are delivered by independent LAMP Link Network Partners or your own existing advisors — not by LAMP.</p>
-    </div>
-
-    <div class="sec-grid">
-      <div class="sec-card"><div class="sec-title"><div class="sec-dot"></div>Private by Default</div><div class="sec-body">Your property data belongs to you and is invisible to everyone until you take action. Share your entire portfolio or individual properties with advisors you choose. When you click "Inquire Now," your inquiry goes to LAMP. We connect you with the appropriate LAMP Link Network Partner, and you decide if and when to share your data with them.</div></div>
-      <div class="sec-card"><div class="sec-title"><div class="sec-dot"></div>Visibility Only When You Share</div><div class="sec-body">When you choose to share, your dashboard shows exactly how many advisors have access. You can always manage who you've shared with in your Settings tab. Add or remove access at any time.</div></div>
-      <div class="sec-card"><div class="sec-title"><div class="sec-dot"></div>Outside the Regulatory Sandbox</div><div class="sec-body">LAMP is not a licensed broker, lender, financial advisor, or legal counsel. We intentionally operate as a neutral technology platform and marketplace — organizing data and facilitating connections without crossing into regulated advisory territory. All licensed professional services are provided by independent Network Partners.</div></div>
-      <div class="sec-card"><div class="sec-title"><div class="sec-dot"></div>Enterprise-Grade Protection</div><div class="sec-body">Encryption in transit and at rest, strong access controls, regular vulnerability scanning, incident response planning, and vendor risk assessments — all built on SOC 2-inspired best practices. Formal SOC 2 Type 1 certification is in progress.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="eyebrow">Common Questions</div>
-    <div class="sec-title">Frequently Asked Questions</div>
-    <div class="divider"></div>
-
-    <div class="faq-grid">
-      <div>
-        <div class="faq-item open"><div class="faq-q">Is LAMP really free for property owners? <span class="faq-tog">+</span></div><div class="faq-a">Yes — LAMP is completely free for property owners and investors. Sign up, log in, and use the platform at no cost. No subscriptions, no hidden fees. We are a marketplace. Only subscribing advisors (LAMP Link Network Partners) pay to access shared portfolios and participate in the network.</div></div>
-        <div class="faq-item"><div class="faq-q">What is LAMP exactly? <span class="faq-tog">+</span></div><div class="faq-a">LAMP is your AI-powered real estate command center — delivering institutional-grade intelligence and clear visibility into every property you own. Analyze assets, uncover opportunities to sell, exchange, finance, improve, or optimize, and connect seamlessly to our marketplace of real estate solutions and LAMP Link Network Partners.</div></div>
-        <div class="faq-item"><div class="faq-q">What happens when I "Light Up" a property? <span class="faq-tog">+</span></div><div class="faq-a">When you click a solution button (Sell, Exchange, Finance, Improve, or Premium) and hit "Inquire Now," LAMP first notifies any existing advisors you've assigned to that category in your Advisory Boardroom. Your realtor gets the sell inquiry. Your CPA gets the tax question. LAMP Link Network Partners only receive the referral when no advisor has been assigned to that category — filling the gap, not replacing a relationship.</div></div>
-        <div class="faq-item"><div class="faq-q">Will LAMP replace my existing advisors or interfere with those relationships? <span class="faq-tog">+</span></div><div class="faq-a">No — and this is by design. LAMP is built to strengthen your existing advisory relationships, not compete with them. When you light up a solution, your advisors in that category are notified first. A LAMP Link Network Partner only steps in when there's no advisor already assigned to that role. Think of LAMP Link as a marketplace for the gaps in your advisory team — not a replacement for the professionals you already trust.</div></div>
-        <div class="faq-item"><div class="faq-q">What types of properties can I add? <span class="faq-tog">+</span></div><div class="faq-a">LAMP supports a wide range of property types — single family homes, multifamily, commercial, retail, industrial, and mixed-use. Simply enter the property address and LAMP's AI-powered platform handles the rest.</div></div>
-        <div class="faq-item"><div class="faq-q">Does LAMP provide legal, financial, or real estate advice? <span class="faq-tog">+</span></div><div class="faq-a">No. LAMP provides no legal, financial, tax, or real estate advice. We do not offer brokerage, lending, consulting, or any professional services. Our role is purely to facilitate connections in a secure, data-rich environment.</div></div>
-      </div>
-      <div>
-        <div class="faq-item"><div class="faq-q">Who can see my property data? <span class="faq-tog">+</span></div><div class="faq-a">No one — not advisors, not LAMP Link Network Partners, not LAMP itself — can see your data unless you explicitly grant access. Your portfolio is completely private by default. You can always view and manage who you've given permissions to in your LAMPit.ai account under the Settings tab.</div></div>
-        <div class="faq-item"><div class="faq-q">Who are LAMP Link Network Partners and how do they join? <span class="faq-tog">+</span></div><div class="faq-a">LAMP Link Network Partners are real estate professionals — brokers, exchange sponsors, lenders, attorneys, wealth managers, construction managers, and private client advisors. For advisors, LAMP Link functions as a real estate advisory CRM where client assets are the trackable entity. They join when a property owner invites them to view a shared portfolio. Their 30-day free trial begins automatically on first access to shared content.</div></div>
-        <div class="faq-item"><div class="faq-q">What happens after the advisor's 30-day free trial? <span class="faq-tog">+</span></div><div class="faq-a">At the end of the 30-day free trial, advisors are prompted to review and electronically sign the LAMP Link Network Partner Terms of Service and enter payment information via Stripe to continue access.<br><br><strong>LAMP Link Solo</strong> — $49/mo (or $45/mo billed annually). For individual advisors who want full platform access and a LAMP Link Network.<br><br><strong>LAMP Link Teams</strong> — $35/seat/mo, auto-detected when 3 or more advisors join from the same firm. Saves 29% vs. Solo.<br><br><strong>Enterprise</strong> — Custom pricing for firms that need white-label integration, API access, or volume licensing. Contact <a href="mailto:info@lampportfolio.com" style="color:var(--orange);font-weight:600;">info@lampportfolio.com</a>.<br><br>Property owners are always free — no subscription, no credit card required.</div></div>
-        <div class="faq-item"><div class="faq-q">Are there any fees beyond the monthly subscription? <span class="faq-tog">+</span></div><div class="faq-a">Yes. LAMP Link Network Partners are subject to two additional fees beyond their monthly subscription:<br><br><strong>Referral Fee — $199</strong><br>Charged per referral sent when a property owner with no existing advisor in a given category clicks "Inquire Now" and LAMP routes the inquiry to a Network Partner. This fee applies per referral delivered, regardless of outcome.<br><br><strong>Technology Fee — $199</strong><br>Charged upon a completed transaction where LAMP was the originating referral source — for example, a property sale, a completed 1031 exchange, a closed refinance, or any other executed transaction. This fee applies in addition to the referral fee where both are applicable, meaning a LAMP-referred deal that closes may carry up to $398 in total LAMP fees.<br><br>Neither fee applies to transactions within an advisor's existing shared portfolio relationships — only to LAMP-originated referrals. LAMP reserves the right to audit completed transactions per the terms of the LAMP Link Network Partner Terms of Service, which all Network Partners sign upon activation.</div></div>
-        <div class="faq-item"><div class="faq-q">How do I share my portfolio with my advisors? <span class="faq-tog">+</span></div><div class="faq-a">After adding your properties, click "Share Portfolio" and enter the email addresses of your advisory team. If you'd prefer to share selectively, you can expand on any individual property and share just that one asset. Advisors receive view-only access; they cannot modify your data.</div></div>
-        <div class="faq-item"><div class="faq-q">How does LAMP protect my data? <span class="faq-tog">+</span></div><div class="faq-a">Our practices include strong access controls, encryption in transit and at rest, regular vulnerability scanning, incident response planning, and vendor risk assessments — all built on SOC 2-aligned best practices. We are actively implementing SOC 2 Type 1 controls and expect formal certification in the near future.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-section">
-  <div class="eyebrow">Get Started Today</div>
-  <h2 class="cta-title">Ready to Light Up Your Real Estate?</h2>
-  <p class="cta-sub">Create your free account at LAMPit.ai, add your properties, and build your real estate advisory boardroom. Free for property owners.</p>
-  <div class="cta-actions">
-    <a href="https://lampit.ai" class="btn-primary">Light Up My Portfolio</a>
-    <a href="mailto:info@lampportfolio.com" class="btn-gw">Contact Us</a>
-  </div>
-  <div class="cta-note">All platform and referral fees are paid by LAMP Link Network Partners — never by you.</div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="fb-logo"><svg width="20" height="20" viewBox="0 0 100 100" fill="none"><polygon points="50,8 95,88 5,88" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/><polygon points="50,92 5,12 95,12" fill="none" stroke="#D4722C" stroke-width="10" stroke-linejoin="round"/></svg>LAMP <span>Portfolio</span></div>
-      <div class="fb-body">Legacy Asset Management Platform. Your AI-powered real estate command center — institutional-grade intelligence, full visibility, and a marketplace to connect with solutions and LAMP Link Network Partners.</div>
-      <div class="fb-tag">"Light up your real estate portfolio. LAMP it."</div>
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="section section--light" id="how-it-works">
+  <div class="container">
+    <div class="text-center scroll-reveal">
+      <span class="badge badge--blue">Simple &amp; Powerful</span>
+      <h2 style="margin-top:16px;">How LAMP Works</h2>
+      <p class="subtitle" style="margin-top:12px;">Three steps to unlock institutional-grade intelligence for your entire real estate portfolio. LAMP it. Visit <strong>LAMPit.ai</strong> to get started.</p>
     </div>
-    <div class="fc"><div class="fc-title">Strategy</div><ul><li><a href="#solutions">Sell — LAMP AM</a></li><li><a href="#solutions">Exchange — LAMP X</a></li><li><a href="#solutions">Finance — LAMP PF</a></li><li><a href="#solutions">Improve — LAMP PI</a></li><li><a href="#solutions">Premium — LAMP PC</a></li><li><a href="#solutions">Custom — LAMP PS</a></li></ul></div>
-    <div class="fc"><div class="fc-title">Platform</div><ul><li><a href="https://lampit.ai">LAMPit.ai</a></li><li><a href="#how-it-works">How It Works</a></li><li><a href="#lamp-link">LAMP Link</a></li><li><a href="#advisor-crm">Advisor CRM</a></li><li><a href="#security">Security</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-    <div class="fc"><div class="fc-title">Contact</div><ul><li><a href="mailto:info@lampportfolio.com">info@lampportfolio.com</a></li><li><a href="https://lampit.ai">LAMPit.ai</a></li><li><a href="https://lampportfolio.com">LAMPportfolio.com</a></li></ul></div>
+
+    <div class="steps__grid">
+      <div class="step-card scroll-reveal">
+        <div class="step-card__number">1</div>
+        <h3>Login &amp; Add Properties</h3>
+        <p>Create your free account at LAMPit.ai. Add your property addresses to build your portfolio. Then build your real estate advisory boardroom — share per property or your entire portfolio with one easy invite to assemble your advisory team of CPAs, wealth managers, brokers, and more.</p>
+        <div class="step-connector">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+
+      <div class="step-card scroll-reveal" style="animation-delay:0.15s">
+        <div class="step-card__number">2</div>
+        <h3>"Light Up" Your Portfolio</h3>
+        <p>Click the solution you need — <strong>Sell, Exchange, Finance, Improve, or Premium</strong> — and hit "Inquire Now." LAMP distributes your inquiry to the appropriate LAMP Network Partner.</p>
+        <div class="step-connector">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+
+      <div class="step-card scroll-reveal" style="animation-delay:0.3s">
+        <div class="step-card__number">3</div>
+        <h3>Connect &amp; Transact</h3>
+        <p>Your advisor team is notified. LAMP Network Partners reach out to assist. <strong>All platform and referral fees are paid by Network Partners — never by you.</strong></p>
+      </div>
+    </div>
   </div>
-  <div class="footer-bottom"><div class="footer-copy">&copy; 2025 LAMP Portfolio. All rights reserved. · Professional Analysis · AI Powered · Institutional Grade</div></div>
+</section>
+
+<!-- ==================== SOLUTIONS ==================== -->
+<section class="section solutions-section" id="solutions">
+  <div class="container">
+    <div class="text-center solutions__intro scroll-reveal">
+      <span class="badge badge--orange">Five Powerful Solutions</span>
+      <h2 style="margin-top:16px;">Light Up Every Opportunity</h2>
+      <p class="subtitle" style="margin-top:12px;">LAMP is a comprehensive marketplace connecting you with LAMP Network Partners across every real estate need. Click a solution to learn more.</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="solutions__tabs scroll-reveal">
+      <button class="sol-tab active" data-tab="sell">
+        Sell
+      </button>
+      <button class="sol-tab" data-tab="exchange">
+        Exchange
+      </button>
+      <button class="sol-tab" data-tab="finance">
+        Finance
+      </button>
+      <button class="sol-tab" data-tab="improve">
+        Improve
+      </button>
+      <button class="sol-tab" data-tab="premium">
+        Premium
+      </button>
+      <button class="sol-tab" data-tab="custom">
+        Custom
+      </button>
+    </div>
+
+    <!-- SELL PANEL -->
+    <div class="sol-panel active" id="panel-sell">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP AM · Asset Management</div>
+            <h3>Sell Your Property</h3>
+            <p>Maximize sale prices with detailed financial modeling and data-driven insights. LAMP AM connects you with LAMP Network Partners who provide institutional-grade analysis to ensure you capture the full value of your asset.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <div class="sol-panel__features">
+            <div class="sol-feature">
+              <div><h4>Data-Driven Pricing</h4><p>AI-powered market analysis helps determine optimal listing price and sale timing based on real-time comparable data and market trends.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Advisor Collaboration</h4><p>Share your portfolio with your advisory team — wealth managers, CPAs, realtors — so everyone has complete visibility into the sale process.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>LAMP Network Partners</h4><p>LAMP connects you with brokers and real estate professionals who specialize in maximizing asset value for sellers.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Zero Cost to You</h4><p>All platform, referral, and transaction fees are paid by LAMP Network Partners. Property owners never pay to use the platform.</p></div>
+            </div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="https://lampit.ai" class="btn btn--primary">Light Up to Sell →</a>
+            <span style="color:var(--gray-400); font-size:0.85rem;">Log in to LAMPit.ai and click "Sell" on any property</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXCHANGE PANEL -->
+    <div class="sol-panel" id="panel-exchange">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP X · Exchange</div>
+            <h3>Exchange Your Property</h3>
+            <p>Explore the full spectrum of exchange opportunities — 1031 exchanges, DSTs, 721 UPREITs, Opportunity Zones, and more. Light Up "Exchange" on any property, click "Inquire Now," and LAMP connects you with the right LAMP Network Partner to explore your options.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <div class="sol-panel__features">
+            <div class="sol-feature">
+              <div><h4>Full Range of Exchange Options</h4><p>LAMP supports all major exchange strategies — 1031 exchanges, Delaware Statutory Trusts (DSTs), 721 UPREITs, Opportunity Zones, and other tax-efficient transactions. Light Up "Exchange" to get started.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Complete Property Intelligence</h4><p>Your portfolio analysis gives exchange sponsors and facilitators the data they need to identify the right opportunities — all shared on your terms when you choose.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>You Initiate the Connection</h4><p>Click "Exchange" on any property and hit "Inquire Now" to Light Up your intent. LAMP distributes your inquiry to the appropriate LAMP Network Partner exchange sponsor, and your advisor team maintains visibility if you've shared with them.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Warm Introductions, Not Cold Outreach</h4><p>When you Light Up "Exchange" and inquire, sponsors receive your intent along with complete asset details — a warm introduction initiated by you, not a cold call.</p></div>
+            </div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="https://lampit.ai" class="btn btn--primary">Light Up to Exchange →</a>
+            <span style="color:var(--gray-400); font-size:0.85rem;">Log in to LAMPit.ai and click "Exchange" on any property</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCE PANEL -->
+    <div class="sol-panel" id="panel-finance">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP PF · Portfolio Finance</div>
+            <h3>Finance Your Property</h3>
+            <p>Uncover competitive financing options by showcasing your asset's true value through comprehensive reports and data gathering. LAMP PF connects you with lenders who can underwrite quickly using clean, institutional-grade documentation.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <div class="sol-panel__features">
+            <div class="sol-feature">
+              <div><h4>Clean Loan Packaging</h4><p>Comprehensive documentation and asset reports enable lenders to underwrite quickly — unlocking bridge financing in days, not months.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Lender Network</h4><p>Access LAMP's network of private lenders and traditional financing sources, offering competitive rates and reliable execution.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Asset Value Showcase</h4><p>AI-powered analysis highlights your property's strengths, enabling you to secure more favorable terms from financing partners.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Accelerated Timelines</h4><p>Because LAMP centralizes your data, financing partners can move faster — reducing the time from application to funding.</p></div>
+            </div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="https://lampit.ai" class="btn btn--primary">Light Up to Finance →</a>
+            <span style="color:var(--gray-400); font-size:0.85rem;">Log in to LAMPit.ai and click "Finance" on any property</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPROVE PANEL -->
+    <div class="sol-panel" id="panel-improve">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP PI · Portfolio Improvement</div>
+            <h3>Improve Your Property</h3>
+            <p>Enhance property value and appeal with strategic renovation and refurbishment recommendations. LAMP PI connects you with construction and improvement professionals who understand how to maximize your return on investment.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <div class="sol-panel__features">
+            <div class="sol-feature">
+              <div><h4>Strategic Renovation Plans</h4><p>Receive targeted recommendations on which improvements deliver the highest ROI for your specific property type and market.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Value-Add Analysis</h4><p>AI-powered projections show how specific improvements can increase property value, rental income, and overall portfolio performance.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Contractor Network</h4><p>Connect with construction management and renovation professionals through LAMP's Network Partner ecosystem.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Budget &amp; Timeline Guidance</h4><p>From initial scope to completion, improvement partners provide clear budgets and timelines so you can plan with confidence.</p></div>
+            </div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="https://lampit.ai" class="btn btn--primary">Light Up to Improve →</a>
+            <span style="color:var(--gray-400); font-size:0.85rem;">Log in to LAMPit.ai and click "Improve" on any property</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM PANEL -->
+    <div class="sol-panel" id="panel-premium">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP PC · Private Client</div>
+            <h3>Premium Advisory</h3>
+            <p>Full-service real estate advisory and asset management for institutions, family offices, and UHNW families. LAMP PC delivers a disciplined six-phase optimization process that organizes, strategizes, values, plans, projects, and executes across your entire portfolio.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <h4 style="margin-bottom:20px; color:var(--navy);">The Six-Phase Optimization Process</h4>
+          <div class="sol-panel__features">
+            <div class="sol-feature">
+              <div><h4>Phase 1: Organize &amp; Structure</h4><p>Digitize and centralize all property data — title reports, zoning, insurance, property management records — into a cloud-based profile for each asset.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Phase 2: Strategize</h4><p>Develop a customized strategy for each asset — buy, sell, hold, finance, develop, syndicate, or renovate — aligned with portfolio goals.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Phase 3: Value</h4><p>Comprehensive valuations using appraisers, AI tools, national broker network, and proprietary models across all property types.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Phase 4: Highest &amp; Best Use</h4><p>Identify and model the optimal use for each property with detailed budgets and implementation roadmaps.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Phase 5: After-Renovated Value</h4><p>Project post-improvement values to guide renovation, refinancing, and investment decisions with precision.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Phase 6: Execute &amp; Reassess</h4><p>Monitor performance and continuously refine strategies — ensuring optimal outcomes over time through ongoing portfolio management.</p></div>
+            </div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="https://lampit.ai" class="btn btn--primary">Light Up for Premium →</a>
+            <span style="color:var(--gray-400); font-size:0.85rem;">Select Premium on LAMPit.ai to connect with the LAMP PC advisory team</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CUSTOM PANEL -->
+    <div class="sol-panel" id="panel-custom">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP PS · Portfolio Services</div>
+            <h3>Custom Solutions</h3>
+            <p>Licensing agreements and customized integrations designed to bring the LAMP intelligence platform into your firm's existing workflows. LAMP PS delivers bespoke solutions tailored to your organization's unique requirements.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <div class="sol-panel__features">
+            <div class="sol-feature">
+              <div><h4>White-Label Integration</h4><p>Embed LAMP's intelligence platform within your firm's existing technology stack for a seamless client experience under your brand.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Licensing Agreements</h4><p>Flexible licensing models that scale with your firm — from individual practitioner access to enterprise-wide deployments.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Proprietary Software Access</h4><p>Direct access to LAMP's AI engine, analytics dashboards, and portfolio intelligence tools customized for your firm's workflow.</p></div>
+            </div>
+            <div class="sol-feature">
+              <div><h4>Dedicated Support</h4><p>Work directly with LAMP's technology team to build, deploy, and optimize your customized solution.</p></div>
+            </div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="mailto:info@lampportfolio.com" class="btn btn--primary">Contact Us for Custom Solutions →</a>
+            <span style="color:var(--gray-400); font-size:0.85rem;">Custom solutions are scoped and delivered outside of the LAMPit.ai platform</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CARFAX / AI INTELLIGENCE ==================== -->
+<section class="section section--blue" id="intelligence">
+  <div class="container">
+    <div class="carfax__grid">
+      <div class="carfax__content scroll-reveal">
+        <span class="badge" style="background:rgba(255,255,255,0.1); color:var(--orange-light); border:1px solid rgba(255,255,255,0.15);">AI-Powered Intelligence</span>
+        <h2 style="margin-top:16px;">Your Real Estate<br>Command Center</h2>
+        <p>Like having an institutional boardroom for your properties. LAMP gives you deep visibility, AI-powered insights, and a marketplace to act on every possibility — sell, improve, finance, or exchange. Real-time data. Transparent reporting. Institutional-grade analysis — with eyes on every asset.</p>
+
+        <div class="carfax__pillars">
+          <div class="pillar">
+            <div>
+              <h4>Professional Analysis</h4>
+              <p>Expert insights from advanced AI algorithms analyzing market trends, property performance, and investment opportunities.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div>
+              <h4>AI Powered</h4>
+              <p>Machine learning continuously improves recommendations based on real-time market data and historical performance.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div>
+              <h4>Institutional Grade</h4>
+              <p>Enterprise-level tools and analytics previously exclusive to large institutional investors, now accessible to all property owners.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div>
+              <h4>Build Your Real Estate Advisory Boardroom</h4>
+              <p>Share per property or per portfolio with one easy invite. Assemble your own institutional-style board of advisors — wealth managers, brokers, CPAs, attorneys — all with eyes on your assets and working together in one place.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHO WE SERVE ==================== -->
+<section class="section" id="who-we-serve">
+  <div class="container">
+    <div class="text-center scroll-reveal">
+      <span class="badge badge--orange">Built for Everyone</span>
+      <h2 style="margin-top:16px;">Who We Serve</h2>
+      <p class="subtitle" style="margin-top:12px;">LAMP is a marketplace that empowers every stakeholder in the real estate ecosystem — from individual property owners to institutional investors. Build your real estate advisory boardroom by sharing with your advisory team, and every LAMP Network Partner who joins strengthens the network. More shared portfolios attract more advisors, more advisors deliver better outcomes, and better outcomes bring more users to the platform. Everyone benefits.</p>
+    </div>
+
+    <div class="serve__grid">
+      <div class="serve-card scroll-reveal">
+        <h4>Property Owners</h4>
+        <p>Free institutional-grade analysis of your entire real estate portfolio. Light up any property to connect with solutions.</p>
+      </div>
+      <div class="serve-card scroll-reveal">
+        <h4>Advisors &amp; RIAs</h4>
+        <p>A real estate CRM where your clients' assets are the trackable entity. Gain complete visibility into their holdings when they share — transforming the "real estate blind spot" into a strategic advantage.</p>
+      </div>
+      <div class="serve-card scroll-reveal">
+        <h4>RE Sponsors &amp; Brokers</h4>
+        <p>Receive leads with clear transaction intent. Build scalable exchange pipelines through advisor network partnerships.</p>
+      </div>
+      <div class="serve-card scroll-reveal">
+        <h4>CPAs &amp; Tax Advisors</h4>
+        <p>Help clients identify tax-efficient strategies and exchange opportunities with complete portfolio intelligence.</p>
+      </div>
+      <div class="serve-card scroll-reveal">
+        <h4>Private Lenders</h4>
+        <p>Access clean, comprehensive property data for faster underwriting and confident lending decisions.</p>
+      </div>
+      <div class="serve-card scroll-reveal">
+        <h4>Family Offices &amp; UHNW</h4>
+        <p>Institutional-grade portfolio management with dedicated advisory through our Premium LAMP PC service.</p>
+      </div>
+      <div class="serve-card scroll-reveal">
+        <h4>Realtors</h4>
+        <p>Strengthen client relationships with portfolio-wide visibility and connect them to the full LAMP solutions suite.</p>
+      </div>
+      <div class="serve-card scroll-reveal">
+        <h4>Enterprise &amp; Firms</h4>
+        <p>Custom white-label solutions and licensing through LAMP PS. Integrate LAMP intelligence into your existing platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECURITY & PRIVACY ==================== -->
+<section class="section section--dark" id="security">
+  <div class="container">
+    <div class="security__grid">
+      <div class="security__content scroll-reveal">
+        <span class="badge badge--orange">Your Data, Your Control</span>
+        <h2 style="margin-top:16px; color:white;">Built on Trust &amp; Security</h2>
+        <p style="color:rgba(255,255,255,0.7); line-height:1.75; margin-top:16px; max-width:540px;">Your portfolio data is private by default. No one — not advisors, not Network Partners, not LAMP — can view your information unless you explicitly choose to share per property or per portfolio. When you "Inquire Now," your inquiry goes to LAMP — we connect you with the appropriate LAMP Network Partner, and then you choose whether to share your data with them. The power is always yours.</p>
+        
+        <div class="security__cards">
+          <div class="security__card">
+            <h4>Private by Default</h4>
+            <p>Your property data belongs to you and is invisible to everyone until you take action. Share your entire portfolio or individual properties with advisors you choose. When you click "Inquire Now," your inquiry goes to LAMP. We connect you with the appropriate Network Partner, and you decide if and when to share your data with them.</p>
+          </div>
+          <div class="security__card">
+            <h4>Visibility Only When You Share</h4>
+            <p>When you choose to share, your dashboard shows exactly how many advisors have access — right at the top of your portfolio overview. You can always manage your advisors and who you've shared with in your Settings tab. Add or remove access at any time.</p>
+          </div>
+          <div class="security__card">
+            <h4>Enterprise-Grade Protection</h4>
+            <p>Encryption in transit and at rest, strong access controls, regular vulnerability scanning, incident response planning, and vendor risk assessments — all built on SOC 2-inspired best practices.</p>
+          </div>
+          <div class="security__card">
+            <h4>Compliance Roadmap</h4>
+            <p>We are actively implementing SOC 2 Type 1 controls and expect to have our compliance formally certified in the near future. Our security program also aligns with GDPR data protection principles where applicable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="section section--light" id="faq">
+  <div class="container">
+    <div class="text-center scroll-reveal">
+      <span class="badge badge--blue">Common Questions</span>
+      <h2 style="margin-top:16px;">Frequently Asked Questions</h2>
+    </div>
+
+    <!-- FAQ Category: Platform & Pricing -->
+    <div class="faq__category scroll-reveal">
+      <h3 class="faq__category-title">Platform &amp; Pricing</h3>
+    </div>
+
+    <div class="faq__list">
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Is LAMP really free for property owners and investors?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes — LAMP is completely free for property owners and investors. Sign up, log in, and use the platform at no cost. No subscriptions, no hidden fees. We are a marketplace, not a real estate services platform. LAMP simply connects users with LAMP Network Partners. Users never pay us. Only subscribing advisors (LAMP Network Partners) pay to access shared portfolios and participate in the network.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>What is LAMP exactly?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>LAMP is your AI-powered real estate command center and personal concierge — delivering institutional-grade intelligence and clear visibility into every property you own. Analyze assets, uncover opportunities to sell, exchange, finance, improve, or optimize, and connect seamlessly to our marketplace of real estate solutions and partners. We connect property owners with LAMP Network Partners (advisors such as brokers, lenders, attorneys, wealth managers, and more) in a secure, data-rich environment. All free, all in one place.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Does LAMP provide legal, financial, or real estate advice?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. LAMP provides no legal, financial, tax, or real estate advice. We do not offer brokerage, lending, consulting, or any professional services. Our role is purely to facilitate connections in a secure, data-rich environment — empowering users to share portfolio insights and engage advisors of their choice.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>What happens when I "Light Up" a property?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>When you click a solution button (Sell, Exchange, Finance, Improve, or Premium) and hit "Inquire Now," LAMP distributes your inquiry to the appropriate LAMP Network Partner who specializes in that service. They will reach out to assist you. Your advisor team is also notified if you've granted them viewing access.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>What types of properties can I add?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>LAMP supports a wide range of property types — single family homes, multifamily, commercial, retail, industrial, and mixed-use. Simply enter the property address and LAMP's AI-powered platform handles the rest. In some instances, unique or highly specialized properties may return an inconclusive analysis if sufficient comparable data isn't available. If that happens, you can still add the property to your portfolio and connect with a LAMP Network Partner who can provide further guidance.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Category: Sharing & Advisors -->
+    <div class="faq__category scroll-reveal">
+      <h3 class="faq__category-title">Sharing &amp; Advisor Access</h3>
+    </div>
+
+    <div class="faq__list">
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Who can see my property data?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No one — not advisors, not LAMP Network Partners, not LAMP itself — can see your data unless you explicitly grant access. Your portfolio is completely private by default. You control sharing in two ways: share your entire portfolio or individual properties with specific advisors via email, or when you click "Inquire Now" on a solution, your inquiry goes to LAMP. We connect you with the appropriate LAMP Network Partner, and you then choose whether to share the relevant property with them. No one sees your information unless you decide to share it.</p>
+          <p style="margin-top:10px;">You can always view and manage who you've given shared permissions to in your LAMPit.ai account under the <strong>Settings</strong> tab, where you'll see everyone you've shared with and your full property analysis history.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>How do I share my portfolio with my advisors?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>After adding your properties, click "Share Portfolio" and enter the email addresses of your advisory team — wealth managers, CPAs, realtors, brokers, or anyone you want to have viewing access. If you'd prefer to share selectively, you can expand on any individual property and share just that one asset instead of your entire portfolio. Advisors receive view-only access; they cannot modify your data. Advisors engage only when you choose to share.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>What happens when my advisor receives an invitation?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>When you share your portfolio, your advisor receives an email invitation. If they don't have a LAMP account yet, they're invited to create one (free sign-up). If they already have an account, they can log in immediately and gain access to your shared properties. On first access to any shared content, advisors receive automatic notification of their 30-day free trial.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Category: Advisor Pricing -->
+    <div class="faq__category scroll-reveal">
+      <h3 class="faq__category-title">Advisor Onboarding &amp; Pricing</h3>
+    </div>
+
+    <div class="faq__list">
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Who are LAMP Network Partners and how do they join?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>LAMP Network Partners are real estate professionals — brokers, exchange sponsors, lenders, attorneys, wealth managers, construction managers, and private client advisors. For advisors, LAMP functions as a real estate advisory CRM where client assets are the trackable entity — replacing scattered Excel docs and file cabinets with real-time portfolio intelligence. They join when a property owner invites them to view a shared portfolio. Their 30-day free trial begins automatically on first access to shared content.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>What happens after the advisor's 30-day free trial?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>At the end of the 30-day free trial, advisors are prompted to review and electronically sign the LAMP Network Partner Terms of Service (which details the compensation model) and enter payment information to continue access.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>What is the compensation model for advisors (LAMP Network Partners)?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>After signing the Terms of Service and providing payment information, the following structure applies:</p>
+          <p style="margin-top:12px;"><strong style="color:var(--navy);">Platform / Technology Fee</strong> (monthly subscription) — Billed based on the total number of property profiles the advisor can access across all shared portfolios:</p>
+          <div style="margin:10px 0 10px 16px; font-size:0.9rem;">
+            <p>• 0–20 properties: <strong>$49/month</strong></p>
+            <p>• 21–99 properties: <strong>$149/month</strong></p>
+            <p>• 100+ properties: <strong>$299/month</strong></p>
+          </div>
+          <p style="margin-top:10px;"><strong style="color:var(--navy);">Referral Fee</strong> — $300 per referral, paid to LAMP by the advisor.</p>
+          <p style="margin-top:10px;"><strong style="color:var(--navy);">Transaction Fee</strong> — $200 per completed property transaction (sale, exchange, or financing) involving properties the advisor has access to via LAMP.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Why does this pricing structure work?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Property owners and investors use LAMP at no cost — all fees are structured for LAMP Network Partners (advisors). Advisors receive a generous 30-day risk-free trial, triggered only when real portfolios are shared (proving immediate value). Advisors pay only after experiencing the platform's benefits for client oversight, deal sourcing, or ongoing advisory work. Revenue aligns with real usage, successful referrals, and closed transactions — creating a true win-win marketplace ecosystem for connections and opportunities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Category: Security -->
+    <div class="faq__category scroll-reveal">
+      <h3 class="faq__category-title">Security &amp; Compliance</h3>
+    </div>
+
+    <div class="faq__list">
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>How does LAMP protect my data?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>We take data security and privacy seriously. As a marketplace handling sensitive real estate portfolio information, we are actively implementing SOC 2 Type 1 controls and expect to have our compliance formally certified in the near future. Our security program also aligns with GDPR principles for data protection where applicable, including data minimization, consent management, and user rights.</p>
+          <p style="margin-top:10px;">Our current practices include strong access controls, encryption in transit and at rest, regular vulnerability scanning, incident response planning, employee training, and vendor risk assessments — all built on SOC 2-aligned best practices to protect user and advisor data.</p>
+          <p style="margin-top:10px;">We are not yet formally audited or certified (as those require independent third-party validation), but we are committed to achieving certification and continuously improve our controls to meet these standards. For enterprise partners needing detailed documentation or roadmaps, we're happy to share more about our security posture.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Is my data shared with third parties?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Your data is completely private and never visible to anyone — including LAMP Network Partners — unless you take explicit action to share it. There are two ways to grant access:</p>
+          <p style="margin-top:10px;"><strong style="color:var(--navy);">Share with your advisory team:</strong> Click "Share Portfolio" to share your entire portfolio, or share individual properties via email to specific advisors. You choose exactly who sees what.</p>
+          <p style="margin-top:10px;"><strong style="color:var(--navy);">Inquire Now:</strong> When you "Light Up" a property and click "Inquire Now," your inquiry goes to LAMP. We connect you with the appropriate LAMP Network Partner who can help. You then choose whether to share the relevant property or portfolio with that partner. They cannot see your data unless you decide to share it.</p>
+          <p style="margin-top:10px;">LAMP does not sell, trade, or distribute your data to anyone. No advisor, partner, or third party can view your information without your direct, explicit permission — per property or per portfolio. You can review and manage all sharing permissions at any time under the <strong>Settings</strong> tab in your LAMPit.ai account, where you'll see who you've shared with and your property analysis history. You remain in complete control at all times.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="cta-section">
+  <div class="container" style="position:relative; z-index:2;">
+    <div class="scroll-reveal">
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:var(--orange-light); border:1px solid rgba(255,255,255,0.15);">Get Started Today</span>
+      <h2 style="margin-top:16px;">Ready to Light Up<br>Your Real Estate?</h2>
+      <p>Create your free account at LAMPit.ai, add your properties, and build your real estate advisory boardroom. Share with your advisors, Light Up your solutions, and let LAMP connect you to the right partners. Free for property owners.</p>
+      <div class="cta__actions">
+        <a href="https://lampit.ai" class="btn btn--primary" style="font-size:1.05rem; padding:16px 40px;">
+          Light Up My Portfolio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="mailto:info@lampportfolio.com" class="btn btn--ghost">Contact Us</a>
+      </div>
+      <p class="cta__note">All platform and referral fees are paid by LAMP Network Partners — never by you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a href="#" class="navbar__logo" style="font-size:1.3rem;">
+          <svg viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:32px;">
+            <path d="M6 6 L42 6 L24 42Z" fill="none" stroke="#D4742C" stroke-width="3.5" stroke-linejoin="round"/>
+            <path d="M6 42 L42 42 L24 6Z" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="3.5" stroke-linejoin="round"/>
+            <text x="54" y="34" font-family="'Playfair Display', serif" font-size="26" font-weight="700" fill="white">LAMP</text>
+          </svg>
+        </a>
+        <p class="footer__brand-desc">Legacy Asset Management Platform. Your AI-powered real estate command center — institutional-grade intelligence, full visibility, and a marketplace to connect with solutions and partners.</p>
+        <p class="footer__tagline" style="margin-top:16px;">"Light up your real estate portfolio, LAMP it."</p>
+      </div>
+      <div class="footer__col">
+        <h5>Solutions</h5>
+        <ul>
+          <li><a href="#solutions" onclick="activateTab('sell')">Sell — LAMP AM</a></li>
+          <li><a href="#solutions" onclick="activateTab('exchange')">Exchange — LAMP X</a></li>
+          <li><a href="#solutions" onclick="activateTab('finance')">Finance — LAMP PF</a></li>
+          <li><a href="#solutions" onclick="activateTab('improve')">Improve — LAMP PI</a></li>
+          <li><a href="#solutions" onclick="activateTab('premium')">Premium — LAMP PC</a></li>
+          <li><a href="#solutions" onclick="activateTab('custom')">Custom — LAMP PS</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="https://lampit.ai">LAMPit.ai</a></li>
+          <li><a href="/pf">LAMP PF — Portfolio Finance</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#intelligence">AI Intelligence</a></li>
+          <li><a href="#who-we-serve">Who We Serve</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:info@lampportfolio.com">info@lampportfolio.com</a></li>
+          <li><a href="https://lampit.ai">LAMPit.ai</a></li>
+          <li><a href="https://lampportfolio.com">LAMPportfolio.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2025 LAMP Portfolio. All rights reserved.</span>
+      <span style="color:rgba(255,255,255,0.3);">Professional Analysis · AI Powered · Institutional Grade</span>
+    </div>
+  </div>
 </footer>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
 
-    // Hamburger menu
-    var hamburger = document.getElementById("hamburger");
-    var mobileNav = document.getElementById("mobile-nav");
-    if (hamburger && mobileNav) {
-      hamburger.addEventListener("click", function() {
-        hamburger.classList.toggle("open");
-        mobileNav.classList.toggle("open");
-      });
-      mobileNav.querySelectorAll("a").forEach(function(a) {
-        a.addEventListener("click", function() {
-          hamburger.classList.remove("open");
-          mobileNav.classList.remove("open");
-        });
-      });
-    }
-
-    // Strategy tabs
-    var tabs = document.querySelectorAll("#sol-tabs .sol-tab");
-    var panels = document.querySelectorAll(".sol-panels > div");
-    tabs.forEach(function(tab) {
-      tab.addEventListener("click", function() {
-        var id = this.getAttribute("data-sol");
-        tabs.forEach(function(t) { t.classList.remove("active"); });
-        panels.forEach(function(p) { p.classList.remove("active"); });
-        this.classList.add("active");
-        var panel = document.getElementById("sol-" + id);
-        if (panel) { panel.classList.add("active"); }
-      });
-    });
-
-    // FAQ accordion
-    document.querySelectorAll(".faq-q").forEach(function(q) {
-      q.addEventListener("click", function() {
-        var item = this.closest(".faq-item");
-        var isOpen = item.classList.contains("open");
-        document.querySelectorAll(".faq-item").forEach(function(i) {
-          i.classList.remove("open");
-        });
-        if (!isOpen) { item.classList.add("open"); }
-      });
-    });
-
-    // Nav scroll shadow
-    window.addEventListener("scroll", function() {
-      var nav = document.querySelector("nav");
-      if (nav) { nav.style.boxShadow = window.scrollY > 10 ? "0 2px 20px rgba(0,0,0,0.3)" : "none"; }
-    });
-
+// Mobile menu toggle
+const mobileToggle = document.getElementById('mobileToggle');
+const navLinks = document.querySelector('.navbar__links');
+mobileToggle.addEventListener('click', () => {
+  mobileToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+// Close mobile menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileToggle.classList.remove('active');
+    navLinks.classList.remove('open');
   });
+});
+
+// Solution tabs
+const tabs = document.querySelectorAll('.sol-tab');
+const panels = document.querySelectorAll('.sol-panel');
+
+function activateTab(tabName) {
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+  panels.forEach(p => p.classList.toggle('active', p.id === `panel-${tabName}`));
+}
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => activateTab(tab.dataset.tab));
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+// Mockup light-up interaction
+document.querySelectorAll('.mockup__lightup-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const bar = this.parentElement;
+    const prop = bar.parentElement;
+    bar.querySelectorAll('.mockup__lightup-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.querySelectorAll('.mockup__property').forEach(p => p.classList.remove('mockup__property--lit'));
+    prop.classList.add('mockup__property--lit');
+  });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 </script>
 </body>
 </html>

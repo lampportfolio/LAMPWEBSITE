@@ -1327,6 +1327,93 @@ h4 { font-size: 1.1rem; }
 
   .cta__actions .btn { max-width: 280px; }
 }
+
+/* ==================== DARK BANNER ==================== */
+.dark-banner {
+  background: var(--navy);
+  padding: 80px 0 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.dark-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,116,44,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.dark-banner h2 { color: white; position: relative; z-index: 1; }
+.dark-banner h2 em { font-style: italic; color: var(--orange); }
+.dark-banner p { color: rgba(255,255,255,0.65); position: relative; z-index: 1; }
+.dark-banner .badge { position: relative; z-index: 1; }
+.dark-banner .btn { position: relative; z-index: 1; }
+
+/* ==================== LAMP LINK ==================== */
+.lamp-link__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.lamp-link__content h2 { color: white; margin-bottom: 20px; }
+.lamp-link__content h2 em { font-style: italic; color: var(--orange); }
+.lamp-link__content p { color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 16px; }
+.lamp-link__callout {
+  background: rgba(212,116,44,0.1);
+  border: 1px solid rgba(212,116,44,0.25);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.lamp-link__callout h5 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; font-family: var(--font-body); }
+.lamp-link__callout p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 0; }
+.lamp-link__feats { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
+.lamp-link__feat strong { display: block; color: white; font-size: 0.92rem; margin-bottom: 2px; }
+.lamp-link__feat span { color: rgba(255,255,255,0.52); font-size: 0.85rem; }
+.link-tiers { display: flex; flex-direction: column; gap: 16px; }
+.link-tier {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+.link-tier:hover { border-color: rgba(212,116,44,0.45); background: rgba(212,116,44,0.07); }
+.link-tier--featured { border-color: rgba(212,116,44,0.55); background: rgba(212,116,44,0.1); }
+.link-tier__name { font-weight: 700; color: white; font-size: 0.95rem; margin-bottom: 4px; }
+.link-tier__desc { font-size: 0.82rem; color: rgba(255,255,255,0.48); }
+.link-tier__price { text-align: right; }
+.link-tier__amt { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: white; }
+.link-tier__amt--free { color: var(--orange); }
+.link-tier__per { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+.link-tier__trial { font-size: 0.7rem; color: var(--orange); font-weight: 600; margin-top: 2px; }
+
+.data-ownership {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin: 28px 0;
+}
+.data-ownership h5 { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; font-family: var(--font-body); }
+.data-ownership p { color: rgba(255,255,255,0.65); font-size: 0.9rem; line-height: 1.72; margin-bottom: 10px; }
+.data-ownership p:last-child { margin-bottom: 0; }
+.data-ownership p strong { color: white; }
+
+@media (max-width: 1024px) {
+  .lamp-link__grid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 768px) {
+  .dark-banner { padding: 56px 0 40px; }
+  .link-tier { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .link-tier__price { text-align: left; }
+  .lamp-link__grid { gap: 32px; }
+}
 </style>
 </head>
 <body>
@@ -1345,12 +1432,13 @@ h4 { font-size: 1.1rem; }
     </a>
     <ul class="navbar__links">
       <li><a href="#how-it-works">How It Works</a></li>
-      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#solutions">Strategy</a></li>
       <li><a href="#intelligence">Intelligence</a></li>
+      <li><a href="#lamp-link">LAMP Link</a></li>
+      <li><a href="#advisor-crm">Advisor CRM</a></li>
       <li><a href="#who-we-serve">Who We Serve</a></li>
       <li><a href="#security">Security</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="/pf">LAMP PF</a></li>
     </ul>
     <div class="navbar__cta">
       <a href="https://lampit.ai" class="btn btn--secondary" style="padding:10px 24px; font-size:0.85rem;">Log In</a>
@@ -1365,8 +1453,20 @@ h4 { font-size: 1.1rem; }
   </div>
 </nav>
 
+<!-- ==================== DARK TAGLINE BANNER ==================== -->
+<div class="dark-banner" style="margin-top:66px;">
+  <div class="container">
+    <span class="badge badge--orange">The Question Every Property Owner Should Ask</span>
+    <h2 style="margin-top:16px;">How in the dark are you on your <em>real estate assets?</em></h2>
+    <p class="subtitle" style="color:rgba(255,255,255,0.65); margin-top:12px;">Most property owners are flying blind — no centralized intelligence, no institutional-grade visibility, no command center. <strong style="color:var(--orange-light);">Light them up with LAMP Portfolio. LAMP it.</strong></p>
+    <div style="margin-top:28px;">
+      <a href="https://lampit.ai" class="btn btn--primary">LAMP it — It's Free →</a>
+    </div>
+  </div>
+</div>
+
 <!-- ==================== HERO ==================== -->
-<section class="hero" id="hero">
+<section class="hero" id="hero" style="padding-top:40px;">
   <div class="hero__bg-shape hero__bg-shape--1"></div>
   <div class="hero__bg-shape hero__bg-shape--2"></div>
   <div class="container">
@@ -1405,22 +1505,41 @@ h4 { font-size: 1.1rem; }
               <div class="app__welcome-sub">Here's an overview of your portfolio</div>
             </div>
 
-            <!-- Dashboard Stats (3 boxes) -->
-            <div class="app__stats-row">
+            <!-- Dashboard Stats -->
+            <div class="app__stats-row" style="grid-template-columns: repeat(4, 1fr);">
               <div class="app__stat-box">
-                <div class="app__stat-label">TOTAL PROPERTIES</div>
+                <div class="app__stat-label">PROPERTIES</div>
                 <div class="app__stat-num">4</div>
                 <div class="app__stat-sub">In your portfolio</div>
               </div>
               <div class="app__stat-box">
                 <div class="app__stat-label">TOTAL VALUE</div>
-                <div class="app__stat-num">$8.6M</div>
-                <div class="app__stat-sub" style="color:#28CA42;">↗ Portfolio value</div>
+                <div class="app__stat-num">$8.4M</div>
+                <div class="app__stat-sub" style="color:#28CA42;">Portfolio value</div>
               </div>
               <div class="app__stat-box">
                 <div class="app__stat-label">TOTAL EQUITY</div>
-                <div class="app__stat-num">$4.3M</div>
+                <div class="app__stat-num">$4.5M</div>
                 <div class="app__stat-sub">Estimated equity</div>
+              </div>
+              <div class="app__stat-box">
+                <div class="app__stat-label">TOTAL DEBT</div>
+                <div class="app__stat-num">$3.9M</div>
+                <div class="app__stat-sub">6.91% blended</div>
+              </div>
+            </div>
+            <div class="app__stats-row" style="grid-template-columns: repeat(3, 1fr);">
+              <div class="app__stat-box">
+                <div class="app__stat-label">IMPROVEMENT BUDGET</div>
+                <div class="app__stat-num">N/A</div>
+              </div>
+              <div class="app__stat-box">
+                <div class="app__stat-label">RENOVATED VALUE</div>
+                <div class="app__stat-num">N/A</div>
+              </div>
+              <div class="app__stat-box">
+                <div class="app__stat-label">ADDITIONAL EQUITY</div>
+                <div class="app__stat-num" style="color:#28CA42;">$0</div>
               </div>
             </div>
 
@@ -1438,7 +1557,7 @@ h4 { font-size: 1.1rem; }
             <div class="app__advisors-bar">
               <svg class="app__advisors-icon" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
               <div class="app__advisors-info">
-                <div class="app__advisors-title">Your Advisors</div>
+                <div class="app__advisors-title">Advisory Boardroom</div>
               </div>
               <span class="app__advisors-add">Add →</span>
             </div>
@@ -1551,7 +1670,7 @@ h4 { font-size: 1.1rem; }
       <div class="step-card scroll-reveal" style="animation-delay:0.15s">
         <div class="step-card__number">2</div>
         <h3>"Light Up" Your Portfolio</h3>
-        <p>Click the solution you need — <strong>Sell, Exchange, Finance, Improve, or Premium</strong> — and hit "Inquire Now." LAMP distributes your inquiry to the appropriate LAMP Network Partner.</p>
+        <p>Each property shows a <strong>Strategy</strong> section with action buttons — Sell, Exchange, Improve, Hold, Finance, Premium, and Purchase. Click the solution you need and hit the action button. LAMP distributes your inquiry to the appropriate LAMP Link Network Partner. You also get <strong>Alerts / Insights</strong> and <strong>Strategy Resources</strong> surfaced per property.</p>
         <div class="step-connector">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </div>
@@ -1560,8 +1679,12 @@ h4 { font-size: 1.1rem; }
       <div class="step-card scroll-reveal" style="animation-delay:0.3s">
         <div class="step-card__number">3</div>
         <h3>Connect &amp; Transact</h3>
-        <p>Your advisor team is notified. LAMP Network Partners reach out to assist. <strong>All platform and referral fees are paid by Network Partners — never by you.</strong></p>
+        <p>When you light up a solution, your existing advisors in that category are notified first — your realtor gets the sell inquiry, your CPA gets the tax question. <strong>LAMP Link Network Partners only step in when there's no advisor already in that role.</strong> LAMP is a marketplace for the gaps, not a replacement for the relationships you already have. All platform and referral fees are paid by Network Partners — never by you.</p>
       </div>
+    </div>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px;" class="scroll-reveal">
+      <a href="mailto:info@lampportfolio.com?subject=LAMP%20Demo%20Request" class="btn btn--primary">Schedule a Demo</a>
+      <a href="mailto:info@lampportfolio.com?subject=LAMP%20Webinar%20Registration" class="btn btn--secondary">Join a Webinar <span style="font-size:0.8rem;opacity:0.75;margin-left:4px;">· Wednesdays 1pm PST</span></a>
     </div>
   </div>
 </section>
@@ -1570,9 +1693,9 @@ h4 { font-size: 1.1rem; }
 <section class="section solutions-section" id="solutions">
   <div class="container">
     <div class="text-center solutions__intro scroll-reveal">
-      <span class="badge badge--orange">Five Powerful Solutions</span>
+      <span class="badge badge--orange">Strategy</span>
       <h2 style="margin-top:16px;">Light Up Every Opportunity</h2>
-      <p class="subtitle" style="margin-top:12px;">LAMP is a comprehensive marketplace connecting you with LAMP Network Partners across every real estate need. Click a solution to learn more.</p>
+      <p class="subtitle" style="margin-top:12px;">LAMP is a comprehensive marketplace connecting you with LAMP Link Network Partners across every real estate need. Click a solution to learn more.</p>
     </div>
 
     <!-- TABS -->
@@ -1589,6 +1712,12 @@ h4 { font-size: 1.1rem; }
       <button class="sol-tab" data-tab="improve">
         Improve
       </button>
+      <button class="sol-tab" data-tab="hold">
+        Hold
+      </button>
+      <button class="sol-tab" data-tab="purchase">
+        Purchase
+      </button>
       <button class="sol-tab" data-tab="premium">
         Premium
       </button>
@@ -1604,7 +1733,7 @@ h4 { font-size: 1.1rem; }
           <div class="sol-panel__header-content">
             <div class="sol-panel__label">LAMP AM · Asset Management</div>
             <h3>Sell Your Property</h3>
-            <p>Maximize sale prices with detailed financial modeling and data-driven insights. LAMP AM connects you with LAMP Network Partners who provide institutional-grade analysis to ensure you capture the full value of your asset.</p>
+            <p>Maximize sale prices with detailed financial modeling and data-driven insights. LAMP AM connects you with LAMP Link Network Partners who provide institutional-grade analysis to ensure you capture the full value of your asset.</p>
           </div>
         </div>
         <div class="sol-panel__body">
@@ -1616,10 +1745,10 @@ h4 { font-size: 1.1rem; }
               <div><h4>Advisor Collaboration</h4><p>Share your portfolio with your advisory team — wealth managers, CPAs, realtors — so everyone has complete visibility into the sale process.</p></div>
             </div>
             <div class="sol-feature">
-              <div><h4>LAMP Network Partners</h4><p>LAMP connects you with brokers and real estate professionals who specialize in maximizing asset value for sellers.</p></div>
+              <div><h4>LAMP Link Network Partners</h4><p>LAMP connects you with brokers and real estate professionals who specialize in maximizing asset value for sellers.</p></div>
             </div>
             <div class="sol-feature">
-              <div><h4>Zero Cost to You</h4><p>All platform, referral, and transaction fees are paid by LAMP Network Partners. Property owners never pay to use the platform.</p></div>
+              <div><h4>Zero Cost to You</h4><p>All platform, referral, and transaction fees are paid by LAMP Link Network Partners. Property owners never pay to use the platform.</p></div>
             </div>
           </div>
           <div class="sol-panel__cta">
@@ -1637,7 +1766,7 @@ h4 { font-size: 1.1rem; }
           <div class="sol-panel__header-content">
             <div class="sol-panel__label">LAMP X · Exchange</div>
             <h3>Exchange Your Property</h3>
-            <p>Explore the full spectrum of exchange opportunities — 1031 exchanges, DSTs, 721 UPREITs, Opportunity Zones, and more. Light Up "Exchange" on any property, click "Inquire Now," and LAMP connects you with the right LAMP Network Partner to explore your options.</p>
+            <p>Explore the full spectrum of exchange opportunities — 1031 exchanges, DSTs, 721 UPREITs, Opportunity Zones, and more. Light Up "Exchange" on any property, click "Inquire Now," and LAMP connects you with the right LAMP Link Network Partner to explore your options.</p>
           </div>
         </div>
         <div class="sol-panel__body">
@@ -1649,7 +1778,7 @@ h4 { font-size: 1.1rem; }
               <div><h4>Complete Property Intelligence</h4><p>Your portfolio analysis gives exchange sponsors and facilitators the data they need to identify the right opportunities — all shared on your terms when you choose.</p></div>
             </div>
             <div class="sol-feature">
-              <div><h4>You Initiate the Connection</h4><p>Click "Exchange" on any property and hit "Inquire Now" to Light Up your intent. LAMP distributes your inquiry to the appropriate LAMP Network Partner exchange sponsor, and your advisor team maintains visibility if you've shared with them.</p></div>
+              <div><h4>You Initiate the Connection</h4><p>Click "Exchange" on any property and hit "Inquire Now" to Light Up your intent. LAMP distributes your inquiry to the appropriate LAMP Link Network Partner exchange sponsor, and your advisor team maintains visibility if you've shared with them.</p></div>
             </div>
             <div class="sol-feature">
               <div><h4>Warm Introductions, Not Cold Outreach</h4><p>When you Light Up "Exchange" and inquire, sponsors receive your intent along with complete asset details — a warm introduction initiated by you, not a cold call.</p></div>
@@ -1724,6 +1853,52 @@ h4 { font-size: 1.1rem; }
           <div class="sol-panel__cta">
             <a href="https://lampit.ai" class="btn btn--primary">Light Up to Improve →</a>
             <span style="color:var(--gray-400); font-size:0.85rem;">Log in to LAMPit.ai and click "Improve" on any property</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOLD PANEL -->
+    <div class="sol-panel" id="panel-hold">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP Hold · Portfolio Strategy</div>
+            <h3>Hold Your Property</h3>
+            <p>Not every property needs to transact. LAMP's Hold analysis gives you institutional-grade data to support a disciplined hold decision — with ongoing monitoring so you know exactly when conditions shift.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <div class="sol-panel__features">
+            <div class="sol-feature"><div><h4>Hold vs. Sell Modeling</h4><p>Compare the projected outcome of holding against a sale or exchange over your target time horizon.</p></div></div>
+            <div class="sol-feature"><div><h4>Ongoing Monitoring</h4><p>LAMP tracks your property's value, equity, and market conditions continuously — alerting you when the calculus changes.</p></div></div>
+            <div class="sol-feature"><div><h4>Advisor Visibility</h4><p>Your advisory team sees your hold positions and can weigh in when timing or strategy shifts.</p></div></div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="https://lampit.ai" class="btn btn--primary">Light Up to Hold →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PURCHASE PANEL -->
+    <div class="sol-panel" id="panel-purchase">
+      <div class="sol-panel__card">
+        <div class="sol-panel__header">
+          <div class="sol-panel__header-content">
+            <div class="sol-panel__label">LAMP Purchase · Acquisition Intelligence</div>
+            <h3>Purchase a Property</h3>
+            <p>LAMP isn't just for what you own — it's for what you're considering. Add a potential acquisition address and get the same institutional-grade analysis before you buy.</p>
+          </div>
+        </div>
+        <div class="sol-panel__body">
+          <div class="sol-panel__features">
+            <div class="sol-feature"><div><h4>Pre-Purchase Analysis</h4><p>Run the same AI-powered intelligence on a target property before committing capital.</p></div></div>
+            <div class="sol-feature"><div><h4>Acquisition Modeling</h4><p>Pro forma, cap rate, LTV, and equity projections on properties you're evaluating.</p></div></div>
+            <div class="sol-feature"><div><h4>LAMP Link Sourcing Partners</h4><p>Connect with brokers and advisors who can source and underwrite deals through LAMP Link.</p></div></div>
+          </div>
+          <div class="sol-panel__cta">
+            <a href="https://lampit.ai" class="btn btn--primary">Light Up to Purchase →</a>
           </div>
         </div>
       </div>
@@ -1814,33 +1989,73 @@ h4 { font-size: 1.1rem; }
         <p>Like having an institutional boardroom for your properties. LAMP gives you deep visibility, AI-powered insights, and a marketplace to act on every possibility — sell, improve, finance, or exchange. Real-time data. Transparent reporting. Institutional-grade analysis — with eyes on every asset.</p>
 
         <div class="carfax__pillars">
-          <div class="pillar">
-            <div>
-              <h4>Professional Analysis</h4>
-              <p>Expert insights from advanced AI algorithms analyzing market trends, property performance, and investment opportunities.</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div>
-              <h4>AI Powered</h4>
-              <p>Machine learning continuously improves recommendations based on real-time market data and historical performance.</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div>
-              <h4>Institutional Grade</h4>
-              <p>Enterprise-level tools and analytics previously exclusive to large institutional investors, now accessible to all property owners.</p>
-            </div>
-          </div>
-          <div class="pillar">
-            <div>
-              <h4>Build Your Real Estate Advisory Boardroom</h4>
-              <p>Share per property or per portfolio with one easy invite. Assemble your own institutional-style board of advisors — wealth managers, brokers, CPAs, attorneys — all with eyes on your assets and working together in one place.</p>
-            </div>
-          </div>
+          <div class="pillar"><div><h4>7 Portfolio Metrics</h4><p>Total Value, Equity, Debt, LTV, Improvement Budget, Renovated Value, and Additional Equity — all calculated automatically per property and rolled up to your portfolio.</p></div></div>
+          <div class="pillar"><div><h4>Alerts / Insights</h4><p>Per-property alerts and AI-generated insights surface automatically — flagging opportunities and risks you need to act on.</p></div></div>
+          <div class="pillar"><div><h4>Strategy Resources</h4><p>Each property has tabbed Strategy Resources — Overview, Sell/Exchange, Finance, Improve, Premium — with curated intelligence for each path.</p></div></div>
+          <div class="pillar"><div><h4>Advanced Planning</h4><p>Portfolio-level Advanced Planning tools for modeling renovation upside, exchange scenarios, and long-term holds — all in one command center.</p></div></div>
+          <div class="pillar"><div><h4>Build Your Real Estate Advisory Boardroom</h4><p>Share per property or per portfolio with one easy invite. Assemble your own institutional-style board of advisors — wealth managers, brokers, CPAs, attorneys — all with eyes on your assets.</p></div></div>
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<!-- ==================== LAMP LINK ==================== -->
+<section class="section section--dark" id="lamp-link">
+  <div class="container">
+    <div class="lamp-link__grid">
+      <div class="lamp-link__content scroll-reveal">
+        <span class="badge badge--orange">LAMP Link · Network Partner Program</span>
+        <h2 style="margin-top:16px;">Connect. Advise. <em>Grow.</em></h2>
+        <p>LAMP Link is how advisors — wealth managers, RIAs, CPAs, estate attorneys, realtors, loan officers, exchange sponsors, and more — join the LAMP ecosystem as Network Partners.</p>
+        <p>Your clients' real estate portfolios are your blind spot. LAMP Link eliminates it. When a client shares their portfolio, you get complete, institutional-grade visibility into every asset — transforming scattered spreadsheets into a real-time command center for your entire book of business.</p>
+        <p>And when a property owner without an existing advisor in your category clicks "Inquire Now" — that referral comes to you. Not a cold call list. A client who already raised their hand, with their full portfolio intelligence attached. <strong style="color:white;">LAMP Link is a lead generation machine.</strong></p>
+        <div class="lamp-link__callout">
+          <h5>Your Relationships Stay Yours</h5>
+          <p>When a client lights up a solution, their existing advisors in that category are notified first. Light up Sell with a realtor in the boardroom? The realtor gets the call. LAMP Link Network Partners only fill the gaps — categories where no advisor has been assigned. LAMP is a marketplace that strengthens your client relationships, not one that competes with them.</p>
+        </div>
+        <div class="lamp-link__feats">
+          <div class="lamp-link__feat"><strong>Real Estate CRM</strong><span>Client assets are the trackable entity — not documents, not scattered notes.</span></div>
+          <div class="lamp-link__feat"><strong>LAMP Link Network — Lead Generation</strong><span>When a property owner without an existing advisor clicks "Inquire Now," that warm, intent-driven referral is routed to you — complete with full portfolio intelligence attached.</span></div>
+          <div class="lamp-link__feat"><strong>Deal Flow Pipeline</strong><span>Advisory Boardroom participation, referral structure, and transaction-based alignment.</span></div>
+          <div class="lamp-link__feat"><strong>30-Day Free Trial</strong><span>Begins automatically on first access to a shared portfolio — no credit card required to start.</span></div>
+        </div>
+        <div style="margin-top:28px;"><a href="https://lampit.ai" class="btn btn--primary">Join LAMP Link →</a></div>
+      </div>
+      <div class="scroll-reveal">
+        <div class="link-tiers">
+          <div class="link-tier"><div><div class="link-tier__name">Property Owners</div><div class="link-tier__desc">Full platform access — portfolio command center, sharing, and all solutions</div></div><div class="link-tier__price"><div class="link-tier__amt link-tier__amt--free">$0</div><div class="link-tier__per">No subscription</div></div></div>
+          <div class="link-tier link-tier--featured"><div><div class="link-tier__name">LAMP Link Solo</div><div class="link-tier__desc">Individual advisor — full platform, LAMP Link Network</div></div><div class="link-tier__price"><div class="link-tier__amt">$49</div><div class="link-tier__per">/mo after trial</div><div class="link-tier__trial">30-day free trial</div></div></div>
+          <div class="link-tier"><div><div class="link-tier__name">LAMP Link Teams</div><div class="link-tier__desc">3+ advisors, same firm — auto-detected, firm-wide discount</div></div><div class="link-tier__price"><div class="link-tier__amt">$35</div><div class="link-tier__per">/seat/mo</div><div class="link-tier__trial">Save 29% vs Solo</div></div></div>
+          <div class="link-tier"><div><div class="link-tier__name">Enterprise</div><div class="link-tier__desc">Custom implementation, white-label, API access, volume pricing</div></div><div class="link-tier__price"><div class="link-tier__amt" style="font-size:1.1rem;">Custom</div><div class="link-tier__per">Annual contract</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADVISOR CRM ==================== -->
+<section class="section section--blue" id="advisor-crm">
+  <div class="container">
+    <div class="carfax__grid">
+      <div class="carfax__content scroll-reveal">
+        <span class="badge" style="background:rgba(255,255,255,0.1); color:var(--orange-light); border:1px solid rgba(255,255,255,0.15);">LAMP Link · Advisor View</span>
+        <h2 style="margin-top:16px;">Eyes on Every Client's<br>Real Estate</h2>
+        <p>Most advisors are flying blind on their clients' largest assets. LAMP Link gives you a live, shared view of every real estate portfolio your clients choose to share — organized by client, filterable by strategy, and actionable from one place.</p>
+        <div class="carfax__pillars">
+          <div class="pillar"><div><h4>Shared With Me Dashboard</h4><p>See every portfolio a client has shared — total properties, combined value, and equity — all in one consolidated view.</p></div></div>
+          <div class="pillar"><div><h4>Filter by Strategy Across Your Entire Book</h4><p>Instantly surface which clients have properties flagged for Sell, Exchange, Finance, Improve, Hold, or Purchase.</p></div></div>
+          <div class="pillar"><div><h4>By Client or By Property</h4><p>Toggle between a client-level CRM view and a flat property list. Sort by priority, filter by category.</p></div></div>
+          <div class="pillar"><div><h4>Has Actions · Overdue Alerts</h4><p>Know which clients need attention. LAMP flags properties with pending actions or overdue items.</p></div></div>
+        </div>
+        <a href="https://lampit.ai" class="btn btn--primary" style="margin-top:28px;">Join LAMP Link →</a>
+      </div>
+      <div class="carfax__visual scroll-reveal">
+        <div class="carfax__stat-card"><div class="stat-label">Shared Properties</div><div class="stat-value">12</div><div class="stat-desc">Across 1 portfolio</div></div>
+        <div class="carfax__stat-card"><div class="stat-label">Combined Value</div><div class="stat-value">$34.6M</div><div class="stat-desc">Shared portfolio value</div></div>
+        <div class="carfax__stat-card"><div class="stat-label">Total Equity</div><div class="stat-value">$26.2M</div><div class="stat-desc">Estimated shared equity</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1851,7 +2066,7 @@ h4 { font-size: 1.1rem; }
     <div class="text-center scroll-reveal">
       <span class="badge badge--orange">Built for Everyone</span>
       <h2 style="margin-top:16px;">Who We Serve</h2>
-      <p class="subtitle" style="margin-top:12px;">LAMP is a marketplace that empowers every stakeholder in the real estate ecosystem — from individual property owners to institutional investors. Build your real estate advisory boardroom by sharing with your advisory team, and every LAMP Network Partner who joins strengthens the network. More shared portfolios attract more advisors, more advisors deliver better outcomes, and better outcomes bring more users to the platform. Everyone benefits.</p>
+      <p class="subtitle" style="margin-top:12px;">LAMP is a marketplace that empowers every stakeholder in the real estate ecosystem — from individual property owners to institutional investors. Every LAMP Link Network Partner who joins strengthens the network.</p>
     </div>
 
     <div class="serve__grid">
@@ -1861,11 +2076,11 @@ h4 { font-size: 1.1rem; }
       </div>
       <div class="serve-card scroll-reveal">
         <h4>Advisors &amp; RIAs</h4>
-        <p>A real estate CRM where your clients' assets are the trackable entity. Gain complete visibility into their holdings when they share — transforming the "real estate blind spot" into a strategic advantage.</p>
+        <p>A real estate CRM where your clients' assets are the trackable entity. Eliminate the real estate blind spot through LAMP Link.</p>
       </div>
       <div class="serve-card scroll-reveal">
         <h4>RE Sponsors &amp; Brokers</h4>
-        <p>Receive leads with clear transaction intent. Build scalable exchange pipelines through advisor network partnerships.</p>
+        <p>Receive leads with clear transaction intent. Build scalable exchange pipelines through LAMP Link Network partnerships.</p>
       </div>
       <div class="serve-card scroll-reveal">
         <h4>CPAs &amp; Tax Advisors</h4>
@@ -1897,9 +2112,16 @@ h4 { font-size: 1.1rem; }
     <div class="security__grid">
       <div class="security__content scroll-reveal">
         <span class="badge badge--orange">Your Data, Your Control</span>
-        <h2 style="margin-top:16px; color:white;">Built on Trust &amp; Security</h2>
-        <p style="color:rgba(255,255,255,0.7); line-height:1.75; margin-top:16px; max-width:540px;">Your portfolio data is private by default. No one — not advisors, not Network Partners, not LAMP — can view your information unless you explicitly choose to share per property or per portfolio. When you "Inquire Now," your inquiry goes to LAMP — we connect you with the appropriate LAMP Network Partner, and then you choose whether to share your data with them. The power is always yours.</p>
-        
+        <h2 style="margin-top:16px; color:white;">Built on Trust, Transparency &amp; Security</h2>
+        <p style="color:rgba(255,255,255,0.7); line-height:1.75; margin-top:16px; max-width:540px;">Your portfolio data is private by default. No one — not advisors, not Network Partners, not LAMP — can view your information unless you explicitly choose to share per property or per portfolio. When you "Inquire Now," your inquiry goes to LAMP — we connect you with the appropriate LAMP Link Network Partner, and then you choose whether to share your data with them. The power is always yours. And LAMP will never provide legal, financial, tax, or real estate advice of any kind.</p>
+
+        <div class="data-ownership">
+          <h5>Data Ownership Statement</h5>
+          <p><strong>Property owners own their data. Entirely. Always.</strong></p>
+          <p>Nothing in your portfolio is visible to anyone — not your advisors, not LAMP Link Network Partners, not LAMP itself — until you make an explicit choice to share it. You control what is shared, with whom, and when. You can revoke access at any time from your Settings tab.</p>
+          <p>LAMP is a technology platform and marketplace. We do not provide legal, financial, tax, investment, or real estate advice of any kind. We do not hold licenses as a broker, lender, attorney, or financial advisor. Our role is to organize your data, surface intelligence, and facilitate connections.</p>
+        </div>
+
         <div class="security__cards">
           <div class="security__card">
             <h4>Private by Default</h4>
@@ -1911,11 +2133,11 @@ h4 { font-size: 1.1rem; }
           </div>
           <div class="security__card">
             <h4>Enterprise-Grade Protection</h4>
-            <p>Encryption in transit and at rest, strong access controls, regular vulnerability scanning, incident response planning, and vendor risk assessments — all built on SOC 2-inspired best practices.</p>
+            <p>Encryption in transit and at rest, strong access controls, regular vulnerability scanning, incident response planning, and vendor risk assessments — all built on SOC 2-inspired best practices. Formal SOC 2 Type 1 certification is in progress.</p>
           </div>
           <div class="security__card">
-            <h4>Compliance Roadmap</h4>
-            <p>We are actively implementing SOC 2 Type 1 controls and expect to have our compliance formally certified in the near future. Our security program also aligns with GDPR data protection principles where applicable.</p>
+            <h4>Outside the Regulatory Sandbox</h4>
+            <p>LAMP is not a licensed broker, lender, financial advisor, or legal counsel. We intentionally operate as a neutral technology platform and marketplace — organizing data and facilitating connections without crossing into regulated advisory territory. All licensed professional services are provided by independent Network Partners.</p>
           </div>
         </div>
       </div>
@@ -1943,7 +2165,7 @@ h4 { font-size: 1.1rem; }
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>Yes — LAMP is completely free for property owners and investors. Sign up, log in, and use the platform at no cost. No subscriptions, no hidden fees. We are a marketplace, not a real estate services platform. LAMP simply connects users with LAMP Network Partners. Users never pay us. Only subscribing advisors (LAMP Network Partners) pay to access shared portfolios and participate in the network.</p>
+          <p>Yes — LAMP is completely free for property owners and investors. Sign up, log in, and use the platform at no cost. No subscriptions, no hidden fees. We are a marketplace. Only subscribing advisors (LAMP Link Network Partners) pay to access shared portfolios and participate in the network.</p>
         </div>
       </div>
 
@@ -1953,7 +2175,7 @@ h4 { font-size: 1.1rem; }
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>LAMP is your AI-powered real estate command center and personal concierge — delivering institutional-grade intelligence and clear visibility into every property you own. Analyze assets, uncover opportunities to sell, exchange, finance, improve, or optimize, and connect seamlessly to our marketplace of real estate solutions and partners. We connect property owners with LAMP Network Partners (advisors such as brokers, lenders, attorneys, wealth managers, and more) in a secure, data-rich environment. All free, all in one place.</p>
+          <p>LAMP is your AI-powered real estate command center — delivering institutional-grade intelligence and clear visibility into every property you own. Analyze assets, uncover opportunities to sell, exchange, finance, improve, or optimize, and connect seamlessly to our marketplace of real estate solutions and LAMP Link Network Partners.</p>
         </div>
       </div>
 
@@ -1973,7 +2195,27 @@ h4 { font-size: 1.1rem; }
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>When you click a solution button (Sell, Exchange, Finance, Improve, or Premium) and hit "Inquire Now," LAMP distributes your inquiry to the appropriate LAMP Network Partner who specializes in that service. They will reach out to assist you. Your advisor team is also notified if you've granted them viewing access.</p>
+          <p>When you click a solution button (Sell, Exchange, Finance, Improve, Hold, Premium, or Purchase) and hit "Inquire Now," LAMP first notifies any existing advisors you've assigned to that category in your Advisory Boardroom. Your realtor gets the sell inquiry. Your CPA gets the tax question. LAMP Link Network Partners only receive the referral when no advisor has been assigned to that category — filling the gap, not replacing a relationship.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Will LAMP replace my existing advisors or interfere with those relationships?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No — and this is by design. LAMP is built to strengthen your existing advisory relationships, not compete with them. When you light up a solution, your advisors in that category are notified first. A LAMP Link Network Partner only steps in when there's no advisor already assigned to that role. Think of LAMP Link as a marketplace for the gaps in your advisory team — not a replacement for the professionals you already trust.</p>
+        </div>
+      </div>
+
+      <div class="faq-item scroll-reveal">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Will LAMP replace my existing advisors or interfere with those relationships?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No — and this is by design. LAMP is built to strengthen your existing advisory relationships, not compete with them. When you light up a solution, your advisors in that category are notified first. A LAMP Link Network Partner only steps in when there's no advisor already assigned to that role. Think of LAMP Link as a marketplace for the gaps in your advisory team — not a replacement for the professionals you already trust.</p>
         </div>
       </div>
 
@@ -1983,7 +2225,7 @@ h4 { font-size: 1.1rem; }
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>LAMP supports a wide range of property types — single family homes, multifamily, commercial, retail, industrial, and mixed-use. Simply enter the property address and LAMP's AI-powered platform handles the rest. In some instances, unique or highly specialized properties may return an inconclusive analysis if sufficient comparable data isn't available. If that happens, you can still add the property to your portfolio and connect with a LAMP Network Partner who can provide further guidance.</p>
+          <p>LAMP supports a wide range of property types — single family homes, multifamily, commercial, retail, industrial, and mixed-use. Simply enter the property address and LAMP's AI-powered platform handles the rest. In some instances, unique or highly specialized properties may return an inconclusive analysis if sufficient comparable data isn't available. If that happens, you can still add the property to your portfolio and connect with a LAMP Link Network Partner who can provide further guidance.</p>
         </div>
       </div>
     </div>
@@ -2000,7 +2242,7 @@ h4 { font-size: 1.1rem; }
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>No one — not advisors, not LAMP Network Partners, not LAMP itself — can see your data unless you explicitly grant access. Your portfolio is completely private by default. You control sharing in two ways: share your entire portfolio or individual properties with specific advisors via email, or when you click "Inquire Now" on a solution, your inquiry goes to LAMP. We connect you with the appropriate LAMP Network Partner, and you then choose whether to share the relevant property with them. No one sees your information unless you decide to share it.</p>
+          <p>No one — not advisors, not LAMP Link Network Partners, not LAMP itself — can see your data unless you explicitly grant access. Your portfolio is completely private by default. You control sharing in two ways: share your entire portfolio or individual properties with specific advisors via email, or when you click "Inquire Now" on a solution, your inquiry goes to LAMP. We connect you with the appropriate LAMP Link Network Partner, and you then choose whether to share the relevant property with them. No one sees your information unless you decide to share it.</p>
           <p style="margin-top:10px;">You can always view and manage who you've given shared permissions to in your LAMPit.ai account under the <strong>Settings</strong> tab, where you'll see everyone you've shared with and your full property analysis history.</p>
         </div>
       </div>
@@ -2015,15 +2257,6 @@ h4 { font-size: 1.1rem; }
         </div>
       </div>
 
-      <div class="faq-item scroll-reveal">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>What happens when my advisor receives an invitation?</span>
-          <span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>When you share your portfolio, your advisor receives an email invitation. If they don't have a LAMP account yet, they're invited to create one (free sign-up). If they already have an account, they can log in immediately and gain access to your shared properties. On first access to any shared content, advisors receive automatic notification of their 30-day free trial.</p>
-        </div>
-      </div>
     </div>
 
     <!-- FAQ Category: Advisor Pricing -->
@@ -2034,11 +2267,11 @@ h4 { font-size: 1.1rem; }
     <div class="faq__list">
       <div class="faq-item scroll-reveal">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Who are LAMP Network Partners and how do they join?</span>
+          <span>Who are LAMP Link Network Partners and how do they join?</span>
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>LAMP Network Partners are real estate professionals — brokers, exchange sponsors, lenders, attorneys, wealth managers, construction managers, and private client advisors. For advisors, LAMP functions as a real estate advisory CRM where client assets are the trackable entity — replacing scattered Excel docs and file cabinets with real-time portfolio intelligence. They join when a property owner invites them to view a shared portfolio. Their 30-day free trial begins automatically on first access to shared content.</p>
+          <p>LAMP Link Network Partners are real estate professionals — brokers, exchange sponsors, lenders, attorneys, wealth managers, construction managers, and private client advisors. For advisors, LAMP Link functions as a real estate advisory CRM where client assets are the trackable entity — replacing scattered Excel docs and file cabinets with real-time portfolio intelligence. They join when a property owner invites them to view a shared portfolio. Their 30-day free trial begins automatically on first access to shared content.</p>
         </div>
       </div>
 
@@ -2048,37 +2281,23 @@ h4 { font-size: 1.1rem; }
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>At the end of the 30-day free trial, advisors are prompted to review and electronically sign the LAMP Network Partner Terms of Service (which details the compensation model) and enter payment information to continue access.</p>
+          <p>At the end of the 30-day free trial, advisors are prompted to review and electronically sign the LAMP Link Network Partner Terms of Service and enter payment information via Stripe to continue access.</p><p style="margin-top:10px;"><strong style="color:var(--navy);">LAMP Link Solo</strong> — $49/mo (or $45/mo billed annually). For individual advisors who want full platform access and a LAMP Link Network.</p><p style="margin-top:10px;"><strong style="color:var(--navy);">LAMP Link Teams</strong> — $35/seat/mo, auto-detected when 3 or more advisors join from the same firm. Saves 29% vs. Solo.</p><p style="margin-top:10px;"><strong style="color:var(--navy);">Enterprise</strong> — Custom pricing for firms that need white-label integration, API access, or volume licensing. Contact <a href="mailto:info@lampportfolio.com" style="color:var(--orange);font-weight:600;">info@lampportfolio.com</a>.</p><p style="margin-top:10px;">Property owners are always free — no subscription, no credit card required.</p>
         </div>
       </div>
 
       <div class="faq-item scroll-reveal">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>What is the compensation model for advisors (LAMP Network Partners)?</span>
+          <span>Are there any fees beyond the monthly subscription?</span>
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>After signing the Terms of Service and providing payment information, the following structure applies:</p>
-          <p style="margin-top:12px;"><strong style="color:var(--navy);">Platform / Technology Fee</strong> (monthly subscription) — Billed based on the total number of property profiles the advisor can access across all shared portfolios:</p>
-          <div style="margin:10px 0 10px 16px; font-size:0.9rem;">
-            <p>• 0–20 properties: <strong>$49/month</strong></p>
-            <p>• 21–99 properties: <strong>$149/month</strong></p>
-            <p>• 100+ properties: <strong>$299/month</strong></p>
-          </div>
-          <p style="margin-top:10px;"><strong style="color:var(--navy);">Referral Fee</strong> — $300 per referral, paid to LAMP by the advisor.</p>
-          <p style="margin-top:10px;"><strong style="color:var(--navy);">Transaction Fee</strong> — $200 per completed property transaction (sale, exchange, or financing) involving properties the advisor has access to via LAMP.</p>
+          <p>Yes. LAMP Link Network Partners are subject to two additional fees beyond their monthly subscription:</p>
+          <p style="margin-top:12px;"><strong style="color:var(--navy);">Referral Fee — $199</strong><br>Charged per referral sent when a property owner with no existing advisor in a given category clicks "Inquire Now" and LAMP routes the inquiry to a Network Partner. This fee applies per referral delivered, regardless of outcome.</p>
+          <p style="margin-top:12px;"><strong style="color:var(--navy);">Technology Fee — $199</strong><br>Charged upon a completed transaction where LAMP was the originating referral source. This fee applies in addition to the referral fee where both are applicable, meaning a LAMP-referred deal that closes may carry up to $398 in total LAMP fees.</p>
+          <p style="margin-top:12px;">Neither fee applies to transactions within an advisor's existing shared portfolio relationships — only to LAMP-originated referrals. LAMP reserves the right to audit completed transactions per the terms of the LAMP Link Network Partner Terms of Service, which all Network Partners sign upon activation.</p>
         </div>
       </div>
 
-      <div class="faq-item scroll-reveal">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Why does this pricing structure work?</span>
-          <span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Property owners and investors use LAMP at no cost — all fees are structured for LAMP Network Partners (advisors). Advisors receive a generous 30-day risk-free trial, triggered only when real portfolios are shared (proving immediate value). Advisors pay only after experiencing the platform's benefits for client oversight, deal sourcing, or ongoing advisory work. Revenue aligns with real usage, successful referrals, and closed transactions — creating a true win-win marketplace ecosystem for connections and opportunities.</p>
-        </div>
-      </div>
     </div>
 
     <!-- FAQ Category: Security -->
@@ -2093,24 +2312,10 @@ h4 { font-size: 1.1rem; }
           <span class="faq-toggle">+</span>
         </button>
         <div class="faq-answer">
-          <p>We take data security and privacy seriously. As a marketplace handling sensitive real estate portfolio information, we are actively implementing SOC 2 Type 1 controls and expect to have our compliance formally certified in the near future. Our security program also aligns with GDPR principles for data protection where applicable, including data minimization, consent management, and user rights.</p>
-          <p style="margin-top:10px;">Our current practices include strong access controls, encryption in transit and at rest, regular vulnerability scanning, incident response planning, employee training, and vendor risk assessments — all built on SOC 2-aligned best practices to protect user and advisor data.</p>
-          <p style="margin-top:10px;">We are not yet formally audited or certified (as those require independent third-party validation), but we are committed to achieving certification and continuously improve our controls to meet these standards. For enterprise partners needing detailed documentation or roadmaps, we're happy to share more about our security posture.</p>
+          <p>Our practices include strong access controls, encryption in transit and at rest, regular vulnerability scanning, incident response planning, and vendor risk assessments — all built on SOC 2-aligned best practices. We are actively implementing SOC 2 Type 1 controls and expect formal certification in the near future.</p>
         </div>
       </div>
 
-      <div class="faq-item scroll-reveal">
-        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          <span>Is my data shared with third parties?</span>
-          <span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Your data is completely private and never visible to anyone — including LAMP Network Partners — unless you take explicit action to share it. There are two ways to grant access:</p>
-          <p style="margin-top:10px;"><strong style="color:var(--navy);">Share with your advisory team:</strong> Click "Share Portfolio" to share your entire portfolio, or share individual properties via email to specific advisors. You choose exactly who sees what.</p>
-          <p style="margin-top:10px;"><strong style="color:var(--navy);">Inquire Now:</strong> When you "Light Up" a property and click "Inquire Now," your inquiry goes to LAMP. We connect you with the appropriate LAMP Network Partner who can help. You then choose whether to share the relevant property or portfolio with that partner. They cannot see your data unless you decide to share it.</p>
-          <p style="margin-top:10px;">LAMP does not sell, trade, or distribute your data to anyone. No advisor, partner, or third party can view your information without your direct, explicit permission — per property or per portfolio. You can review and manage all sharing permissions at any time under the <strong>Settings</strong> tab in your LAMPit.ai account, where you'll see who you've shared with and your property analysis history. You remain in complete control at all times.</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -2129,7 +2334,7 @@ h4 { font-size: 1.1rem; }
         </a>
         <a href="mailto:info@lampportfolio.com" class="btn btn--ghost">Contact Us</a>
       </div>
-      <p class="cta__note">All platform and referral fees are paid by LAMP Network Partners — never by you.</p>
+      <p class="cta__note">All platform and referral fees are paid by LAMP Link Network Partners — never by you.</p>
     </div>
   </div>
 </section>
@@ -2146,11 +2351,11 @@ h4 { font-size: 1.1rem; }
             <text x="54" y="34" font-family="'Playfair Display', serif" font-size="26" font-weight="700" fill="white">LAMP</text>
           </svg>
         </a>
-        <p class="footer__brand-desc">Legacy Asset Management Platform. Your AI-powered real estate command center — institutional-grade intelligence, full visibility, and a marketplace to connect with solutions and partners.</p>
-        <p class="footer__tagline" style="margin-top:16px;">"Light up your real estate portfolio, LAMP it."</p>
+        <p class="footer__brand-desc">Legacy Asset Management Platform. Your AI-powered real estate command center — institutional-grade intelligence, full visibility, and a marketplace to connect with solutions and LAMP Link Network Partners.</p>
+        <p class="footer__tagline" style="margin-top:16px;">"Light up your real estate portfolio. LAMP it."</p>
       </div>
       <div class="footer__col">
-        <h5>Solutions</h5>
+        <h5>Strategy</h5>
         <ul>
           <li><a href="#solutions" onclick="activateTab('sell')">Sell — LAMP AM</a></li>
           <li><a href="#solutions" onclick="activateTab('exchange')">Exchange — LAMP X</a></li>
@@ -2164,7 +2369,8 @@ h4 { font-size: 1.1rem; }
         <h5>Platform</h5>
         <ul>
           <li><a href="https://lampit.ai">LAMPit.ai</a></li>
-          <li><a href="/pf">LAMP PF — Portfolio Finance</a></li>
+          <li><a href="#lamp-link">LAMP Link</a></li>
+          <li><a href="#advisor-crm">Advisor CRM</a></li>
           <li><a href="#how-it-works">How It Works</a></li>
           <li><a href="#intelligence">AI Intelligence</a></li>
           <li><a href="#who-we-serve">Who We Serve</a></li>

@@ -154,9 +154,9 @@ h4 { font-size: 1.1rem; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
+  max-width: 1340px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 28px;
 }
 
 .navbar__logo {
@@ -177,21 +177,22 @@ h4 { font-size: 1.1rem; }
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
   list-style: none;
 }
 .navbar__links a {
-  padding: 8px 16px;
+  padding: 6px 10px;
   color: var(--gray-600);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 500;
   border-radius: 8px;
   transition: var(--transition);
+  white-space: nowrap;
 }
 .navbar__links a:hover { color: var(--blue); background: rgba(30,58,110,0.04); }
 
-.navbar__cta { display: flex; gap: 12px; align-items: center; }
+.navbar__cta { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
 
 .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
 .mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--gray-800); margin: 5px 0; transition: var(--transition); border-radius: 2px; }
@@ -1129,6 +1130,28 @@ h4 { font-size: 1.1rem; }
 
 /* ---------- Tablet (max-width: 1024px) ---------- */
 @media (max-width: 1024px) {
+  .navbar__links { display: none; }
+  .mobile-toggle { display: block; }
+  .navbar__inner { position: relative; }
+  .navbar__links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 12px 16px;
+    box-shadow: var(--shadow-lg);
+    border-top: 1px solid var(--gray-100);
+    gap: 2px;
+    z-index: 1000;
+  }
+  .navbar__links.open a {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+  }
   .hero__grid { grid-template-columns: 1fr; gap: 40px; }
   .hero__visual { order: -1; }
   .hero__mockup { max-width: 440px; }
@@ -1463,8 +1486,8 @@ h4 { font-size: 1.1rem; }
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="navbar__cta">
-      <a href="https://lampit.ai" class="btn" style="padding:10px 24px; font-size:0.85rem; color:var(--blue); background:transparent; border:1.5px solid var(--gray-200);">Log In</a>
-      <a href="https://lampit.ai" class="btn btn--primary" style="padding:10px 24px; font-size:0.85rem;">LAMP it &rarr;</a>
+      <a href="https://lampit.ai" class="btn" style="padding:8px 20px; font-size:0.82rem; color:var(--blue); background:transparent; border:1.5px solid var(--gray-200); white-space:nowrap;">Log In</a>
+      <a href="https://lampit.ai" class="btn btn--primary" style="padding:8px 20px; font-size:0.82rem; white-space:nowrap;">LAMP it &rarr;</a>
     </div>
     <button class="mobile-toggle" id="mobileToggle">
       <span></span><span></span><span></span>
